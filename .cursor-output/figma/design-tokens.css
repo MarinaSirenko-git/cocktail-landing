@@ -1,0 +1,99 @@
+:root {
+  /* Colors — inferred from Figma layers (no official variables found) */
+  --color-bg: #000000;
+  --color-bg-gradient-start: rgba(67, 67, 67, 1);
+  --color-bg-gradient-mid: rgba(33, 33, 33, 1);
+  --color-surface: #ffffff;
+  --color-surface-muted: #313131;
+  --color-surface-dark: #0f0f0f;
+  --color-text: #ffffff;
+  --color-text-muted: #efefef;
+  --color-text-subtle: #898989;
+  --color-text-display: #505050;
+  --color-accent: #e7d393;
+  --color-accent-badge: #b2b6f4;
+  --color-text-inverse: #000000;
+  --color-border: #ffffff;
+
+  /* Typography — inferred; substitute licensed fonts for production */
+  --font-display: "Modern Negra Demo", ui-serif, Georgia, serif;
+  --font-main: "Mona Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --text-display-xl-size: 330px;
+  --text-display-xl-line-height: 1;
+  --text-display-xl-tracking: -6.6px;
+  --text-display-sm-size: 132px;
+  --text-display-sm-tracking: -2.64px;
+
+  --text-h1-size: 64px;
+  --text-h1-line-height: 0.9;
+  --text-h2-size: 50px;
+  --text-h2-line-height: 46px;
+  --text-h3-size: 36px;
+  --text-h3-line-height: 36px;
+  --text-brand-size: 30px;
+  --text-brand-line-height: 40px;
+
+  --text-body-lg-size: 18px;
+  --text-body-lg-line-height: 28px;
+  --text-body-size: 16px;
+  --text-body-line-height: 24px;
+  --text-body-sm-size: 14px;
+  --text-body-sm-line-height: 20px;
+  --text-label-size: 20px;
+  --text-label-line-height: 30px;
+  --text-price-size: 22px;
+  --text-rating-size: 24px;
+
+  /* Spacing — inferred repeated values */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-11: 11px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-23: 23px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-90: 90px;
+
+  /* Layout */
+  --container-width: 1260px;
+  --container-max: 1440px;
+  --container-padding: 80px;
+  --container-padding-mobile: 18px;
+  --header-height-desktop: 90px;
+  --header-height-mobile: 130px;
+  --section-hero-height-desktop: 927px;
+  --section-hero-height-mobile: 783px;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
+  --radius-pill-lg: 60px;
+  --radius-full: 9999px;
+
+  /* Shadows / effects */
+  --shadow-card: none;
+  --effect-noise-opacity: 0.3;
+  --effect-header-blur: 20px;
+  --effect-cta-opacity: 0.8;
+
+  /* Complex effects — implement manually; not simple token values */
+  /* --effect-blend-hero-image: lighten; */
+  /* --effect-blend-noise: overlay; */
+  /* --gradient-bg-radial: see design-tokens.json for stop values */
+  /* --gradient-display-text: linear from #ffffff to #898989 at 62.879% */
+  /* --gradient-card: linear from #313131 to #0f0f0f */
+}

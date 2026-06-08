@@ -1,17 +1,12 @@
 @import "tailwindcss";
+@import "./theme.css";
 
-@theme {
-  --font-main: system-ui, sans-serif;
-  --color-brand: #111111;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  left: 1rem;
-  top: 1rem;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
 }

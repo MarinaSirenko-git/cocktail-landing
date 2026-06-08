@@ -2,7 +2,7 @@
 
 A Vue 3 landing page starter for building a cocktail-themed marketing site with semantic structure, Tailwind styling, and GSAP-ready animation hooks.
 
-**Demo:** *Coming soon*
+**Demo:** [cocktail-landing.marina-sirenko1-80f.workers.dev](https://cocktail-landing.marina-sirenko1-80f.workers.dev)
 
 ## Stack
 
@@ -71,7 +71,17 @@ Serves the production build locally for a final check before deployment.
 
 ## Deployment
 
-This project is configured for Cloudflare Workers Static Assets deployment.
+This project is deployed to Cloudflare Workers Static Assets.
+
+### Production URL
+
+[View deployed site](https://cocktail-landing.marina-sirenko1-80f.workers.dev)
+
+### Deploy command
+
+```bash
+npm run deploy
+```
 
 ### Local Cloudflare preview
 
@@ -79,25 +89,16 @@ This project is configured for Cloudflare Workers Static Assets deployment.
 npm run dev:cf
 ```
 
-### Deploy
-
-```bash
-npx wrangler login
-npm run deploy
-```
-
-After deployment, Cloudflare will provide a `*.workers.dev` URL.
-
 ### Routing
 
-SPA fallback is not enabled because no client-side router package was detected.
+SPA fallback is not enabled. This is expected for simple static landing pages or projects without a client-side router.
 
 ### Performance audit
 
-After local preview or deployment, run:
+After deployment, run:
 
 ```txt
-user-run-web-perf-audit DEPLOYED_URL
+user-run-web-perf-audit https://cocktail-landing.marina-sirenko1-80f.workers.dev
 ```
 
 ## Accessibility Notes

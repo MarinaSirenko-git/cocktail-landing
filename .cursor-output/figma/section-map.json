@@ -1,0 +1,495 @@
+{
+  "source": {
+    "figmaTarget": "https://www.figma.com/design/MmNz1rHoj2PGzFqT6309PX/Cocktail-GSAP-Website--Copy-?node-id=42001-1163",
+    "figmaNodeId": "42001:1163",
+    "figmaNodeName": "Desktop",
+    "generatedAt": "2026-06-08",
+    "basedOn": [
+      ".cursor-output/figma/figma-audit.md",
+      ".cursor-output/figma/design-tokens.json",
+      ".cursor-output/figma/assets-manifest.json",
+      ".cursor-output/figma/assets-report.md"
+    ]
+  },
+  "page": {
+    "name": "Velvet Pour Landing",
+    "type": "landing-page",
+    "brandName": "Velvet Pour",
+    "recommendedHtmlEntry": "index.html",
+    "recommendedVueEntry": "src/App.vue",
+    "recommendedSectionDir": "src/sections/",
+    "recommendedMainId": "main-content",
+    "scrollAnchors": {
+      "cocktails": "menu",
+      "about-us": "philosophy",
+      "the-art": "the-art",
+      "contact": "contact"
+    }
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero",
+      "figmaNodeName": "Hero",
+      "figmaNodeId": "42001:1164",
+      "htmlTag": "section",
+      "bemBlock": "hero",
+      "vueComponent": "HeroSection",
+      "sectionId": "hero",
+      "ariaLabelledBy": "hero-title",
+      "heading": {
+        "level": 1,
+        "id": "hero-title",
+        "text": "Sip the Spirit of Summer",
+        "role": "main page title"
+      },
+      "elements": [
+        { "name": "display-type", "bemElement": "display-type", "htmlTag": "p", "role": "decorative background wordmark (MOJITO)", "manualReview": true },
+        { "name": "eyebrow", "bemElement": "eyebrow", "htmlTag": "p", "role": "Cool. Crisp. Classic." },
+        { "name": "title", "bemElement": "title", "htmlTag": "h1", "role": "section heading" },
+        { "name": "description", "bemElement": "description", "htmlTag": "p", "role": "hero supporting copy" },
+        { "name": "cta", "bemElement": "cta", "htmlTag": "a", "role": "link to #menu", "href": "#menu" },
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "hero cocktail image" },
+        { "name": "scroll-indicator", "bemElement": "scroll-indicator", "htmlTag": "a", "role": "skip to next section", "href": "#menu" },
+        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative grain overlay", "ariaHidden": true }
+      ],
+      "repeatedItems": [
+        { "pattern": "decorative-leaf", "count": 2, "bemBlock": "hero", "bemElement": "leaf" }
+      ],
+      "assets": [
+        "src/assets/images/hero-cocktail-mojito.webp",
+        "src/assets/images/decorative-monstera-leaf.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["DecorativeLeaf"],
+      "designTokens": ["--color-accent", "--text-h2-size", "--text-display-xl-size", "--effect-header-blur", "--effect-blend-hero-image"],
+      "a11yNotes": [
+        "Only one h1 on the page — use hero-title for Sip the Spirit of Summer",
+        "MOJITO display type is decorative; use aria-hidden or presentational styling, not a heading",
+        "View cocktails must be a real anchor to #menu with visible focus state",
+        "Scroll indicator needs aria-label if icon-only"
+      ],
+      "layoutNotes": [
+        "Absolute layering: display type behind cocktail image",
+        "mix-blend-lighten on hero cocktail photo",
+        "GSAP: parallax on monstera leaves, text reveal on eyebrow/title"
+      ],
+      "responsiveNotes": [
+        "Mobile Hero frame (42001:1366) stacks nav below logo and centers copy",
+        "Scale display-type with clamp(); desktop 330px → mobile 132px reference"
+      ],
+      "implementationRisks": [
+        "Header is embedded in Figma hero but project has separate SiteHeader.vue — align nav/branding between both",
+        "Heavy absolute positioning on desktop"
+      ]
+    },
+    {
+      "id": "menu",
+      "name": "Menu",
+      "figmaNodeName": "Section",
+      "figmaNodeId": "42001:1187",
+      "htmlTag": "section",
+      "bemBlock": "menu",
+      "vueComponent": "MenuSection",
+      "sectionId": "menu",
+      "ariaLabelledBy": "menu-title-left",
+      "heading": {
+        "level": 2,
+        "id": "menu-title-left",
+        "text": "Most popular cocktails:",
+        "role": "left column section label"
+      },
+      "elements": [
+        { "name": "title-right", "bemElement": "title-right", "htmlTag": "h2", "id": "menu-title-right", "role": "right column section label" },
+        { "name": "columns", "bemElement": "columns", "htmlTag": "div", "role": "two-column layout wrapper" },
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "center cocktail image" },
+        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative overlay", "ariaHidden": true }
+      ],
+      "repeatedItems": [
+        {
+          "pattern": "menu-item",
+          "count": 8,
+          "bemBlock": "menu",
+          "bemElement": "item",
+          "htmlTag": "li",
+          "parentList": "ul",
+          "fields": ["name", "meta", "price"]
+        }
+      ],
+      "assets": [
+        "src/assets/images/menu-cocktail-center.webp",
+        "src/assets/images/decorative-monstera-leaf.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["MenuColumn", "MenuItem", "DecorativeLeaf"],
+      "designTokens": ["--color-accent", "--text-h3-size", "--text-price-size", "--space-36", "--space-80"],
+      "a11yNotes": [
+        "Use two h2 elements for column labels or one h2 with visually hidden structure — avoid skipping levels",
+        "Menu items should be ul > li with name in strong or heading level h3",
+        "Prices should be readable by screen readers (avoid em dash only semantics)"
+      ],
+      "layoutNotes": [
+        "Two flex/grid columns with centered overlapping cocktail visual",
+        "List rows: name + meta left, price right"
+      ],
+      "responsiveNotes": [
+        "Stack columns on mobile; reduce center image scale",
+        "manualReview: no tablet frame in Figma"
+      ],
+      "implementationRisks": [
+        "Figma copy uses wine/beer names — normalize cocktail names before implementation",
+        "Central image overlaps lists — z-index and spacing careful on small screens"
+      ]
+    },
+    {
+      "id": "philosophy",
+      "name": "Philosophy and Bento Gallery",
+      "figmaNodeName": "Section",
+      "figmaNodeId": "42001:1244",
+      "htmlTag": "section",
+      "bemBlock": "philosophy",
+      "vueComponent": "PhilosophySection",
+      "sectionId": "philosophy",
+      "ariaLabelledBy": "philosophy-title",
+      "heading": {
+        "level": 2,
+        "id": "philosophy-title",
+        "text": "Where every detail matters—from muddle to garnish",
+        "role": "section heading"
+      },
+      "elements": [
+        { "name": "badge", "bemElement": "badge", "htmlTag": "span", "role": "Best Cocktails pill" },
+        { "name": "intro", "bemElement": "intro", "htmlTag": "p", "role": "supporting paragraph" },
+        { "name": "rating", "bemElement": "rating", "htmlTag": "div", "role": "star rating + score" },
+        { "name": "avatars", "bemElement": "avatars", "htmlTag": "div", "role": "customer avatar stack" },
+        { "name": "bento", "bemElement": "bento", "htmlTag": "div", "role": "image grid gallery" },
+        { "name": "feature-card", "bemElement": "feature-card", "htmlTag": "article", "role": "Crafted to Impress checklist card" }
+      ],
+      "repeatedItems": [
+        { "pattern": "checklist-item", "count": 4, "bemBlock": "philosophy", "bemElement": "check-item", "htmlTag": "li", "parentList": "ul" },
+        { "pattern": "bento-card", "count": 4, "bemBlock": "philosophy", "bemElement": "bento-card", "htmlTag": "figure", "variants": ["image", "checklist"] },
+        { "pattern": "star-icon", "count": 5, "bemBlock": "philosophy", "bemElement": "star", "htmlTag": "span", "decorative": true }
+      ],
+      "assets": [
+        "src/assets/icons/icon-star.svg",
+        "src/assets/icons/icon-check.svg",
+        "src/assets/images/bento-bartender-pouring.webp",
+        "src/assets/images/bento-guests-drinking.webp",
+        "src/assets/images/bento-cocktail-garnish.webp",
+        "src/assets/images/bento-cocktails-row.webp",
+        "src/assets/images/avatar-customer-1.webp",
+        "src/assets/images/avatar-customer-2.webp",
+        "src/assets/images/avatar-customer-3.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["Badge", "RatingBlock", "AvatarStack", "FeatureChecklist", "BentoCard"],
+      "designTokens": ["--text-h1-size", "--radius-lg", "--radius-pill", "--color-surface-muted", "--color-accent-badge"],
+      "a11yNotes": [
+        "Rating needs visible text (4.5/5) plus aria-label on star group",
+        "Avatars decorative when adjacent to +12000 customers text",
+        "Bento images need meaningful alt text per manifest",
+        "Checklist icons decorative with text labels"
+      ],
+      "layoutNotes": [
+        "CSS Grid bento: asymmetric card sizes (330, 580, 480, 780 widths on desktop)",
+        "Top row: heading left, intro + rating + avatars right"
+      ],
+      "responsiveNotes": [
+        "Bento grid must collapse to single column on mobile",
+        "manualReview: bento-guests-drinking and bento-cocktail-garnish exports are low resolution"
+      ],
+      "implementationRisks": [
+        "Complex bento grid proportions",
+        "Small bento image asset quality"
+      ]
+    },
+    {
+      "id": "the-art",
+      "name": "The Art",
+      "figmaNodeName": "Section",
+      "figmaNodeId": "42001:1297",
+      "htmlTag": "section",
+      "bemBlock": "the-art",
+      "vueComponent": "TheArtSection",
+      "sectionId": "the-art",
+      "ariaLabelledBy": "the-art-subtitle",
+      "heading": {
+        "level": 2,
+        "id": "the-art-display",
+        "text": "The ART",
+        "role": "decorative display wordmark",
+        "manualReview": true
+      },
+      "elements": [
+        { "name": "display-type", "bemElement": "display-type", "htmlTag": "p", "role": "large background The ART", "ariaHidden": true },
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "masked circular composite" },
+        { "name": "checklist-left", "bemElement": "checklist-left", "htmlTag": "ul", "role": "left feature list" },
+        { "name": "checklist-right", "bemElement": "checklist-right", "htmlTag": "ul", "role": "right feature list" },
+        { "name": "subtitle", "bemElement": "subtitle", "htmlTag": "h2", "id": "the-art-subtitle", "text": "Sip-Worthy Perfection" }
+      ],
+      "repeatedItems": [
+        { "pattern": "checklist-item", "count": 8, "bemBlock": "the-art", "bemElement": "check-item", "htmlTag": "li" }
+      ],
+      "assets": [
+        "src/assets/images/art-section-mask.png",
+        "src/assets/images/bartender-photo.webp",
+        "src/assets/icons/icon-check.svg",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["FeatureChecklist", "MaskedVisual"],
+      "designTokens": ["--text-display-xl-size", "--color-text-display", "--text-h3-size"],
+      "a11yNotes": [
+        "Use h2 Sip-Worthy Perfection as accessible section title; The ART display is decorative",
+        "Masked composite needs alt on bartender-photo"
+      ],
+      "layoutNotes": [
+        "CSS mask-image using art-section-mask.png over bartender-photo",
+        "Dual checklist columns flanking center visual"
+      ],
+      "responsiveNotes": [
+        "Stack checklists below visual on mobile",
+        "Reduce display-type size with clamp"
+      ],
+      "implementationRisks": [
+        "Mask group composition is non-trivial",
+        "GSAP scroll scaling on masked visual — test performance"
+      ]
+    },
+    {
+      "id": "showcase",
+      "name": "Bartender Showcase",
+      "figmaNodeName": "Section",
+      "figmaNodeId": "42001:1330",
+      "htmlTag": "section",
+      "bemBlock": "showcase",
+      "vueComponent": "ShowcaseSection",
+      "sectionId": "showcase",
+      "ariaLabelledBy": "showcase-title",
+      "heading": {
+        "level": 2,
+        "id": "showcase-title",
+        "text": "Made with Craft, Poured with Passion",
+        "role": "section heading"
+      },
+      "elements": [
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "bartender photo" },
+        { "name": "subtitle", "bemElement": "subtitle", "htmlTag": "p", "role": "supporting line" },
+        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative", "ariaHidden": true }
+      ],
+      "repeatedItems": [
+        { "pattern": "floating-cocktail", "count": 2, "bemBlock": "showcase", "bemElement": "floating-cocktail", "htmlTag": "img", "decorative": true }
+      ],
+      "assets": [
+        "src/assets/images/bartender-photo.webp",
+        "src/assets/images/floating-cocktail-aperol.webp",
+        "src/assets/images/floating-cocktail-martini.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["DecorativeLeaf"],
+      "designTokens": ["--text-h2-size", "--radius-lg"],
+      "a11yNotes": [
+        "Bartender image needs descriptive alt",
+        "Floating cocktails are decorative (alt empty)"
+      ],
+      "layoutNotes": [
+        "Large rounded image centered with absolute floating drink cutouts",
+        "GSAP parallax on floating cocktails"
+      ],
+      "responsiveNotes": [
+        "Hide or simplify floating elements on small screens",
+        "Image full-bleed with max-width container"
+      ],
+      "implementationRisks": [
+        "Same bartender-photo asset reused from the-art section — share src"
+      ]
+    },
+    {
+      "id": "carousel",
+      "name": "Featured Cocktails Carousel",
+      "figmaNodeName": "carousel",
+      "figmaNodeId": "42002:26",
+      "htmlTag": "section",
+      "bemBlock": "cocktail-carousel",
+      "vueComponent": "CocktailCarouselSection",
+      "sectionId": "carousel",
+      "ariaLabelledBy": "carousel-recipe-title",
+      "heading": {
+        "level": 2,
+        "id": "carousel-recipe-title",
+        "text": "Raspberry Mojito",
+        "role": "active recipe heading (dynamic per tab)"
+      },
+      "elements": [
+        { "name": "tabs", "bemElement": "tabs", "htmlTag": "div", "role": "tablist" },
+        { "name": "tab", "bemElement": "tab", "htmlTag": "button", "role": "tab with aria-selected" },
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "active drink image" },
+        { "name": "nav-prev", "bemElement": "nav-prev", "htmlTag": "button", "role": "previous slide" },
+        { "name": "nav-next", "bemElement": "nav-next", "htmlTag": "button", "role": "next slide" },
+        { "name": "eyebrow", "bemElement": "eyebrow", "htmlTag": "p", "text": "Recipes for:" },
+        { "name": "description-title", "bemElement": "description-title", "htmlTag": "h3", "text": "A Zesty Classic That Never Fails" },
+        { "name": "description", "bemElement": "description", "htmlTag": "p", "role": "recipe copy" }
+      ],
+      "repeatedItems": [
+        { "pattern": "carousel-tab", "count": 4, "labels": ["Classic Mojito", "Raspberry Mojito", "Violet Breeze", "Tipsy Tales"], "bemElement": "tab" }
+      ],
+      "assets": [
+        "src/assets/images/carousel-drink-raspberry-mojito.webp",
+        "src/assets/icons/icon-arrow-right.svg",
+        "src/assets/images/decorative-monstera-leaf.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["CocktailCarousel", "TabList"],
+      "designTokens": ["--text-h3-size", "--space-48"],
+      "a11yNotes": [
+        "Implement WAI-ARIA tabs pattern: tablist, tab, tabpanel",
+        "Prev/next buttons need aria-labels",
+        "Keyboard: arrow keys between tabs, focus management on change",
+        "manualExportRequired: only one drink image exported — other tabs need assets or placeholders"
+      ],
+      "layoutNotes": [
+        "Vue reactive state for active tab index",
+        "GSAP crossfade/slide on drink image and copy change",
+        "Flanking vertical labels + arrow buttons absolute positioned"
+      ],
+      "responsiveNotes": [
+        "Hide side labels on mobile; tabs become primary navigation",
+        "Stack description below visual"
+      ],
+      "implementationRisks": [
+        "Copy mismatch: Margarita description under Raspberry Mojito tab",
+        "Missing drink images for 3 of 4 tabs",
+        "Interactive component — highest JS/GSAP complexity"
+      ]
+    },
+    {
+      "id": "contact",
+      "name": "Contact and Footer",
+      "figmaNodeName": "Section",
+      "figmaNodeId": "42001:1337",
+      "htmlTag": "section",
+      "bemBlock": "contact",
+      "vueComponent": "ContactSection",
+      "sectionId": "contact",
+      "ariaLabelledBy": "contact-title",
+      "heading": {
+        "level": 2,
+        "id": "contact-title",
+        "text": "Where to Find Us",
+        "role": "section heading"
+      },
+      "elements": [
+        { "name": "location", "bemElement": "location", "htmlTag": "div", "role": "address block" },
+        { "name": "phone-email", "bemElement": "contact-details", "htmlTag": "div", "role": "tel and email" },
+        { "name": "hours", "bemElement": "hours", "htmlTag": "div", "role": "opening hours" },
+        { "name": "socials", "bemElement": "socials", "htmlTag": "nav", "role": "social links", "ariaLabel": "Social media" },
+        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "decorative cocktail assortment", "ariaHidden": true }
+      ],
+      "repeatedItems": [
+        { "pattern": "social-link", "count": 3, "platforms": ["instagram", "x", "facebook"], "bemElement": "social-link", "htmlTag": "a" },
+        { "pattern": "hours-row", "count": 4, "bemElement": "hours-row", "htmlTag": "p" }
+      ],
+      "assets": [
+        "src/assets/icons/icon-social-instagram.svg",
+        "src/assets/icons/icon-social-x.svg",
+        "src/assets/icons/icon-social-facebook.svg",
+        "src/assets/images/footer-cocktail-assortment.webp",
+        "src/assets/images/decorative-monstera-leaf.webp",
+        "src/assets/images/noise-texture.webp"
+      ],
+      "components": ["SocialLinks", "ContactBlock"],
+      "designTokens": ["--text-body-lg-size", "--space-48", "--text-brand-size"],
+      "a11yNotes": [
+        "Phone as tel: link, email as mailto: link",
+        "Social icons need aria-label per platform",
+        "Address in address element or structured p with semantic clarity",
+        "Existing SiteFooter.vue is placeholder — merge or replace with this section content"
+      ],
+      "layoutNotes": [
+        "Centered content column (880px) with large display title",
+        "Decorative cocktail image bottom-right absolute"
+      ],
+      "responsiveNotes": [
+        "Stack contact blocks; reduce title size on mobile"
+      ],
+      "implementationRisks": [
+        "Project SiteFooter vs Figma contact section overlap — decide single footer component",
+        "Email in design: hello@jsmcocktail.com — verify brand email"
+      ]
+    }
+  ],
+  "globalComponents": [
+    {
+      "name": "SiteHeader",
+      "suggestedClass": "site-header",
+      "vuePath": "src/components/layout/SiteHeader.vue",
+      "usage": ["Global nav — merge Figma hero header: logo, Cocktails, About Us, The Art, Contact"],
+      "assets": ["src/assets/logos/velvet-pour-mark.png"],
+      "notes": "Figma embeds header inside hero; recommend sticky header with anchor links"
+    },
+    {
+      "name": "SiteFooter",
+      "suggestedClass": "site-footer",
+      "vuePath": "src/components/layout/SiteFooter.vue",
+      "usage": ["Currently placeholder — may defer to ContactSection or slim copyright bar below contact"],
+      "notes": "manualReview: reconcile with contact section"
+    },
+    {
+      "name": "Button",
+      "suggestedClass": "button",
+      "usage": ["Carousel prev/next", "Optional CTA variants"]
+    },
+    {
+      "name": "Badge",
+      "suggestedClass": "badge",
+      "usage": ["philosophy Best Cocktails pill"]
+    },
+    {
+      "name": "FeatureChecklist",
+      "suggestedClass": "feature-checklist",
+      "usage": ["philosophy feature-card", "the-art checklists"]
+    },
+    {
+      "name": "MenuItem",
+      "suggestedClass": "menu__item",
+      "usage": ["menu section drink rows"]
+    },
+    {
+      "name": "RatingBlock",
+      "suggestedClass": "rating",
+      "usage": ["philosophy social proof"]
+    },
+    {
+      "name": "AvatarStack",
+      "suggestedClass": "avatars",
+      "usage": ["philosophy customer count"]
+    },
+    {
+      "name": "CocktailCarousel",
+      "suggestedClass": "cocktail-carousel",
+      "usage": ["carousel section tabs + panels"]
+    },
+    {
+      "name": "SocialLinks",
+      "suggestedClass": "socials",
+      "usage": ["contact section"]
+    },
+    {
+      "name": "DecorativeLeaf",
+      "suggestedClass": "decorative-leaf",
+      "usage": ["hero", "menu", "carousel", "contact parallax decorations"]
+    },
+    {
+      "name": "NoiseOverlay",
+      "suggestedClass": "noise-overlay",
+      "usage": ["Reusable section grain overlay"]
+    }
+  ],
+  "warnings": [
+    "Desktop frame only — responsive behavior must be planned without Figma mobile specs (except Hero 42001:1366 reference).",
+    "Brand in Figma is Velvet Pour; repo is cocktail-landing — align naming.",
+    "SiteHeader/SiteFooter already exist in Vue scaffold — section map assumes merging Figma header into SiteHeader and contact into ContactSection.",
+    "Only one h1: hero Sip the Spirit of Summer; MOJITO and The ART are decorative display type.",
+    "Carousel missing 3 of 4 drink images in assets manifest.",
+    "Menu copy and carousel copy have content inconsistencies from Figma."
+  ]
+}

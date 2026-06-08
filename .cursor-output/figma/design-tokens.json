@@ -1,0 +1,134 @@
+{
+  "source": {
+    "figmaTarget": "https://www.figma.com/design/MmNz1rHoj2PGzFqT6309PX/Cocktail-GSAP-Website--Copy-?node-id=42001-1366",
+    "figmaFileKey": "MmNz1rHoj2PGzFqT6309PX",
+    "primaryNodeId": "42001:1366",
+    "primaryNodeName": "Hero",
+    "primaryNodeSize": "440×783",
+    "supplementalNodeId": "42001:1163",
+    "supplementalNodeName": "Desktop",
+    "supplementalSource": ".cursor-output/figma/figma-audit.md",
+    "extractedAt": "2026-06-08",
+    "mode": "variables-and-inferred-values"
+  },
+  "colors": {
+    "official": [],
+    "inferred": [
+      { "token": "--color-bg", "value": "#000000", "usage": "Page/section base", "source": "Desktop + Mobile Hero radial gradient end stop" },
+      { "token": "--color-bg-gradient-start", "value": "rgba(67, 67, 67, 1)", "usage": "Radial background center", "source": "Desktop + Mobile Hero inline SVG gradient" },
+      { "token": "--color-bg-gradient-mid", "value": "rgba(33, 33, 33, 1)", "usage": "Radial background mid", "source": "Desktop + Mobile Hero inline SVG gradient" },
+      { "token": "--color-surface", "value": "#FFFFFF", "usage": "Cards, image frames, badge fill", "source": "Desktop bento cards" },
+      { "token": "--color-surface-muted", "value": "#313131", "usage": "Gradient card start", "source": "Desktop feature card" },
+      { "token": "--color-surface-dark", "value": "#0F0F0F", "usage": "Gradient card end", "source": "Desktop feature card" },
+      { "token": "--color-text", "value": "#FFFFFF", "usage": "Primary text on dark backgrounds", "source": "Desktop + Mobile Hero" },
+      { "token": "--color-text-muted", "value": "#EFEFEF", "usage": "Nav links, secondary body", "source": "Desktop + Mobile Hero nav" },
+      { "token": "--color-text-subtle", "value": "#898989", "usage": "Display gradient end, muted typography", "source": "Desktop MOJITO gradient" },
+      { "token": "--color-text-display", "value": "#505050", "usage": "Large background wordmarks", "source": "Desktop The ART section" },
+      { "token": "--color-accent", "value": "#E7D393", "usage": "Gold accent headings, menu titles", "source": "Desktop hero tagline + menu" },
+      { "token": "--color-accent-badge", "value": "#B2B6F4", "usage": "+12k avatar chip", "source": "Desktop philosophy section" },
+      { "token": "--color-text-inverse", "value": "#000000", "usage": "Text on white pills/badges", "source": "Desktop Best Cocktails badge" },
+      { "token": "--color-border", "value": "#FFFFFF", "usage": "Avatar chip border", "source": "Desktop avatar stack" }
+    ]
+  },
+  "typography": {
+    "official": [],
+    "inferred": [
+      { "token": "--font-display", "value": "\"Modern Negra Demo\", serif", "usage": "Brand, display headings, menu titles", "source": "Figma font family name — verify license/substitute" },
+      { "token": "--font-main", "value": "\"Mona Sans\", system-ui, sans-serif", "usage": "Body, nav, UI text", "source": "Figma font family name — verify license/substitute" },
+      { "token": "--font-weight-medium", "value": "500", "usage": "Mona Sans Medium", "source": "Design context" },
+      { "token": "--font-weight-semibold", "value": "600", "usage": "Mona Sans SemiBold CTA", "source": "Mobile Hero" },
+      { "token": "--font-weight-bold", "value": "700", "usage": "Mona Sans Bold ratings", "source": "Desktop philosophy section" },
+      { "token": "--text-display-xl-size", "value": "330px", "usage": "Desktop MOJITO / The ART", "source": "Desktop frame 42001:1163" },
+      { "token": "--text-display-xl-line-height", "value": "1", "usage": "Desktop display type", "source": "Desktop frame" },
+      { "token": "--text-display-xl-tracking", "value": "-6.6px", "usage": "Desktop display letter-spacing", "source": "Desktop frame" },
+      { "token": "--text-display-sm-size", "value": "132px", "usage": "Mobile MOJITO", "source": "Mobile Hero 42001:1366" },
+      { "token": "--text-display-sm-tracking", "value": "-2.64px", "usage": "Mobile display letter-spacing", "source": "Mobile Hero" },
+      { "token": "--text-h1-size", "value": "64px", "usage": "Section headings", "source": "Desktop philosophy section" },
+      { "token": "--text-h1-line-height", "value": "0.9", "usage": "Section headings", "source": "Desktop philosophy section" },
+      { "token": "--text-h2-size", "value": "50px", "usage": "Hero tagline desktop", "source": "Desktop hero" },
+      { "token": "--text-h2-line-height", "value": "46px", "usage": "Hero tagline desktop", "source": "Desktop hero" },
+      { "token": "--text-h3-size", "value": "36px", "usage": "Card titles, menu item names", "source": "Desktop menu + cards" },
+      { "token": "--text-h3-line-height", "value": "36px", "usage": "Menu item names", "source": "Desktop menu" },
+      { "token": "--text-brand-size", "value": "30px", "usage": "Logo wordmark", "source": "Desktop + Mobile Hero" },
+      { "token": "--text-brand-line-height", "value": "40px", "usage": "Logo wordmark", "source": "Desktop + Mobile Hero" },
+      { "token": "--text-body-lg-size", "value": "18px", "usage": "Hero details, section copy", "source": "Desktop hero" },
+      { "token": "--text-body-lg-line-height", "value": "28px", "usage": "Hero details", "source": "Desktop hero" },
+      { "token": "--text-body-size", "value": "16px", "usage": "Body, nav desktop, menu meta", "source": "Desktop + Mobile Hero" },
+      { "token": "--text-body-line-height", "value": "24px", "usage": "Body default", "source": "Desktop + Mobile Hero" },
+      { "token": "--text-body-sm-size", "value": "14px", "usage": "Mobile nav, badges, captions", "source": "Mobile Hero + Desktop badge" },
+      { "token": "--text-body-sm-line-height", "value": "20px", "usage": "Mobile nav", "source": "Mobile Hero" },
+      { "token": "--text-label-size", "value": "20px", "usage": "Column labels", "source": "Desktop menu section" },
+      { "token": "--text-label-line-height", "value": "30px", "usage": "Column labels", "source": "Desktop menu section" },
+      { "token": "--text-price-size", "value": "22px", "usage": "Menu prices", "source": "Desktop menu" },
+      { "token": "--text-rating-size", "value": "24px", "usage": "4.5/5 score", "source": "Desktop philosophy section" }
+    ]
+  },
+  "spacing": {
+    "official": [],
+    "inferred": [
+      { "token": "--space-4", "value": "4px", "usage": "Logo icon gap, star icon gap", "source": "Desktop navbar" },
+      { "token": "--space-8", "value": "8px", "usage": "Tight internal gaps", "source": "Inferred from 4px scale" },
+      { "token": "--space-10", "value": "10px", "usage": "Checklist icon-to-text gap", "source": "Desktop checklist rows" },
+      { "token": "--space-11", "value": "11px", "usage": "Rating block text gap", "source": "Desktop rating" },
+      { "token": "--space-12", "value": "12px", "usage": "Stack gap in hero details", "source": "Desktop + Mobile Hero" },
+      { "token": "--space-14", "value": "14px", "usage": "Checklist row gap", "source": "Desktop The ART section" },
+      { "token": "--space-16", "value": "16px", "usage": "Card inner padding baseline", "source": "Desktop cards" },
+      { "token": "--space-20", "value": "20px", "usage": "Badge horizontal padding", "source": "Desktop Best Cocktails pill" },
+      { "token": "--space-23", "value": "23px", "usage": "Rating stars to text gap", "source": "Desktop philosophy" },
+      { "token": "--space-24", "value": "24px", "usage": "Mobile navbar stack gap", "source": "Mobile Hero" },
+      { "token": "--space-32", "value": "32px", "usage": "Card content padding", "source": "Desktop Crafted to Impress card" },
+      { "token": "--space-36", "value": "36px", "usage": "Menu list row gap", "source": "Desktop menu columns" },
+      { "token": "--space-48", "value": "48px", "usage": "Desktop nav link gap", "source": "Desktop + Mobile Hero nav" },
+      { "token": "--space-64", "value": "64px", "usage": "Large section offsets", "source": "Inferred from layout rhythm" },
+      { "token": "--space-80", "value": "80px", "usage": "Desktop horizontal page padding", "source": "Desktop frame" },
+      { "token": "--space-90", "value": "90px", "usage": "Navbar side inset (centered 1260 in 1440)", "source": "Desktop header" }
+    ]
+  },
+  "radius": {
+    "official": [],
+    "inferred": [
+      { "token": "--radius-sm", "value": "10px", "usage": "Inner image corners", "source": "Desktop bento images" },
+      { "token": "--radius-md", "value": "12px", "usage": "Check icon container", "source": "Desktop checklist" },
+      { "token": "--radius-lg", "value": "20px", "usage": "Bento cards", "source": "Desktop gallery" },
+      { "token": "--radius-xl", "value": "30px", "usage": "Design canvas frame (not for production)", "source": "Desktop wrapper" },
+      { "token": "--radius-pill", "value": "50px", "usage": "Best Cocktails badge", "source": "Desktop philosophy" },
+      { "token": "--radius-pill-lg", "value": "60px", "usage": "Avatar stack container", "source": "Desktop philosophy" },
+      { "token": "--radius-full", "value": "9999px", "usage": "Circular avatars", "source": "Desktop avatars" }
+    ]
+  },
+  "shadows": {
+    "official": [],
+    "inferred": [
+      { "token": "--effect-noise-opacity", "value": "0.3", "usage": "Noise overlay opacity", "source": "Desktop + Mobile Hero" },
+      { "token": "--effect-header-blur", "value": "20px", "usage": "Header backdrop blur", "source": "Desktop + Mobile Hero" },
+      { "token": "--effect-cta-opacity", "value": "0.8", "usage": "View cocktails link", "source": "Desktop + Mobile Hero" },
+      { "token": "--effect-blend-hero-image", "value": "lighten", "usage": "Hero cocktail photo", "source": "Desktop + Mobile Hero — manual review" },
+      { "token": "--effect-blend-noise", "value": "overlay", "usage": "Grain texture overlay", "source": "Desktop + Mobile Hero — manual review" },
+      { "token": "--shadow-card", "value": "none", "usage": "Cards use flat fills/gradients", "source": "No box shadows detected" }
+    ]
+  },
+  "layout": {
+    "official": [],
+    "inferred": [
+      { "token": "--container-width", "value": "1260px", "usage": "Navbar content width on desktop", "source": "Desktop header" },
+      { "token": "--container-max", "value": "1440px", "usage": "Desktop artboard width", "source": "Desktop frame" },
+      { "token": "--container-padding", "value": "80px", "usage": "Desktop horizontal content inset", "source": "Desktop sections" },
+      { "token": "--container-padding-mobile", "value": "18px", "usage": "Mobile hero content side inset (404px in 440)", "source": "Mobile Hero" },
+      { "token": "--header-height-desktop", "value": "90px", "usage": "Desktop header", "source": "Desktop hero" },
+      { "token": "--header-height-mobile", "value": "130px", "usage": "Mobile stacked header", "source": "Mobile Hero" },
+      { "token": "--section-hero-height-desktop", "value": "927px", "usage": "Desktop hero section", "source": "Desktop frame" },
+      { "token": "--section-hero-height-mobile", "value": "783px", "usage": "Mobile hero frame", "source": "Mobile Hero" },
+      { "token": "--breakpoint-mobile", "value": "440px", "usage": "Mobile hero artboard — not an official breakpoint token", "source": "Mobile Hero frame width — manual review for responsive strategy" },
+      { "token": "--breakpoint-desktop", "value": "1440px", "usage": "Desktop artboard — design reference only", "source": "Desktop frame — manual review" }
+    ]
+  },
+  "warnings": [
+    "No official Figma variables were returned by get_variable_defs (empty object).",
+    "No Figma text styles were exposed via variables API; all typography is inferred from text nodes.",
+    "Font families use demo/third-party names (Modern Negra Demo, Mona Sans) — substitute with licensed webfonts before production.",
+    "Radial background gradients are inline SVG in export — rebuild as CSS custom properties or utility classes.",
+    "Blend modes (lighten, overlay) and mask groups require manual CSS implementation review.",
+    "Mobile Hero node (42001:1366) was the primary extraction target; desktop values supplemented from frame 42001:1163.",
+    "Breakpoint tokens are artboard widths, not confirmed responsive specs."
+  ]
+}
