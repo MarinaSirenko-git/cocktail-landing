@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-main: system-ui, sans-serif;
+  --color-brand: #111111;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
