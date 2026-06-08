@@ -10,7 +10,7 @@ A Vue 3 landing page starter for building a cocktail-themed marketing site with 
 - Vite
 - GSAP
 - Tailwind CSS
-- Cloudflare Pages (recommended deployment target)
+- Cloudflare Workers Static Assets
 
 ## Features
 
@@ -71,15 +71,34 @@ Serves the production build locally for a final check before deployment.
 
 ## Deployment
 
-Recommended settings for **Cloudflare Pages**:
+This project is configured for Cloudflare Workers Static Assets deployment.
 
-| Setting | Value |
-| --- | --- |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Production branch | `main` |
+### Local Cloudflare preview
 
-No Cloudflare configuration is committed yet. Connect the repository in the Cloudflare Pages dashboard and use the values above.
+```bash
+npm run dev:cf
+```
+
+### Deploy
+
+```bash
+npx wrangler login
+npm run deploy
+```
+
+After deployment, Cloudflare will provide a `*.workers.dev` URL.
+
+### Routing
+
+SPA fallback is not enabled because no client-side router package was detected.
+
+### Performance audit
+
+After local preview or deployment, run:
+
+```txt
+user-run-web-perf-audit DEPLOYED_URL
+```
 
 ## Accessibility Notes
 
