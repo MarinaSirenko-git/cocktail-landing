@@ -19,6 +19,17 @@ const rightItems = [
   'Ice-cold every time',
   'Expertly shaken & stirred',
 ]
+
+const maskStyle = {
+  WebkitMaskImage: `url(${artMask})`,
+  maskImage: `url(${artMask})`,
+  WebkitMaskSize: '100% 100%',
+  maskSize: '100% 100%',
+  WebkitMaskRepeat: 'no-repeat',
+  maskRepeat: 'no-repeat',
+  WebkitMaskPosition: 'center',
+  maskPosition: 'center',
+}
 </script>
 
 <template>
@@ -35,33 +46,48 @@ const rightItems = [
     </p>
 
     <div class="relative z-10 mx-auto max-w-[1260px] px-5 lg:px-20">
-      <figure class="relative mx-auto size-[min(100%,626px)] overflow-hidden rounded-full">
-        <!-- TODO: Compose circular mask using art-section-mask.png in CSS -->
-        <img :src="artMask" alt="" width="626" height="626" decoding="async" loading="lazy" aria-hidden="true" hidden />
-        <picture>
-          <source :srcset="bartenderWebp" type="image/webp" />
-          <img
-            :src="bartenderPng"
-            alt="Bartender preparing a cocktail seen through a glass"
-            width="626"
-            height="626"
-            decoding="async"
-            loading="lazy"
-            class="size-full object-cover"
-          />
-        </picture>
-      </figure>
+      <div class="relative mx-auto min-h-0 lg:min-h-[626px] lg:py-8">
+        <figure class="relative mx-auto size-[min(100%,626px)]">
+          <picture>
+            <source :srcset="bartenderWebp" type="image/webp" />
+            <img
+              :src="bartenderPng"
+              alt="Bartender preparing a cocktail seen through a glass"
+              width="626"
+              height="626"
+              decoding="async"
+              loading="lazy"
+              class="size-full object-cover"
+              :style="maskStyle"
+            />
+          </picture>
+        </figure>
 
-      <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
-        <ul class="space-y-3.5">
+        <ul class="absolute left-0 top-1/2 hidden max-w-[220px] -translate-y-1/2 space-y-3.5 lg:block">
           <li v-for="item in leftItems" :key="item" class="flex items-center gap-2.5">
             <img :src="iconCheck" alt="" width="16" height="16" decoding="async" aria-hidden="true" class="size-4 shrink-0" />
             <span class="text-base leading-6 text-muted">{{ item }}</span>
           </li>
         </ul>
 
-        <ul class="space-y-3.5">
+        <ul class="absolute right-0 top-1/2 hidden max-w-[220px] -translate-y-1/2 space-y-3.5 lg:block">
           <li v-for="item in rightItems" :key="item" class="flex items-center gap-2.5">
+            <img :src="iconCheck" alt="" width="16" height="16" decoding="async" aria-hidden="true" class="size-4 shrink-0" />
+            <span class="text-base leading-6 text-muted">{{ item }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-12 grid gap-10 lg:hidden">
+        <ul class="space-y-3.5">
+          <li v-for="item in leftItems" :key="`mobile-${item}`" class="flex items-center gap-2.5">
+            <img :src="iconCheck" alt="" width="16" height="16" decoding="async" aria-hidden="true" class="size-4 shrink-0" />
+            <span class="text-base leading-6 text-muted">{{ item }}</span>
+          </li>
+        </ul>
+
+        <ul class="space-y-3.5">
+          <li v-for="item in rightItems" :key="`mobile-${item}`" class="flex items-center gap-2.5">
             <img :src="iconCheck" alt="" width="16" height="16" decoding="async" aria-hidden="true" class="size-4 shrink-0" />
             <span class="text-base leading-6 text-muted">{{ item }}</span>
           </li>

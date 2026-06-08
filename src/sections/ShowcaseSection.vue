@@ -16,7 +16,7 @@ import noisePng from '../assets/images/noise-texture.png'
     class="relative overflow-hidden bg-section-radial py-16 md:py-24"
   >
     <div class="relative z-10 mx-auto max-w-[1260px] px-5 lg:px-20">
-      <figure class="relative mx-auto max-w-[968px] overflow-hidden rounded-card">
+      <figure class="relative mx-auto w-full max-w-none overflow-hidden">
         <picture>
           <source :srcset="bartenderWebp" type="image/webp" />
           <img
@@ -26,7 +26,7 @@ import noisePng from '../assets/images/noise-texture.png'
             height="661"
             decoding="async"
             loading="lazy"
-            class="w-full object-cover"
+            class="mx-auto w-full max-w-[968px] object-cover"
           />
         </picture>
       </figure>
@@ -44,7 +44,7 @@ import noisePng from '../assets/images/noise-texture.png'
       </div>
     </div>
 
-    <picture class="pointer-events-none absolute left-8 top-1/4 z-0 hidden opacity-80 lg:block">
+    <picture class="pointer-events-none absolute left-4 top-[18%] z-0 hidden opacity-80 lg:block xl:left-12">
       <source :srcset="aperolWebp" type="image/webp" />
       <img
         :src="aperolPng"
@@ -54,10 +54,10 @@ import noisePng from '../assets/images/noise-texture.png'
         decoding="async"
         loading="lazy"
         aria-hidden="true"
-        class="size-[262px] max-w-none"
+        class="size-[220px] max-w-none lg:size-[262px]"
       />
     </picture>
-    <picture class="pointer-events-none absolute right-8 bottom-1/4 z-0 hidden opacity-80 lg:block">
+    <picture class="pointer-events-none absolute right-4 bottom-[20%] z-0 hidden opacity-80 lg:block xl:right-12">
       <source :srcset="martiniWebp" type="image/webp" />
       <img
         :src="martiniPng"
@@ -67,7 +67,7 @@ import noisePng from '../assets/images/noise-texture.png'
         decoding="async"
         loading="lazy"
         aria-hidden="true"
-        class="size-[238px] max-w-none"
+        class="size-[200px] max-w-none lg:size-[238px]"
       />
     </picture>
 

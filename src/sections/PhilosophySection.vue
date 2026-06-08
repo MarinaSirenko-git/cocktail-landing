@@ -33,7 +33,7 @@ const checklistItems = [
     class="relative overflow-hidden bg-section-radial py-16 md:py-24"
   >
     <div class="relative z-10 mx-auto max-w-[1260px] px-5 lg:px-20">
-      <span class="inline-flex rounded-pill bg-surface px-5 py-2 text-sm font-medium text-primary-foreground">
+      <span class="inline-flex rounded-pill bg-surface px-5 py-2.5 text-sm font-medium text-primary-foreground">
         Best Cocktails
       </span>
 
@@ -53,45 +53,46 @@ const checklistItems = [
 
       <div
         role="group"
-        aria-label="4.5 out of 5 stars"
-        class="mx-auto mt-10 flex max-w-md flex-col items-center gap-2 text-center"
+        aria-label="4.5 out of 5 stars from more than 12,000 customers"
+        class="mx-auto mt-10 flex max-w-lg flex-col items-center gap-4 text-center"
       >
-        <div class="flex items-center gap-1" aria-hidden="true">
-          <img
-            v-for="n in 5"
-            :key="n"
-            :src="iconStar"
-            alt=""
-            width="16"
-            height="16"
-            decoding="async"
-            aria-hidden="true"
-            class="size-4"
-          />
-        </div>
-        <p class="text-2xl font-bold text-foreground">4.5/5</p>
-        <p class="text-base text-muted-subtle">More than +12000 customers</p>
-      </div>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <div class="flex flex-col items-center gap-2">
+            <div class="flex items-center gap-1" aria-hidden="true">
+              <img
+                v-for="n in 5"
+                :key="n"
+                :src="iconStar"
+                alt=""
+                width="16"
+                height="16"
+                decoding="async"
+                aria-hidden="true"
+                class="size-4"
+              />
+            </div>
+            <p class="text-2xl font-bold text-foreground">4.5/5</p>
+          </div>
 
-      <div
-        aria-hidden="true"
-        class="mx-auto mt-6 flex w-fit items-center gap-2 rounded-pill border border-border bg-surface-dark px-3 py-2"
-      >
-        <picture>
-          <source :srcset="avatar1Webp" type="image/webp" />
-          <img :src="avatar1Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="size-11 rounded-full" />
-        </picture>
-        <picture>
-          <source :srcset="avatar2Webp" type="image/webp" />
-          <img :src="avatar2Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="-ml-3 size-11 rounded-full border-2 border-background" />
-        </picture>
-        <picture>
-          <source :srcset="avatar3Webp" type="image/webp" />
-          <img :src="avatar3Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="-ml-3 size-11 rounded-full border-2 border-background" />
-        </picture>
-        <p class="ml-2 rounded-pill bg-accent-badge px-3 py-1 text-sm font-medium text-primary-foreground">
-          +12k
-        </p>
+          <div class="flex items-center gap-2 rounded-pill border border-border bg-surface-dark px-3 py-2">
+            <picture>
+              <source :srcset="avatar1Webp" type="image/webp" />
+              <img :src="avatar1Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="size-11 rounded-full" />
+            </picture>
+            <picture>
+              <source :srcset="avatar2Webp" type="image/webp" />
+              <img :src="avatar2Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="-ml-3 size-11 rounded-full border-2 border-background" />
+            </picture>
+            <picture>
+              <source :srcset="avatar3Webp" type="image/webp" />
+              <img :src="avatar3Png" alt="" width="44" height="44" decoding="async" loading="lazy" class="-ml-3 size-11 rounded-full border-2 border-background" />
+            </picture>
+            <p class="ml-2 rounded-pill bg-accent-badge px-3 py-1 text-sm font-medium text-primary-foreground">
+              +12k
+            </p>
+          </div>
+        </div>
+        <p class="text-base text-muted-subtle">More than +12000 customers</p>
       </div>
 
       <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-12">

@@ -33,7 +33,7 @@ const lovedMocktails: MenuItem[] = [
     aria-labelledby="menu-title-left"
     class="relative overflow-hidden bg-section-radial py-16 md:py-24"
   >
-    <div class="relative z-10 mx-auto grid max-w-[1260px] gap-10 px-5 lg:grid-cols-[1fr_auto_1fr] lg:items-start lg:gap-12 lg:px-20">
+    <div class="relative z-10 mx-auto grid max-w-[1260px] gap-10 px-5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-start lg:gap-10 lg:px-20">
       <div aria-labelledby="menu-title-left" class="space-y-9">
         <h2
           id="menu-title-left"
@@ -57,7 +57,7 @@ const lovedMocktails: MenuItem[] = [
         </ul>
       </div>
 
-      <figure class="mx-auto w-full max-w-[360px] lg:max-w-[720px]">
+      <figure class="mx-auto w-full max-w-[360px] lg:-mt-4 lg:max-w-[720px] lg:px-4">
         <picture>
           <source :srcset="menuWebp" type="image/webp" />
           <img

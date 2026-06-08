@@ -28,7 +28,7 @@ const activeTabIndex = 1
       <div
         role="tablist"
         aria-label="Featured cocktails"
-        class="flex flex-wrap justify-center gap-3"
+        class="flex flex-wrap justify-center gap-x-8 gap-y-2 border-b border-border"
       >
         <button
           v-for="(tab, index) in tabs"
@@ -39,8 +39,8 @@ const activeTabIndex = 1
           :tabindex="index === activeTabIndex ? 0 : -1"
           :id="`carousel-tab-${index}`"
           :aria-controls="`carousel-panel-${index}`"
-          class="rounded-button border border-border px-5 py-2 text-sm font-medium transition-colors"
-          :class="index === activeTabIndex ? 'bg-surface text-primary-foreground' : 'text-muted hover:text-foreground'"
+          class="border-b-2 px-1 pb-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          :class="index === activeTabIndex ? 'border-accent text-foreground' : 'border-transparent text-muted hover:text-foreground'"
         >
           {{ tab }}
         </button>
@@ -49,10 +49,11 @@ const activeTabIndex = 1
       <div class="mt-12 grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr] lg:gap-12">
         <button
           type="button"
-          class="hidden items-center justify-end gap-3 text-left text-muted transition-colors hover:text-foreground lg:flex"
+          class="hidden items-center justify-end gap-4 text-left text-muted transition-colors hover:text-foreground lg:flex"
         >
           <span class="font-display text-xl text-foreground">Classic Mojito</span>
-          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px] rotate-180" />
+          <span aria-hidden="true" class="h-px w-16 bg-border" />
+          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px] shrink-0 rotate-180" />
         </button>
 
         <figure class="mx-auto w-full max-w-[401px]">
@@ -72,10 +73,11 @@ const activeTabIndex = 1
 
         <button
           type="button"
-          class="hidden items-center gap-3 text-muted transition-colors hover:text-foreground lg:flex"
+          class="hidden items-center gap-4 text-muted transition-colors hover:text-foreground lg:flex"
         >
+          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px] shrink-0" />
+          <span aria-hidden="true" class="h-px w-16 bg-border" />
           <span class="font-display text-xl text-foreground">Violet Breeze</span>
-          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px]" />
         </button>
       </div>
 
