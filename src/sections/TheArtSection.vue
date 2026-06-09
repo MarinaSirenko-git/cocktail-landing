@@ -40,7 +40,7 @@ const maskStyle = {
   >
     <p
       aria-hidden="true"
-      class="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-display text-[100px] leading-none tracking-tight text-display sm:text-[180px] lg:text-[330px]"
+      class="pointer-events-none abs-center z-0 select-none whitespace-nowrap font-display text-[100px] leading-none tracking-tight text-display sm:text-[180px] lg:text-[330px]"
     >
       The ART
     </p>

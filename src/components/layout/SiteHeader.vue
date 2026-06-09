@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import logoMark from '../../assets/logos/velvet-pour-mark.png'
+import { useHeaderScroll } from '../../composables/useHeaderScroll'
+import { useSmoothScroll } from '../../composables/useSmoothScroll'
 
 const navItems = [
   { label: 'Cocktails', href: '#menu' },
@@ -9,15 +11,31 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ]
 
+const headerBackdropRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
+
+useHeaderScroll(headerBackdropRef)
+
+const { handleNavClick } = useSmoothScroll()
+
+function onNavClick(event: MouseEvent, href: string) {
+  handleNavClick(event, href, () => {
+    isMenuOpen.value = false
+  })
+}
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-[20px]">
-    <div class="mx-auto flex max-w-[1260px] items-center justify-between px-5 py-6 lg:px-[90px] lg:py-7">
+  <header class="sticky top-0 z-50 relative">
+    <div
+      ref="headerBackdropRef"
+      class="pointer-events-none absolute inset-0 -z-10"
+      aria-hidden="true"
+    />
+    <div class="container relative flex-between py-7">
       <a
         href="/"
-        class="flex items-center gap-1 font-display text-[30px] leading-10 text-foreground"
+        class="flex-center gap-1 font-display text-[30px] leading-10 text-foreground"
       >
         <img
           :src="logoMark"
@@ -28,7 +46,7 @@ const isMenuOpen = ref(false)
           class="size-8"
           aria-hidden="true"
         />
-        <span>Velvet Pour</span>
+        <span class="mt-[4px] leading-[25px]">Velvet Pour</span>
       </a>
 
       <nav aria-label="Main navigation" class="hidden md:block">
@@ -37,6 +55,7 @@ const isMenuOpen = ref(false)
             <a
               :href="item.href"
               class="transition-opacity hover:opacity-80"
+              @click="onNavClick($event, item.href)"
             >
               {{ item.label }}
             </a>
@@ -49,7 +68,7 @@ const isMenuOpen = ref(false)
         :aria-expanded="isMenuOpen"
         aria-controls="mobile-menu"
         :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
-        class="inline-flex items-center justify-center rounded-button border border-border px-4 py-2 text-sm font-medium text-foreground md:hidden"
+        class="flex-center rounded-button border border-border px-4 py-2 text-sm font-medium text-foreground md:hidden"
         @click="isMenuOpen = !isMenuOpen"
       >
         {{ isMenuOpen ? 'Close' : 'Menu' }}
@@ -67,7 +86,7 @@ const isMenuOpen = ref(false)
           <a
             :href="item.href"
             class="block transition-opacity hover:opacity-80"
-            @click="isMenuOpen = false"
+            @click="onNavClick($event, item.href)"
           >
             {{ item.label }}
           </a>

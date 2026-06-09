@@ -76,7 +76,7 @@ const hours = [
                   :aria-label="link.label"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex size-10 items-center justify-center rounded-full border border-border transition-opacity hover:opacity-80"
+                  class="flex-center size-10 rounded-full border border-border transition-opacity hover:opacity-80"
                 >
                   <img
                     :src="link.icon"

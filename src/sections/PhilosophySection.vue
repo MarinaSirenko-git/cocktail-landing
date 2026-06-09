@@ -56,7 +56,7 @@ const checklistItems = [
         aria-label="4.5 out of 5 stars from more than 12,000 customers"
         class="mx-auto mt-10 flex max-w-lg flex-col items-center gap-4 text-center"
       >
-        <div class="flex flex-wrap items-center justify-center gap-4">
+        <div class="flex-center flex-wrap gap-4">
           <div class="flex flex-col items-center gap-2">
             <div class="flex items-center gap-1" aria-hidden="true">
               <img

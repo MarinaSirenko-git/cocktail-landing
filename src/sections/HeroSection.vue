@@ -15,7 +15,7 @@ import noisePng from '../assets/images/noise-texture.png'
   >
     <p
       aria-hidden="true"
-      class="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap bg-display-text bg-clip-text font-display text-[132px] font-normal leading-none tracking-[-0.02em] text-transparent sm:text-[200px] lg:text-[330px] lg:tracking-[-0.02em]"
+      class="pointer-events-none abs-center z-0 select-none whitespace-nowrap bg-display-text bg-clip-text font-display text-[132px] font-normal leading-none tracking-[-0.02em] text-transparent sm:text-[200px] lg:text-[330px] lg:tracking-[-0.02em]"
     >
       MOJITO
     </p>
@@ -73,7 +73,7 @@ import noisePng from '../assets/images/noise-texture.png'
     <a
       href="#menu"
       aria-label="Scroll to cocktails menu"
-      class="relative z-10 mx-auto mt-10 flex size-12 items-center justify-center rounded-full border border-border text-sm text-muted transition-colors hover:text-foreground lg:absolute lg:right-10 lg:top-1/2 lg:mx-0 lg:mt-0 lg:-translate-y-1/2"
+      class="relative z-10 mx-auto mt-10 flex-center size-12 rounded-full border border-border text-sm text-muted transition-colors hover:text-foreground lg:absolute lg:right-10 lg:top-1/2 lg:mx-0 lg:mt-0 lg:-translate-y-1/2"
     >
       <span aria-hidden="true" class="block h-6 w-px bg-border" />
     </a>

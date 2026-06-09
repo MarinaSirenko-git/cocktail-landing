@@ -32,9 +32,6 @@ Thumbs.db
 .temp
 tmp
 
-# Unused starter / duplicate assets (not used in production build)
-src/assets/source/
-
 *.suo
 *.ntvs*
 *.njsproj
