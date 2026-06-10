@@ -203,11 +203,11 @@ onUnmounted(() => {
       />
     </picture>
 
-    <div class="video absolute inset-0">
+    <div class="absolute inset-0">
       <video
         id="hero-video"
         ref="videoRef"
-        class="mix-blend-lighten"
+        class="video mix-blend-lighten"
         :src="heroVideo"
         muted
         playsInline
