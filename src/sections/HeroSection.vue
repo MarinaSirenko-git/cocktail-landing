@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
-import heroVideo from '../assets/video/input.mp4'
+import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 // register GSAP plugin
@@ -154,7 +154,7 @@ onUnmounted(() => {
       </a>
 
       <div class="flex flex-col gap-2">
-        <p class="animation-marker text-base">Cool. Crisp. Classic.</p>
+        <p class="text-base">Cool. Crisp. Classic.</p>
         <h2 class="animation-marker font-display text-[50px] leading-none text-accent">
           Sip the Spirit <br />
           of Summer
@@ -169,7 +169,7 @@ onUnmounted(() => {
         <div class="flex">
           <a
             href="#menu"
-            class="animation-marker text-base transition-opacity hover:opacity-80 focus-ring"
+            class="text-base transition-opacity hover:opacity-80 focus-ring"
           >
             View cocktails
           </a>
