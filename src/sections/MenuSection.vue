@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 type MenuItem = {
   name: string
@@ -21,63 +25,103 @@ const lovedMocktails: MenuItem[] = [
   { name: 'Citrus Glow', meta: 'CA | 750 ml', price: '$20' },
   { name: 'Lavender Fizz', meta: 'IE | 600 ml', price: '$29' },
 ]
+
+// create reactive container with .value field where Vue will add real DOM element value
+// type null is important because element exists only after mount
+const sectionRef = ref<HTMLElement | null>(null)
+
+// register plugin
+gsap.registerPlugin(ScrollTrigger)
+
+const prefersReducedMotion = usePrefersReducedMotion()
+
+// create variable to store the animation context
+let ctx: gsap.Context | undefined
+
+onMounted(() => {
+  // add check if  user has reduced motion
+  if (!sectionRef.value || prefersReducedMotion.value) return
+
+  ctx = gsap.context(function (this: gsap.Context) {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top 30%',
+        end: 'bottom 80%',
+        scrub: true,
+      }
+    })
+
+    timeline
+      .from('#menu-left-leaf', {
+        x: -100,
+        y: 100
+      })
+      .from('#menu-right-leaf', {
+        x: 100,
+        y: 100
+      })
+
+
+  }, sectionRef.value)
+ 
+})
+
+onUnmounted(() => {
+  ctx?.revert()
+})
+
 </script>
 
 <template>
   <section
+    ref="sectionRef"
     id="menu"
     aria-labelledby="menu-title-left"
-    class="relative overflow-x-hidden bg-section-radial pt-[120px] pb-[420px]"
+    class="noisy relative z-20 min-h-dvh w-full overflow-hidden"
   >
-    <div class="relative container flex-between">
-      <div aria-labelledby="menu-title-left" class="space-y-9">
-        <h2
-          id="menu-title-left"
-          class="text-xl lg:text-[20px] lg:leading-[30px]"
-        >
+    <div
+      class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 px-5 pt-40 md:flex-row 2xl:px-0"
+    >
+      <div aria-labelledby="menu-title-left" class="w-full space-y-8 md:w-fit">
+        <h2 id="menu-title-left" class="text-xl font-medium">
           Most popular cocktails:
         </h2>
-        <ul class="space-y-9">
-          <li v-for="item in popularCocktails" :key="item.name">
-            <article class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-4 gap-y-1">
-              <h3 class="col-start-1 row-start-1 font-display text-[30px] leading-none text-accent">
+        <ul class="space-y-8">
+          <li v-for="item in popularCocktails" :key="item.name" class="flex items-start justify-between">
+            <div class="md:me-28">
+              <h3 class="font-display text-xl text-accent 2xl:text-3xl">
                 {{ item.name }}
               </h3>
-              <p class="col-start-1 row-start-2 text-base leading-6">{{ item.meta }}</p>
-              <p class="col-start-2 row-start-1 justify-self-end text-[22px] font-medium leading-6 text-foreground">
-                <span aria-hidden="true">—</span>
-                {{ item.price }}
-              </p>
-            </article>
+              <p class="text-sm">{{ item.meta }}</p>
+            </div>
+            <span class="text-xl font-medium">- {{ item.price }}</span>
           </li>
         </ul>
       </div>
 
-      <div aria-labelledby="menu-title-right" class="space-y-9">
-        <h2
-          id="menu-title-right"
-          class="text-xl lg:text-[20px] lg:leading-[30px]"
-        >
+      <div aria-labelledby="menu-title-right" class="w-full space-y-8 pb-20 md:w-fit md:pb-0">
+        <h2 id="menu-title-right" class="text-xl font-medium">
           Most loved mocktails:
         </h2>
-        <ul class="space-y-9">
-          <li v-for="item in lovedMocktails" :key="item.name">
-            <article class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-4 gap-y-1">
-              <h3 class="col-start-1 row-start-1 font-display text-[30px] leading-none text-accent">
+        <ul class="space-y-8">
+          <li v-for="item in lovedMocktails" :key="item.name" class="flex items-start justify-between">
+            <div class="me-28">
+              <h3 class="font-display text-xl text-accent 2xl:text-3xl">
                 {{ item.name }}
               </h3>
-              <p class="col-start-1 row-start-2 text-base leading-6">{{ item.meta }}</p>
-              <p class="col-start-2 row-start-1 justify-self-end text-[22px] font-medium leading-6 text-foreground">
-                <span aria-hidden="true">—</span>
-                {{ item.price }}
-              </p>
-            </article>
+              <p class="text-sm">{{ item.meta }}</p>
+            </div>
+            <span class="text-xl font-medium">- {{ item.price }}</span>
           </li>
         </ul>
       </div>
     </div>
 
-    <picture class="pointer-events-none absolute -left-15 bottom-0 z-10">
+    <picture
+      id="menu-left-leaf"
+      class="pointer-events-none absolute -left-20 -bottom-20 w-1/3 md:top-auto md:w-fit"
+    >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
         :src="monsteraPng"
@@ -90,7 +134,10 @@ const lovedMocktails: MenuItem[] = [
         class="size-[317px] max-w-none rotate-[42deg] scale-x-[-1]"
       />
     </picture>
-    <picture class="pointer-events-none absolute -right-15 bottom-0 z-10">
+    <picture
+      id="menu-right-leaf"
+      class="pointer-events-none absolute -right-20 -bottom-20 w-1/3  md:top-auto md:w-fit"
+    >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
         :src="monsteraPng"
@@ -103,7 +150,5 @@ const lovedMocktails: MenuItem[] = [
         class="size-[317px] max-w-none rotate-[-42deg]"
       />
     </picture>
-
-    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

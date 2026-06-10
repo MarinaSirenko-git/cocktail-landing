@@ -13,7 +13,7 @@ import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 // register GSAP plugin
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
-// detect screens less then 768 as mobile devices
+// detect screens less then 768 as mobile devices and reduced motion
 const isMobile = useMediaQuery('(max-width: 767px)')
 const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -128,20 +128,20 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="hero-stage relative h-[calc(100dvh-var(--header-height,0px))] w-full overflow-hidden">
+  <div class="hero-stage relative h-[calc(100dvh-var(--header-height,0px))] w-full">
     <section
       ref="sectionRef"
       id="hero"
       aria-labelledby="hero-title"
-      class="noisy relative z-10 flex h-full w-full flex-col flex-between border border-transparent pt-[50px] pb-[70px]"
+      class="noisy relative z-20 flex h-full w-full flex-col flex-between border border-transparent pt-[50px] pb-[70px]"
     >
-      <h1 id="title" class="decorative-text relative z-10 flex-center">MOJITO</h1>
+      <h1 id="title" class="decorative-text relative z-20 flex-center">MOJITO</h1>
 
-      <div class="relative z-10 container flex-between">
+      <div class="relative z-20 container flex-between">
         <a
           href="#menu"
           aria-label="Scroll to cocktails menu"
-          class="absolute right-0 top-[-240px] z-10 hover:opacity-80 focus-ring"
+          class="absolute right-0 top-[-240px] z-20 hover:opacity-80 focus-ring"
         >
           <img
             :src="iconArrowDown"
@@ -178,7 +178,7 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <picture id="left-leaf" class="pointer-events-none absolute -left-32 top-48 z-10">
+      <picture id="left-leaf" class="pointer-events-none absolute -left-32 top-48 z-20">
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
           :src="monsteraPng"
@@ -190,7 +190,7 @@ onUnmounted(() => {
           class="size-[326px] max-w-none rotate-45 scale-x-[-1]"
         />
       </picture>
-      <picture id="right-leaf" class="pointer-events-none absolute -right-47 -top-4 z-10">
+      <picture id="right-leaf" class="pointer-events-none absolute -right-47 -top-4 z-20">
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
           :src="monsteraPng"
@@ -204,7 +204,7 @@ onUnmounted(() => {
         />
       </picture>
     </section>
-    <div class="pointer-events-none absolute inset-0 z-0">
+    <div class="pointer-events-none absolute inset-0 z-10">
       <video
         id="hero-video"
         ref="videoRef"
