@@ -5,8 +5,6 @@ import aperolWebp from '../assets/images/floating-cocktail-aperol.webp'
 import aperolPng from '../assets/images/floating-cocktail-aperol.png'
 import martiniWebp from '../assets/images/floating-cocktail-martini.webp'
 import martiniPng from '../assets/images/floating-cocktail-martini.png'
-import noiseWebp from '../assets/images/noise-texture.webp'
-import noisePng from '../assets/images/noise-texture.png'
 </script>
 
 <template>
@@ -71,19 +69,6 @@ import noisePng from '../assets/images/noise-texture.png'
       />
     </picture>
 
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 mix-blend-overlay opacity-30">
-      <picture class="block size-full">
-        <source :srcset="noiseWebp" type="image/webp" />
-        <img
-          :src="noisePng"
-          alt=""
-          width="1440"
-          height="927"
-          decoding="async"
-          loading="lazy"
-          class="size-full object-cover"
-        />
-      </picture>
-    </div>
+    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

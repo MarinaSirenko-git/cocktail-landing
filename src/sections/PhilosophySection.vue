@@ -15,8 +15,6 @@ import avatar2Webp from '../assets/images/avatar-customer-2.webp'
 import avatar2Png from '../assets/images/avatar-customer-2.png'
 import avatar3Webp from '../assets/images/avatar-customer-3.webp'
 import avatar3Png from '../assets/images/avatar-customer-3.png'
-import noiseWebp from '../assets/images/noise-texture.webp'
-import noisePng from '../assets/images/noise-texture.png'
 
 const checklistItems = [
   'Perfectly balanced blends',
@@ -173,19 +171,6 @@ const checklistItems = [
       </div>
     </div>
 
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 mix-blend-overlay opacity-30">
-      <picture class="block size-full">
-        <source :srcset="noiseWebp" type="image/webp" />
-        <img
-          :src="noisePng"
-          alt=""
-          width="1440"
-          height="1065"
-          decoding="async"
-          loading="lazy"
-          class="size-full object-cover"
-        />
-      </picture>
-    </div>
+    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

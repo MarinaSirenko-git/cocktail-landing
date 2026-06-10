@@ -17,3 +17,22 @@
 @utility container {
   @apply mx-auto max-w-[1260px];
 }
+
+@utility decorative-text {
+  @apply bg-display-text bg-clip-text font-display text-[132px] font-normal leading-none tracking-[-0.02em] text-transparent whitespace-nowrap sm:text-[200px] lg:text-[330px] lg:tracking-[-0.02em];
+}
+
+@utility noise-overlay {
+  @apply pointer-events-none absolute inset-0 z-0 bg-noise bg-repeat opacity-30 mix-blend-overlay;
+}
+
+@utility focus-ring {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent;
+}
+
+@utility text-gradient {
+  background: linear-gradient(to bottom, #ffffff, #898989);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -3,8 +3,6 @@ import iconCheck from '../assets/icons/icon-check.svg'
 import artMask from '../assets/images/art-section-mask.png'
 import bartenderWebp from '../assets/images/bartender-photo.webp'
 import bartenderPng from '../assets/images/bartender-photo.png'
-import noiseWebp from '../assets/images/noise-texture.webp'
-import noisePng from '../assets/images/noise-texture.png'
 
 const leftItems = [
   'Handpicked ingredients',
@@ -102,19 +100,6 @@ const maskStyle = {
       </h2>
     </div>
 
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 mix-blend-overlay opacity-30">
-      <picture class="block size-full">
-        <source :srcset="noiseWebp" type="image/webp" />
-        <img
-          :src="noisePng"
-          alt=""
-          width="1440"
-          height="927"
-          decoding="async"
-          loading="lazy"
-          class="size-full object-cover"
-        />
-      </picture>
-    </div>
+    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

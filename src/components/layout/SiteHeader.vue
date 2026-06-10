@@ -35,7 +35,7 @@ function onNavClick(event: MouseEvent, href: string) {
     <div class="container relative flex-between py-7">
       <a
         href="/"
-        class="flex-center gap-1 font-display text-[30px] leading-10 text-foreground"
+        class="flex-center gap-1 font-display text-[30px] leading-10 text-foreground focus-ring"
       >
         <img
           :src="logoMark"
@@ -54,7 +54,7 @@ function onNavClick(event: MouseEvent, href: string) {
           <li v-for="item in navItems" :key="item.href">
             <a
               :href="item.href"
-              class="transition-opacity hover:opacity-80"
+              class="focus-ring transition-opacity hover:opacity-80"
               @click="onNavClick($event, item.href)"
             >
               {{ item.label }}
@@ -68,7 +68,7 @@ function onNavClick(event: MouseEvent, href: string) {
         :aria-expanded="isMenuOpen"
         aria-controls="mobile-menu"
         :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
-        class="flex-center rounded-button border border-border px-4 py-2 text-sm font-medium text-foreground md:hidden"
+        class="flex-center focus-ring rounded-button border border-border px-4 py-2 text-sm font-medium text-foreground md:hidden"
         @click="isMenuOpen = !isMenuOpen"
       >
         {{ isMenuOpen ? 'Close' : 'Menu' }}
@@ -85,7 +85,7 @@ function onNavClick(event: MouseEvent, href: string) {
         <li v-for="item in navItems" :key="item.href">
           <a
             :href="item.href"
-            class="block transition-opacity hover:opacity-80"
+            class="block focus-ring transition-opacity hover:opacity-80"
             @click="onNavClick($event, item.href)"
           >
             {{ item.label }}

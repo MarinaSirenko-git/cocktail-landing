@@ -4,8 +4,6 @@ import drinkWebp from '../assets/images/carousel-drink-raspberry-mojito.webp'
 import drinkPng from '../assets/images/carousel-drink-raspberry-mojito.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
-import noiseWebp from '../assets/images/noise-texture.webp'
-import noisePng from '../assets/images/noise-texture.png'
 
 const tabs = [
   'Classic Mojito',
@@ -39,7 +37,7 @@ const activeTabIndex = 1
           :tabindex="index === activeTabIndex ? 0 : -1"
           :id="`carousel-tab-${index}`"
           :aria-controls="`carousel-panel-${index}`"
-          class="border-b-2 px-1 pb-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          class="border-b-2 px-1 pb-3 text-sm font-medium transition-colors focus-ring"
           :class="index === activeTabIndex ? 'border-accent text-foreground' : 'border-transparent text-muted hover:text-foreground'"
         >
           {{ tab }}
@@ -134,19 +132,6 @@ const activeTabIndex = 1
       />
     </picture>
 
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 mix-blend-overlay opacity-30">
-      <picture class="block size-full">
-        <source :srcset="noiseWebp" type="image/webp" />
-        <img
-          :src="noisePng"
-          alt=""
-          width="1440"
-          height="837"
-          decoding="async"
-          loading="lazy"
-          class="size-full object-cover"
-        />
-      </picture>
-    </div>
+    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

@@ -3,8 +3,6 @@ import menuWebp from '../assets/images/menu-cocktail-center.webp'
 import menuPng from '../assets/images/menu-cocktail-center.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
-import noiseWebp from '../assets/images/noise-texture.webp'
-import noisePng from '../assets/images/noise-texture.png'
 
 type MenuItem = {
   name: string
@@ -123,19 +121,6 @@ const lovedMocktails: MenuItem[] = [
       />
     </picture>
 
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 mix-blend-overlay opacity-30">
-      <picture class="block size-full">
-        <source :srcset="noiseWebp" type="image/webp" />
-        <img
-          :src="noisePng"
-          alt=""
-          width="1440"
-          height="927"
-          decoding="async"
-          loading="lazy"
-          class="size-full object-cover"
-        />
-      </picture>
-    </div>
+    <div aria-hidden="true" class="noise-overlay" />
   </section>
 </template>

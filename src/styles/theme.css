@@ -36,4 +36,5 @@
   );
   --background-image-card-gradient: linear-gradient(180deg, #313131 0%, #0f0f0f 100%);
   --background-image-display-text: linear-gradient(180deg, #ffffff 0%, #898989 62.879%);
+  --background-image-noise: url('../assets/images/noise-texture.webp');
 }
