@@ -18,7 +18,7 @@ import ContactSection from './sections/ContactSection.vue'
     Skip to content
   </a>
   <SiteHeader />
-  <main id="main-content" class="min-h-screen bg-background text-foreground">
+  <main id="main-content" class="w-full overflow-x-hidden text-foreground">
     <HeroSection />
     <MenuSection />
     <PhilosophySection />

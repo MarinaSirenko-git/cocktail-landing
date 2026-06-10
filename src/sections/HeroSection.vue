@@ -87,7 +87,7 @@ onMounted(() => {
       const videoTimeline = gsap
         .timeline({
           scrollTrigger: {
-            trigger: 'video',
+            trigger: '#hero-video',
             start: startValue,
             end: endValue,
             scrub: true,
@@ -128,93 +128,93 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section
-    ref="sectionRef"
-    id="hero"
-    aria-labelledby="hero-title"
-    class="relative flex flex-col flex-between min-h-[calc(100dvh-88px)] overflo-x-hidden bg-section-radial py-16 md:py-24 lg:py-0"
-  >
-    <h1 id="title" class="decorative-text relative z-10 flex-center pt-14">MOJITO</h1>
+  <div class="hero-stage relative h-[calc(100dvh-var(--header-height,0px))] w-full overflow-hidden">
+    <section
+      ref="sectionRef"
+      id="hero"
+      aria-labelledby="hero-title"
+      class="noisy relative z-10 flex h-full w-full flex-col flex-between border border-transparent pt-[50px] pb-[70px]"
+    >
+      <h1 id="title" class="decorative-text relative z-10 flex-center">MOJITO</h1>
 
-    <div class="relative z-10 container flex-between">
-      <a
-        href="#menu"
-        aria-label="Scroll to cocktails menu"
-        class="absolute right-0 top-[-240px] z-10 hover:opacity-80 focus-ring"
-      >
-        <img
-          :src="iconArrowDown"
-          alt=""
-          width="23"
-          height="152"
-          decoding="async"
-          aria-hidden="true"
-          class="arrow h-auto w-auto"
-        />
-      </a>
+      <div class="relative z-10 container flex-between">
+        <a
+          href="#menu"
+          aria-label="Scroll to cocktails menu"
+          class="absolute right-0 top-[-240px] z-10 hover:opacity-80 focus-ring"
+        >
+          <img
+            :src="iconArrowDown"
+            alt=""
+            width="23"
+            height="152"
+            decoding="async"
+            aria-hidden="true"
+            class="arrow h-auto w-auto"
+          />
+        </a>
 
-      <div class="flex flex-col gap-2">
-        <p class="text-base">Cool. Crisp. Classic.</p>
-        <h2 class="animation-marker font-display text-[50px] leading-none text-accent">
-          Sip the Spirit <br />
-          of Summer
-        </h2>
-      </div>
+        <div class="flex flex-col gap-2">
+          <p class="text-base">Cool. Crisp. Classic.</p>
+          <h2 class="animation-marker font-display text-[50px] leading-none text-accent">
+            Sip the Spirit <br />
+            of Summer
+          </h2>
+        </div>
 
-      <div class="flex max-w-[270px] flex-col items-right gap-2">
-        <p class="animation-marker text-base leading-7">
-          Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
-          recipes <br />— designed to delight your senses.
-        </p>
-        <div class="flex">
-          <a
-            href="#menu"
-            class="text-base transition-opacity hover:opacity-80 focus-ring"
-          >
-            View cocktails
-          </a>
+        <div class="flex max-w-[270px] flex-col items-right gap-2">
+          <p class="animation-marker text-base leading-7">
+            Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
+            recipes <br />— designed to delight your senses.
+          </p>
+          <div class="flex">
+            <a
+              href="#menu"
+              class="text-base transition-opacity hover:opacity-80 focus-ring"
+            >
+              View cocktails
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <picture id="left-leaf" class="pointer-events-none absolute -left-32 top-48 z-10">
-      <source :srcset="monsteraWebp" type="image/webp" />
-      <img
-        :src="monsteraPng"
-        alt=""
-        width="326"
-        height="326"
-        decoding="async"
-        aria-hidden="true"
-        class="size-[326px] max-w-none rotate-45 scale-x-[-1]"
-      />
-    </picture>
-    <picture id="right-leaf" class="pointer-events-none absolute -right-47 -top-4 z-10">
-      <source :srcset="monsteraWebp" type="image/webp" />
-      <img
-        :src="monsteraPng"
-        alt=""
-        width="356"
-        height="356"
-        decoding="async"
-        loading="lazy"
-        aria-hidden="true"
-        class="size-[356px] max-w-none rotate-[-26deg]"
-      />
-    </picture>
-
-    <div class="absolute inset-0">
+      <picture id="left-leaf" class="pointer-events-none absolute -left-32 top-48 z-10">
+        <source :srcset="monsteraWebp" type="image/webp" />
+        <img
+          :src="monsteraPng"
+          alt=""
+          width="326"
+          height="326"
+          decoding="async"
+          aria-hidden="true"
+          class="size-[326px] max-w-none rotate-45 scale-x-[-1]"
+        />
+      </picture>
+      <picture id="right-leaf" class="pointer-events-none absolute -right-47 -top-4 z-10">
+        <source :srcset="monsteraWebp" type="image/webp" />
+        <img
+          :src="monsteraPng"
+          alt=""
+          width="356"
+          height="356"
+          decoding="async"
+          loading="lazy"
+          aria-hidden="true"
+          class="size-[356px] max-w-none rotate-[-26deg]"
+        />
+      </picture>
+    </section>
+    <div class="pointer-events-none absolute inset-0 z-0">
       <video
         id="hero-video"
         ref="videoRef"
-        class="video mix-blend-lighten"
         :src="heroVideo"
+        class="video"
         muted
         playsInline
         preload="auto"
         aria-hidden="true"
       />
     </div>
-    <div aria-hidden="true" class="noise-overlay" />
-  </section>
+  </div>
 </template>

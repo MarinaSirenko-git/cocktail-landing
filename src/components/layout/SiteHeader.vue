@@ -18,6 +18,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // create reactive variables
 const headerBackdropRef = ref<HTMLElement | null>(null)
+const headerRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
 const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -25,8 +26,19 @@ const prefersReducedMotion = usePrefersReducedMotion()
 let headerCtx: gsap.Context | undefined
 // create variable to control active animated scroll to kill prev scroll
 let activeScrollTween: gsap.core.Tween | null = null
+let headerResizeObserver: ResizeObserver | null = null
+
+function syncHeaderHeightVar() {
+  const height = headerRef.value?.getBoundingClientRect().height ?? 0
+  document.documentElement.style.setProperty('--header-height', `${Math.round(height)}px`)
+}
 
 onMounted(() => {
+  syncHeaderHeightVar()
+  window.addEventListener('resize', syncHeaderHeightVar)
+  headerResizeObserver = new ResizeObserver(syncHeaderHeightVar)
+  if (headerRef.value) headerResizeObserver.observe(headerRef.value)
+
   // check if header doesn`t exist or user reduce motion
   if (!headerBackdropRef.value || prefersReducedMotion.value) return
 
@@ -59,6 +71,9 @@ onMounted(() => {
 
 // clean all animations
 onUnmounted(() => {
+  window.removeEventListener('resize', syncHeaderHeightVar)
+  headerResizeObserver?.disconnect()
+  headerResizeObserver = null
   headerCtx?.revert()
   activeScrollTween?.kill()
   activeScrollTween = null
@@ -107,7 +122,7 @@ function onNavClick(event: MouseEvent, href: string) {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 relative">
+  <header ref="headerRef" class="sticky top-0 z-50 relative">
     <div
       ref="headerBackdropRef"
       class="pointer-events-none absolute inset-0 -z-10"

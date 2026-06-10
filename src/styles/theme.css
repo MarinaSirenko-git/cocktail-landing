@@ -27,14 +27,11 @@
   --spacing-container: 5rem;
 
   --background-image-section-radial: radial-gradient(
-    ellipse at center,
+    circle at center,
     #434343 0%,
-    #323232 25%,
-    #212121 50%,
-    #111111 75%,
-    #000000 100%
+    #000000 50%,
+    transparent 100%
   );
   --background-image-card-gradient: linear-gradient(180deg, #313131 0%, #0f0f0f 100%);
   --background-image-display-text: linear-gradient(180deg, #ffffff 0%, #898989 62.879%);
-  --background-image-noise: url('../assets/images/noise-texture.webp');
 }
