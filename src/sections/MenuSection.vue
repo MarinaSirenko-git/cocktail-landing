@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import menuWebp from '../assets/images/menu-cocktail-center.webp'
-import menuPng from '../assets/images/menu-cocktail-center.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 
@@ -29,24 +27,24 @@ const lovedMocktails: MenuItem[] = [
   <section
     id="menu"
     aria-labelledby="menu-title-left"
-    class="relative overflo-x-hidden bg-section-radial py-16 md:py-24"
+    class="relative overflow-x-hidden bg-section-radial pt-[120px] pb-[420px]"
   >
-    <div class="relative z-10 mx-auto grid max-w-[1260px] gap-10 px-5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-start lg:gap-10 lg:px-20">
+    <div class="relative container flex-between">
       <div aria-labelledby="menu-title-left" class="space-y-9">
         <h2
           id="menu-title-left"
-          class="font-display text-xl text-accent lg:text-[20px] lg:leading-[30px]"
+          class="text-xl lg:text-[20px] lg:leading-[30px]"
         >
           Most popular cocktails:
         </h2>
         <ul class="space-y-9">
           <li v-for="item in popularCocktails" :key="item.name">
-            <article class="space-y-1">
-              <h3 class="font-display text-2xl leading-none text-foreground lg:text-[36px]">
+            <article class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-4 gap-y-1">
+              <h3 class="col-start-1 row-start-1 font-display text-[30px] leading-none text-accent">
                 {{ item.name }}
               </h3>
-              <p class="text-base leading-6 text-muted-subtle">{{ item.meta }}</p>
-              <p class="text-[22px] font-medium leading-6 text-foreground">
+              <p class="col-start-1 row-start-2 text-base leading-6">{{ item.meta }}</p>
+              <p class="col-start-2 row-start-1 justify-self-end text-[22px] font-medium leading-6 text-foreground">
                 <span aria-hidden="true">—</span>
                 {{ item.price }}
               </p>
@@ -55,36 +53,21 @@ const lovedMocktails: MenuItem[] = [
         </ul>
       </div>
 
-      <figure class="mx-auto w-full max-w-[360px] lg:-mt-4 lg:max-w-[720px] lg:px-4">
-        <picture>
-          <source :srcset="menuWebp" type="image/webp" />
-          <img
-            :src="menuPng"
-            alt="Cocktail in a martini glass"
-            width="720"
-            height="643"
-            decoding="async"
-            loading="lazy"
-            class="mx-auto w-full"
-          />
-        </picture>
-      </figure>
-
       <div aria-labelledby="menu-title-right" class="space-y-9">
         <h2
           id="menu-title-right"
-          class="font-display text-xl text-accent lg:text-[20px] lg:leading-[30px]"
+          class="text-xl lg:text-[20px] lg:leading-[30px]"
         >
           Most loved mocktails:
         </h2>
         <ul class="space-y-9">
           <li v-for="item in lovedMocktails" :key="item.name">
-            <article class="space-y-1">
-              <h3 class="font-display text-2xl leading-none text-foreground lg:text-[36px]">
+            <article class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-4 gap-y-1">
+              <h3 class="col-start-1 row-start-1 font-display text-[30px] leading-none text-accent">
                 {{ item.name }}
               </h3>
-              <p class="text-base leading-6 text-muted-subtle">{{ item.meta }}</p>
-              <p class="text-[22px] font-medium leading-6 text-foreground">
+              <p class="col-start-1 row-start-2 text-base leading-6">{{ item.meta }}</p>
+              <p class="col-start-2 row-start-1 justify-self-end text-[22px] font-medium leading-6 text-foreground">
                 <span aria-hidden="true">—</span>
                 {{ item.price }}
               </p>
@@ -94,30 +77,30 @@ const lovedMocktails: MenuItem[] = [
       </div>
     </div>
 
-    <picture class="pointer-events-none absolute -left-24 top-10 z-0 hidden opacity-50 lg:block">
+    <picture class="pointer-events-none absolute -left-15 bottom-0 z-10">
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
         :src="monsteraPng"
         alt=""
-        width="448"
-        height="448"
+        width="317"
+        height="317"
         decoding="async"
         loading="lazy"
         aria-hidden="true"
-        class="size-[448px] max-w-none"
+        class="size-[317px] max-w-none rotate-[42deg] scale-x-[-1]"
       />
     </picture>
-    <picture class="pointer-events-none absolute -right-24 bottom-10 z-0 hidden opacity-50 lg:block">
+    <picture class="pointer-events-none absolute -right-15 bottom-0 z-10">
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
         :src="monsteraPng"
         alt=""
-        width="448"
-        height="448"
+        width="317"
+        height="317"
         decoding="async"
         loading="lazy"
         aria-hidden="true"
-        class="size-[448px] max-w-none"
+        class="size-[317px] max-w-none rotate-[-42deg]"
       />
     </picture>
 
