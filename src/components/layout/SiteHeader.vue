@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import logoMark from '../../assets/logos/velvet-pour-mark.png'
-import { useHeaderScroll } from '../../composables/useHeaderScroll'
-import { useSmoothScroll } from '../../composables/useSmoothScroll'
+import { usePrefersReducedMotion } from '../../composables/usePrefersReducedMotion'
 
 const navItems = [
   { label: 'Cocktails', href: '#menu' },
@@ -11,15 +13,94 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ]
 
+// register plugin
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+
+// create reactive variables
 const headerBackdropRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
+const prefersReducedMotion = usePrefersReducedMotion()
 
-useHeaderScroll(headerBackdropRef)
+// create variable to store the animation context
+let headerCtx: gsap.Context | undefined
+// create variable to control active animated scroll to kill prev scroll
+let activeScrollTween: gsap.core.Tween | null = null
 
-const { handleNavClick } = useSmoothScroll()
+onMounted(() => {
+  // check if header doesn`t exist or user reduce motion
+  if (!headerBackdropRef.value || prefersReducedMotion.value) return
 
+  // Animate the translucent header backdrop once user scrolls past hero.
+  headerCtx = gsap.context(() => {
+    const navTween = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'header',
+        start: 'bottom top',
+        toggleActions: 'play none none reverse',
+      },
+    })
+
+    // use fromTo to control back/forvard state striktly
+    navTween.fromTo(
+      headerBackdropRef.value,
+      {
+        backgroundColor: 'transparent',
+        backdropFilter: 'blur(0px)',
+      },
+      {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(10px)',
+        duration: 1,
+        ease: 'power1.inOut',
+      },
+    )
+  })
+})
+
+// clean all animations
+onUnmounted(() => {
+  headerCtx?.revert()
+  activeScrollTween?.kill()
+  activeScrollTween = null
+})
+
+function scrollToSection(hash: string, onComplete?: () => void) {
+  // find target section by id
+  const target = document.querySelector(hash)
+  if (!target) return
+
+  // find height of header
+  const offsetY = document.querySelector('header')?.getBoundingClientRect().height ?? 0
+
+  // if active scroll exist kill the process
+  activeScrollTween?.kill()
+
+  // Skip animated scroll when user requests reduced motion.
+  if (prefersReducedMotion.value) {
+    const top = target.getBoundingClientRect().top + window.scrollY - offsetY
+    window.scrollTo({ top, behavior: 'instant' })
+    onComplete?.()
+    return
+  }
+
+  // setup animations rules
+  activeScrollTween = gsap.to(window, {
+    duration: 0.9,
+    ease: 'power2.inOut',
+    scrollTo: { y: target, offsetY },
+    onComplete: () => {
+      activeScrollTween = null
+      onComplete?.()
+    },
+  })
+}
+
+// call fn by click or enter
 function onNavClick(event: MouseEvent, href: string) {
-  handleNavClick(event, href, () => {
+  if (!href.startsWith('#')) return
+
+  event.preventDefault()
+  scrollToSection(href, () => {
     isMenuOpen.value = false
   })
 }

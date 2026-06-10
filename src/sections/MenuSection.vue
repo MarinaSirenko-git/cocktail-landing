@@ -29,7 +29,7 @@ const lovedMocktails: MenuItem[] = [
   <section
     id="menu"
     aria-labelledby="menu-title-left"
-    class="relative overflow-hidden bg-section-radial py-16 md:py-24"
+    class="relative overflo-x-hidden bg-section-radial py-16 md:py-24"
   >
     <div class="relative z-10 mx-auto grid max-w-[1260px] gap-10 px-5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-start lg:gap-10 lg:px-20">
       <div aria-labelledby="menu-title-left" class="space-y-9">
