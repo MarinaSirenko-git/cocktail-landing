@@ -5,7 +5,6 @@ import HeroSection from './sections/HeroSection.vue'
 import MenuSection from './sections/MenuSection.vue'
 import PhilosophySection from './sections/PhilosophySection.vue'
 import TheArtSection from './sections/TheArtSection.vue'
-import ShowcaseSection from './sections/ShowcaseSection.vue'
 import CocktailCarouselSection from './sections/CocktailCarouselSection.vue'
 import ContactSection from './sections/ContactSection.vue'
 </script>
@@ -23,7 +22,6 @@ import ContactSection from './sections/ContactSection.vue'
     <MenuSection />
     <PhilosophySection />
     <TheArtSection />
-    <ShowcaseSection />
     <CocktailCarouselSection />
     <ContactSection />
   </main>

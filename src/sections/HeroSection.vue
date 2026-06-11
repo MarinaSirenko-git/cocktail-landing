@@ -84,16 +84,15 @@ onMounted(() => {
 
     const initVideoScroll = () => {
       // Pin the video section and scrub timeline progress between start/end.
-      const videoTimeline = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: '#hero-video',
-            start: startValue,
-            end: endValue,
-            scrub: true,
-            pin: true,
-          },
-        })
+      const videoTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#hero-video',
+          start: startValue,
+          end: endValue,
+          scrub: true,
+          pin: true,
+        },
+      })
 
       // Drive playback by animating currentTime from 0 to full duration.
       videoTimeline.to(video, {
@@ -164,14 +163,11 @@ onUnmounted(() => {
 
         <div class="flex max-w-[270px] flex-col items-right gap-2">
           <p class="animation-marker text-base leading-7">
-            Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
-            recipes <br />— designed to delight your senses.
+            Every cocktail on our menu is a blend of premium ingredients, creative flair, and
+            timeless recipes <br />— designed to delight your senses.
           </p>
           <div class="flex">
-            <a
-              href="#menu"
-              class="text-base transition-opacity hover:opacity-80 focus-ring"
-            >
+            <a href="#menu" class="text-base transition-opacity hover:opacity-80 focus-ring">
               View cocktails
             </a>
           </div>

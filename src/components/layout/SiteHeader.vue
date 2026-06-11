@@ -60,8 +60,8 @@ onMounted(() => {
         backdropFilter: 'blur(0px)',
       },
       {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backdropFilter: 'blur(5px)',
         duration: 1,
         ease: 'power1.inOut',
       },
@@ -128,7 +128,7 @@ function onNavClick(event: MouseEvent, href: string) {
       class="pointer-events-none absolute inset-0 -z-10"
       aria-hidden="true"
     />
-    <div class="container relative flex-between py-7">
+    <div class="container relative flex-between py-5">
       <a
         href="/"
         class="flex-center gap-1 font-display text-[30px] leading-10 text-foreground focus-ring"

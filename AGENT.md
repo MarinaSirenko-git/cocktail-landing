@@ -6,34 +6,34 @@ The goal was not to replace manual development, but to reduce repetitive work du
 
 ## Tools Used
 
-| Tool | Role in this project |
-| --- | --- |
-| **Cursor** | AI-assisted editing and custom command execution |
-| **Custom Cursor commands** | Repeatable setup steps with explicit safety rules |
-| **Vite** | Dev server and production bundling |
-| **Vue 3 / TypeScript** | Component-based landing page foundation |
-| **Tailwind CSS** | Utility-first styling with project theme tokens |
-| **GSAP** | Animation library (installed; sections not animated yet) |
-| **Cloudflare Pages** | Recommended static hosting target (not configured yet) |
-| **Git / GitHub** | Version control (not initialized in the repo yet) |
+| Tool                       | Role in this project                                     |
+| -------------------------- | -------------------------------------------------------- |
+| **Cursor**                 | AI-assisted editing and custom command execution         |
+| **Custom Cursor commands** | Repeatable setup steps with explicit safety rules        |
+| **Vite**                   | Dev server and production bundling                       |
+| **Vue 3 / TypeScript**     | Component-based landing page foundation                  |
+| **Tailwind CSS**           | Utility-first styling with project theme tokens          |
+| **GSAP**                   | Animation library (installed; sections not animated yet) |
+| **Cloudflare Pages**       | Recommended static hosting target (not configured yet)   |
+| **Git / GitHub**           | Version control (not initialized in the repo yet)        |
 
 ## Custom Commands Used
 
 Only commands that were run for this project are listed here.
 
-| Command | Purpose | Status |
-| --- | --- | --- |
+| Command                           | Purpose                                                                                         | Status    |
+| --------------------------------- | ----------------------------------------------------------------------------------------------- | --------- |
 | `user-create-landing-starter-vue` | Scaffold Vite + Vue 3 + TypeScript, install GSAP, create folder structure and layout components | Completed |
-| `user-setup-styles-tailwind` | Install Tailwind CSS, update Vite config, configure `main.css` | Completed |
-| `user-setup-project-readme` | Generate project README from detected stack and scripts | Completed |
-| `user-setup-agent-doc` | Document this AI-assisted workflow | Completed |
+| `user-setup-styles-tailwind`      | Install Tailwind CSS, update Vite config, configure `main.css`                                  | Completed |
+| `user-setup-project-readme`       | Generate project README from detected stack and scripts                                         | Completed |
+| `user-setup-agent-doc`            | Document this AI-assisted workflow                                                              | Completed |
 
 ### Related commands not used here
 
-| Command | Notes |
-| --- | --- |
-| `user-create-landing-starter-html` | Vanilla HTML starter; Vue was chosen instead |
-| `user-setup-styles-css` | Plain CSS / BEM architecture; Tailwind was chosen instead |
+| Command                            | Notes                                                     |
+| ---------------------------------- | --------------------------------------------------------- |
+| `user-create-landing-starter-html` | Vanilla HTML starter; Vue was chosen instead              |
+| `user-setup-styles-css`            | Plain CSS / BEM architecture; Tailwind was chosen instead |
 
 ## What Was Automated
 
@@ -69,28 +69,28 @@ Work not yet done and therefore not reviewed as complete:
 
 ## Developer Decisions
 
-| Decision | Rationale |
-| --- | --- |
-| Vue 3 + TypeScript | Component structure for reusable sections and layout |
-| Tailwind CSS | Faster styling iteration for a marketing landing page |
-| GSAP from the start | Motion and scroll animations planned for section reveals |
-| Cloudflare Pages (planned) | Static `dist` output maps cleanly to edge hosting |
-| Minimal starter scope | Sections, content, and polish deferred to later work |
+| Decision                   | Rationale                                                |
+| -------------------------- | -------------------------------------------------------- |
+| Vue 3 + TypeScript         | Component structure for reusable sections and layout     |
+| Tailwind CSS               | Faster styling iteration for a marketing landing page    |
+| GSAP from the start        | Motion and scroll animations planned for section reveals |
+| Cloudflare Pages (planned) | Static `dist` output maps cleanly to edge hosting        |
+| Minimal starter scope      | Sections, content, and polish deferred to later work     |
 
 ## Quality Checks
 
-| Check | Status |
-| --- | --- |
-| `npm run build` | Passed after starter and Tailwind setup |
-| TypeScript (`vue-tsc`) | Passed as part of build |
+| Check                   | Status                                          |
+| ----------------------- | ----------------------------------------------- |
+| `npm run build`         | Passed after starter and Tailwind setup         |
+| TypeScript (`vue-tsc`)  | Passed as part of build                         |
 | Semantic HTML landmarks | Present in starter (`header`, `main`, `footer`) |
-| Skip link | Present in `App.vue` |
-| Responsive layout | Not implemented yet |
-| GSAP animations | Dependency installed; not implemented yet |
-| Accessibility audit | Not run yet |
-| Performance audit | Not run yet |
-| Git repository | Not initialized yet |
-| Deployment | Documented in README; not deployed yet |
+| Skip link               | Present in `App.vue`                            |
+| Responsive layout       | Not implemented yet                             |
+| GSAP animations         | Dependency installed; not implemented yet       |
+| Accessibility audit     | Not run yet                                     |
+| Performance audit       | Not run yet                                     |
+| Git repository          | Not initialized yet                             |
+| Deployment              | Documented in README; not deployed yet          |
 
 ## Notes
 

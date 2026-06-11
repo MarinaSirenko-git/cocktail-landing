@@ -5,12 +5,7 @@ import drinkPng from '../assets/images/carousel-drink-raspberry-mojito.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 
-const tabs = [
-  'Classic Mojito',
-  'Raspberry Mojito',
-  'Violet Breeze',
-  'Tipsy Tales',
-]
+const tabs = ['Classic Mojito', 'Raspberry Mojito', 'Violet Breeze', 'Tipsy Tales']
 
 const activeTabIndex = 1
 </script>
@@ -38,7 +33,11 @@ const activeTabIndex = 1
           :id="`carousel-tab-${index}`"
           :aria-controls="`carousel-panel-${index}`"
           class="border-b-2 px-1 pb-3 text-sm font-medium transition-colors focus-ring"
-          :class="index === activeTabIndex ? 'border-accent text-foreground' : 'border-transparent text-muted hover:text-foreground'"
+          :class="
+            index === activeTabIndex
+              ? 'border-accent text-foreground'
+              : 'border-transparent text-muted hover:text-foreground'
+          "
         >
           {{ tab }}
         </button>
@@ -51,7 +50,15 @@ const activeTabIndex = 1
         >
           <span class="font-display text-xl text-foreground">Classic Mojito</span>
           <span aria-hidden="true" class="h-px w-16 bg-border" />
-          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px] shrink-0 rotate-180" />
+          <img
+            :src="iconArrow"
+            alt=""
+            width="38"
+            height="38"
+            decoding="async"
+            aria-hidden="true"
+            class="size-[38px] shrink-0 rotate-180"
+          />
         </button>
 
         <figure class="mx-auto w-full max-w-[401px]">
@@ -73,7 +80,15 @@ const activeTabIndex = 1
           type="button"
           class="hidden items-center gap-4 text-muted transition-colors hover:text-foreground lg:flex"
         >
-          <img :src="iconArrow" alt="" width="38" height="38" decoding="async" aria-hidden="true" class="size-[38px] shrink-0" />
+          <img
+            :src="iconArrow"
+            alt=""
+            width="38"
+            height="38"
+            decoding="async"
+            aria-hidden="true"
+            class="size-[38px] shrink-0"
+          />
           <span aria-hidden="true" class="h-px w-16 bg-border" />
           <span class="font-display text-xl text-foreground">Violet Breeze</span>
         </button>
@@ -97,8 +112,8 @@ const activeTabIndex = 1
             A Zesty Classic That Never Fails
           </h3>
           <p class="mt-4 text-base leading-7 text-muted sm:text-lg">
-            The Margarita is a classic that balances tangy lime, smooth tequila, and a touch
-            of sweetness. Shaken, frozen, or on the rocks—it’s always crisp &amp; refreshing.
+            The Margarita is a classic that balances tangy lime, smooth tequila, and a touch of
+            sweetness. Shaken, frozen, or on the rocks—it’s always crisp &amp; refreshing.
           </p>
         </template>
         <p v-else class="sr-only">{{ tab }} recipe details are not available yet.</p>
@@ -118,7 +133,9 @@ const activeTabIndex = 1
         class="size-[587px] max-w-none"
       />
     </picture>
-    <picture class="pointer-events-none absolute -right-20 bottom-10 z-0 hidden opacity-50 lg:block">
+    <picture
+      class="pointer-events-none absolute -right-20 bottom-10 z-0 hidden opacity-50 lg:block"
+    >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
         :src="monsteraPng"

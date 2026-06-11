@@ -39,12 +39,14 @@
 }
 
 @utility radial-gradient {
-  background: radial-gradient(
-    circle at center,
-    #434343 0%,
-    #000 50%,
-    transparent 100%
-  );
+  background: radial-gradient(circle at center, #434343 0%, #000 50%, transparent 100%);
+}
+
+@utility noisy-display-text {
+  background-image: url('./src/assets/images/noisy.png'), linear-gradient(#505050, #505050);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @utility video {

@@ -55,33 +55,36 @@ onMounted(() => {
 
   // Scope selectors to the hero section and revert all GSAP work on cleanup.
   ctx = gsap.context(function (this: gsap.Context) {
-
     // initiate elements for SplitText plugin
     const titleSplit = new SplitText('#philosophy-title', { type: 'words', aria: 'auto' })
 
     // Scroll-linked parallax timeline for title and images.
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: 'top center',
-          once: true,
-        },
-      })
-      
-      timeline
-      .from( titleSplit.words, {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top center',
+        once: true,
+      },
+    })
+
+    timeline
+      .from(titleSplit.words, {
         opacity: 0,
         duration: 1,
         yPercent: 100,
         ease: 'expo.out',
         stagger: 0.02,
       })
-      .from('#philosophy-grid > *', {
-        opacity: 0,
-        duration: 1,
-        ease: 'power1.inOut',
-        stagger: 0.04,
-      }, '-=0.5')
+      .from(
+        '#philosophy-grid > *',
+        {
+          opacity: 0,
+          duration: 1,
+          ease: 'power1.inOut',
+          stagger: 0.04,
+        },
+        '-=0.5',
+      )
 
     // restore original text markup
     return () => {
@@ -97,25 +100,38 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" id="philosophy" aria-labelledby="philosophy-title" class="min-h-[100svh] py-[clamp(50px,6vw,100px)]">
+  <section
+    ref="sectionRef"
+    id="philosophy"
+    aria-labelledby="philosophy-title"
+    class="min-h-[100svh] py-[clamp(50px,6vw,100px)]"
+  >
     <div class="container grid grid-cols-1 lg:grid-cols-2 gap-y-[clamp(32px,6vw,80px)]">
       <div class="lg:col-span-1 flex flex-col gap-[32px]">
-          <p class="flex-center rounded-pill bg-white text-black text-sm px-4 py-2 text-lg font-medium max-w-[136px]">
-            Best Cocktails
-          </p>
-          <h2 id="philosophy-title" class="font-display text-white text-[clamp(3rem,2.65rem+1.5vw,4rem)] w-full max-w-[550px] leading-[0.9]">
-            Where every detail matters - from muddle to garnish
-          </h2>
+        <p
+          class="flex-center rounded-pill bg-white text-black text-sm px-4 py-2 text-lg font-medium max-w-[136px]"
+        >
+          Best Cocktails
+        </p>
+        <h2
+          id="philosophy-title"
+          class="font-display text-white text-[clamp(3rem,2.65rem+1.5vw,4rem)] w-full max-w-[550px] leading-[0.9]"
+        >
+          Where every detail matters - from muddle to garnish
+        </h2>
       </div>
 
       <div class="lg:col-span-1 lg:justify-self-end w-full max-w-[430px]">
         <div class="flex flex-col gap-[32px]">
           <p id="philosophy-paragraph" class="text-md lg:text-lg text-white">
             Every cocktail we serve is a reflection of our obsession with detail — from the first
-            muddle to the final garnish. That care is what turns a simple drink into something truly memorable.
+            muddle to the final garnish. That care is what turns a simple drink into something truly
+            memorable.
           </p>
           <div class="flex flex-nowrap items-center gap-4">
-            <div class="flex flex-col items-start pr-1 lg:pr-[25px] border-r border-r-white/20 min-w-[180px]">
+            <div
+              class="flex flex-col items-start pr-1 lg:pr-[25px] border-r border-r-white/20 min-w-[180px]"
+            >
               <div class="flex items-center gap-1 mb-[20px]" aria-hidden="true">
                 <img
                   v-for="n in 5"
@@ -165,8 +181,13 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <div id="philosophy-grid" class="lg:col-span-2 grid grid-cols-1 lg:grid-cols-[330fr_330fr_80fr_480fr] gap-[20px]">
-        <figure class="relative h-[320px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card">
+      <div
+        id="philosophy-grid"
+        class="lg:col-span-2 grid grid-cols-1 lg:grid-cols-[330fr_330fr_80fr_480fr] gap-[20px]"
+      >
+        <figure
+          class="relative h-[320px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card"
+        >
           <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
           <picture>
             <source :srcset="bentoBartenderWebp" type="image/webp" />
@@ -187,7 +208,10 @@ onUnmounted(() => {
           class="relative flex min-h-[285px] flex-col overflow-hidden rounded-card bg-card-gradient px-6 py-8"
         >
           <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
-          <h3 id="philosophy-feature-title" class="font-display text-[clamp(1.875rem,1.74rem+0.56vw,2.25rem)] leading-none text-foreground z-20">
+          <h3
+            id="philosophy-feature-title"
+            class="font-display text-[clamp(1.875rem,1.74rem+0.56vw,2.25rem)] leading-none text-foreground z-20"
+          >
             Crafted to Impress
           </h3>
           <ul class="pt-5 border-t mt-3.5 flex flex-col gap-3.5 border-white/20 z-20">
@@ -198,12 +222,17 @@ onUnmounted(() => {
               >
                 <img :src="iconCheck" alt="" width="8" height="7" decoding="async" class="size-2" />
               </span>
-              <span class="text-[clamp(1rem,0.96rem+0.19vw,1.125rem)] font-medium leading-6 text-foreground">{{ item }}</span>
+              <span
+                class="text-[clamp(1rem,0.96rem+0.19vw,1.125rem)] font-medium leading-6 text-foreground"
+                >{{ item }}</span
+              >
             </li>
           </ul>
         </article>
 
-        <figure class="relative h-[204px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card lg:col-span-2">
+        <figure
+          class="relative h-[204px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card lg:col-span-2"
+        >
           <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
           <picture>
             <source :srcset="bentoGuestsWebp" type="image/webp" />
@@ -219,7 +248,9 @@ onUnmounted(() => {
           </picture>
         </figure>
 
-        <figure class="relative h-[147px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card lg:col-span-3">
+        <figure
+          class="relative h-[147px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card lg:col-span-3"
+        >
           <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
           <picture>
             <source :srcset="bentoRowWebp" type="image/webp" />
@@ -235,7 +266,9 @@ onUnmounted(() => {
           </picture>
         </figure>
 
-        <figure class="relative h-[240px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card">
+        <figure
+          class="relative h-[240px] lg:h-full lg:min-h-[285px] xl:max-h-[285px] overflow-hidden rounded-card"
+        >
           <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
           <picture>
             <source :srcset="bentoGarnishWebp" type="image/webp" />

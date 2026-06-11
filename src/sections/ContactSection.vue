@@ -27,7 +27,9 @@ const hours = [
     aria-labelledby="contact-title"
     class="relative overflow-hidden bg-section-radial py-16 md:py-24 lg:pb-32"
   >
-    <div class="relative z-10 mx-auto grid max-w-[1260px] gap-12 px-5 lg:min-h-[520px] lg:grid-cols-2 lg:items-start lg:gap-10 lg:px-20">
+    <div
+      class="relative z-10 mx-auto grid max-w-[1260px] gap-12 px-5 lg:min-h-[520px] lg:grid-cols-2 lg:items-start lg:gap-10 lg:px-20"
+    >
       <div>
         <h2
           id="contact-title"
@@ -47,12 +49,18 @@ const hours = [
           <div class="space-y-2">
             <h3 class="font-display text-xl text-accent">Contact us</h3>
             <p>
-              <a href="tel:+15559876543" class="text-base text-muted transition-colors hover:text-foreground">
+              <a
+                href="tel:+15559876543"
+                class="text-base text-muted transition-colors hover:text-foreground"
+              >
                 (555) 987-6543
               </a>
             </p>
             <p>
-              <a href="mailto:hello@jsmcocktail.com" class="text-base text-muted transition-colors hover:text-foreground">
+              <a
+                href="mailto:hello@jsmcocktail.com"
+                class="text-base text-muted transition-colors hover:text-foreground"
+              >
                 hello@jsmcocktail.com
               </a>
             </p>
@@ -92,7 +100,9 @@ const hours = [
         </div>
       </div>
 
-      <figure class="relative mx-auto w-full max-w-[526px] lg:absolute lg:bottom-0 lg:right-20 lg:mx-0 lg:max-w-[580px] lg:translate-y-8">
+      <figure
+        class="relative mx-auto w-full max-w-[526px] lg:absolute lg:bottom-0 lg:right-20 lg:mx-0 lg:max-w-[580px] lg:translate-y-8"
+      >
         <picture>
           <source :srcset="footerCocktailsWebp" type="image/webp" />
           <img

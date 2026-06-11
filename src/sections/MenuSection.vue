@@ -49,28 +49,24 @@ onMounted(() => {
         start: 'top 30%',
         end: 'bottom 80%',
         scrub: true,
-      }
+      },
     })
 
     timeline
       .from('#menu-left-leaf', {
         x: -100,
-        y: 100
+        y: 100,
       })
       .from('#menu-right-leaf', {
         x: 100,
-        y: 100
+        y: 100,
       })
-
-
   }, sectionRef.value)
- 
 })
 
 onUnmounted(() => {
   ctx?.revert()
 })
-
 </script>
 
 <template>
@@ -84,11 +80,13 @@ onUnmounted(() => {
       class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 px-5 pt-40 md:flex-row 2xl:px-0"
     >
       <div aria-labelledby="menu-title-left" class="w-full space-y-8 md:w-fit">
-        <h2 id="menu-title-left" class="text-xl font-medium">
-          Most popular cocktails:
-        </h2>
+        <h2 id="menu-title-left" class="text-xl font-medium">Most popular cocktails:</h2>
         <ul class="space-y-8">
-          <li v-for="item in popularCocktails" :key="item.name" class="flex items-start justify-between">
+          <li
+            v-for="item in popularCocktails"
+            :key="item.name"
+            class="flex items-start justify-between"
+          >
             <div class="md:me-28">
               <h3 class="font-display text-xl text-accent 2xl:text-3xl">
                 {{ item.name }}
@@ -101,11 +99,13 @@ onUnmounted(() => {
       </div>
 
       <div aria-labelledby="menu-title-right" class="w-full space-y-8 pb-20 md:w-fit md:pb-0">
-        <h2 id="menu-title-right" class="text-xl font-medium">
-          Most loved mocktails:
-        </h2>
+        <h2 id="menu-title-right" class="text-xl font-medium">Most loved mocktails:</h2>
         <ul class="space-y-8">
-          <li v-for="item in lovedMocktails" :key="item.name" class="flex items-start justify-between">
+          <li
+            v-for="item in lovedMocktails"
+            :key="item.name"
+            class="flex items-start justify-between"
+          >
             <div class="me-28">
               <h3 class="font-display text-xl text-accent 2xl:text-3xl">
                 {{ item.name }}
@@ -136,7 +136,7 @@ onUnmounted(() => {
     </picture>
     <picture
       id="menu-right-leaf"
-      class="pointer-events-none absolute -right-20 -bottom-20 w-1/3  md:top-auto md:w-fit"
+      class="pointer-events-none absolute -right-20 -bottom-20 w-1/3 md:top-auto md:w-fit"
     >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
