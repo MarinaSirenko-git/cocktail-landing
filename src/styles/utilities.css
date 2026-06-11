@@ -15,7 +15,8 @@
 }
 
 @utility container {
-  @apply mx-auto max-w-[1260px];
+  @apply mx-auto;
+  width: min(100% - 40px, 1260px);
 }
 
 @utility decorative-text {
