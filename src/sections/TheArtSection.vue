@@ -63,6 +63,7 @@ onMounted(() => {
   )
   // Start when trigger top reaches the line below the fixed header (not viewport top).
   const start = `top top+=${headerHeight}`
+  const pin = isMobile.value ? contentRef.value : sectionRef.value
 
   // Scope selectors to the art section and revert all GSAP work on cleanup.
   ctx = gsap.context(function (this: gsap.Context) {
@@ -70,15 +71,21 @@ onMounted(() => {
       scrollTrigger: {
         trigger,
         start,
-        end: 'bottom center',
+        end: isMobile.value ? '+=280' : 'bottom center',
         scrub: 1.5,
-        pin: sectionRef.value,
+        pin: pin,
       },
     })
 
     maskTimeline
       .to('.will-fade', {
-        opacity: 0,
+        autoAlpha: 0,
+        height: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        marginTop: 0,
+        marginBottom: 0,
+        overflow: 'hidden',
         stagger: 0.2,
         ease: 'power1.inOut',
       })
@@ -118,7 +125,7 @@ onUnmounted(() => {
     id="the-art"
     ref="sectionRef"
     aria-labelledby="the-art-subtitle"
-    class="relative overflow-hidden bg-section-radial py-[clamp(63px,40px+6vw,127px)] min-h-[100svh]"
+    class="relative overflow-hidden bg-section-radial py-[clamp(63px,40px+6vw,127px)] lg:min-h-[100svh]"
   >
     <div class="container flex-center flex-col">
       <h2
@@ -128,7 +135,7 @@ onUnmounted(() => {
       </h2>
       <div
         ref="contentRef"
-        class="-mt-[120px] lg:-mt-[200px] flex flex-col lg:flex-row lg:flex-wrap lg:flex-between w-full"
+        class="translate-y-[-50px] lg:translate-y-[-200px] flex flex-col lg:flex-row lg:flex-wrap lg:flex-between w-full"
       >
         <ul class="will-fade flex flex-col gap-[14px] pt-[32px] lg:pt-[50px] order-3 lg:order-1">
           <li v-for="item in leftItems" :key="item" class="flex items-center gap-2.5">
@@ -145,7 +152,7 @@ onUnmounted(() => {
           </li>
         </ul>
         <figure
-          class="relative mx-auto w-[626px] h-[626px] order-1 lg:order-2"
+          class="relative mx-auto w-full h-[230px] lg:w-[626px] lg:h-[626px] order-1 lg:order-2"
         >
           <picture class="flex size-[364px] rounded-card lg:size-[626px] absolute -top-[100px] left-0">
             <source :srcset="bartenderWebp" type="image/webp" />
@@ -186,7 +193,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="will-appear pointer-events-none absolute bottom-10 left-1/2 z-10 w-full -translate-x-1/2 space-y-5 px-5 text-center opacity-0 lg:bottom-16"
+    <div class="will-appear pointer-events-none absolute bottom-0 lg:top-100 left-1/2 z-10 w-full -translate-x-1/2 space-y-5 px-5 text-center opacity-0 lg:bottom-16"
     >
       <h3
         class="font-display text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] font-normal leading-[0.9] tracking-tight text-foreground w-full"
