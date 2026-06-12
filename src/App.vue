@@ -6,7 +6,6 @@ import MenuSection from './sections/MenuSection.vue'
 import PhilosophySection from './sections/PhilosophySection.vue'
 import TheArtSection from './sections/TheArtSection.vue'
 import CocktailCarouselSection from './sections/CocktailCarouselSection.vue'
-import ContactSection from './sections/ContactSection.vue'
 </script>
 
 <template>
@@ -23,7 +22,6 @@ import ContactSection from './sections/ContactSection.vue'
     <PhilosophySection />
     <TheArtSection />
     <CocktailCarouselSection />
-    <ContactSection />
   </main>
   <SiteFooter />
 </template>
