@@ -20,7 +20,8 @@
 }
 
 @utility decorative-text {
-  @apply bg-display-text bg-clip-text font-display text-[132px] font-normal leading-none tracking-[-0.02em] text-transparent whitespace-nowrap sm:text-[200px] lg:text-[20vw] lg:tracking-[-0.02em];
+  @apply bg-display-text bg-clip-text font-display font-normal leading-none tracking-[-0.02em] text-transparent whitespace-nowrap;
+  font-size: clamp(118px, 31vw, 252px);
 }
 
 @utility noisy {
@@ -50,5 +51,5 @@
 }
 
 @utility video {
-  @apply w-full md:h-[80%] h-1/2 absolute bottom-0 left-0 object-cover object-[50%_100%] md:object-contain md:object-[56%_100%];
+  @apply w-full lg:h-[80%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[56%_100%];
 }

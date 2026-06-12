@@ -77,7 +77,7 @@ onUnmounted(() => {
     class="noisy relative z-20 min-h-dvh w-full overflow-hidden"
   >
     <div
-      class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 px-5 pt-40 md:flex-row 2xl:px-0"
+      class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 lg:px-5 pt-40 md:flex-row 2xl:px-0"
     >
       <div aria-labelledby="menu-title-left" class="w-full space-y-8 md:w-fit">
         <h2 id="menu-title-left" class="text-xl font-medium">Most popular cocktails:</h2>
@@ -88,31 +88,31 @@ onUnmounted(() => {
             class="flex items-start justify-between"
           >
             <div class="md:me-28">
-              <h3 class="font-display text-xl text-accent 2xl:text-3xl">
+              <h3 class="font-display text-[30px] text-accent leading-none text-nowrap">
                 {{ item.name }}
               </h3>
               <p class="text-sm">{{ item.meta }}</p>
             </div>
-            <span class="text-xl font-medium">- {{ item.price }}</span>
+            <span class="text-xl font-medium text-nowrap">- {{ item.price }}</span>
           </li>
         </ul>
       </div>
 
       <div aria-labelledby="menu-title-right" class="w-full space-y-8 pb-20 md:w-fit md:pb-0">
         <h2 id="menu-title-right" class="text-xl font-medium">Most loved mocktails:</h2>
-        <ul class="space-y-8">
+        <ul class="space-y-5 lg:space-y-8">
           <li
             v-for="item in lovedMocktails"
             :key="item.name"
-            class="flex items-start justify-between"
+            class="flex items-start justify-between flex-nowrap"
           >
             <div class="me-28">
-              <h3 class="font-display text-xl text-accent 2xl:text-3xl">
+              <h3 class="font-display text-[30px] text-accent leading-none ">
                 {{ item.name }}
               </h3>
               <p class="text-sm">{{ item.meta }}</p>
             </div>
-            <span class="text-xl font-medium">- {{ item.price }}</span>
+            <span class="text-xl font-medium text-nowrap">- {{ item.price }}</span>
           </li>
         </ul>
       </div>
@@ -120,7 +120,7 @@ onUnmounted(() => {
 
     <picture
       id="menu-left-leaf"
-      class="pointer-events-none absolute -left-20 -bottom-20 w-1/3 md:top-auto md:w-fit"
+      class="pointer-events-none absolute -left-20 -bottom-20 w-1/3 md:top-auto md:w-fit hidden lg:block"
     >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
@@ -136,7 +136,7 @@ onUnmounted(() => {
     </picture>
     <picture
       id="menu-right-leaf"
-      class="pointer-events-none absolute -right-20 -bottom-20 w-1/3 md:top-auto md:w-fit"
+      class="pointer-events-none absolute -right-20 -bottom-20 w-1/3 md:top-auto md:w-fit hidden lg:block"
     >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img

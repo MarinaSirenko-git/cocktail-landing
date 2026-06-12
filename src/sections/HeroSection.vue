@@ -132,9 +132,9 @@ onUnmounted(() => {
       ref="sectionRef"
       id="hero"
       aria-labelledby="hero-title"
-      class="noisy relative z-20 flex h-full w-full flex-col flex-between border border-transparent pt-[50px] pb-[70px]"
+      class="noisy relative z-20 flex h-full w-full flex-col flex-start lg:flex-between border border-transparent pt-[50px] pb-[70px]"
     >
-      <h1 id="title" class="decorative-text relative z-20 flex-center">MOJITO</h1>
+      <h1 id="title" class="container mt-12 lg:mt-0 decorative-text relative z-20 flex-center">MOJITO</h1>
 
       <div class="relative z-20 container flex-between">
         <a
@@ -149,11 +149,11 @@ onUnmounted(() => {
             height="152"
             decoding="async"
             aria-hidden="true"
-            class="arrow h-auto w-auto"
+            class="arrow h-auto w-auto hidden lg:block"
           />
         </a>
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 hidden lg:block">
           <p class="text-base">Cool. Crisp. Classic.</p>
           <h2 class="animation-marker font-display text-[50px] leading-none text-accent">
             Sip the Spirit <br />
@@ -161,20 +161,20 @@ onUnmounted(() => {
           </h2>
         </div>
 
-        <div class="flex max-w-[270px] flex-col items-right gap-2">
-          <p class="animation-marker text-base leading-7">
+        <div class="flex w-full lg:max-w-[270px] flex-col items-center lg:items-start gap-2">
+          <p class="animation-marker text-base leading-7 text-center lg:text-start">
             Every cocktail on our menu is a blend of premium ingredients, creative flair, and
-            timeless recipes <br />— designed to delight your senses.
+            timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
           </p>
           <div class="flex">
-            <a href="#menu" class="text-base transition-opacity hover:opacity-80 focus-ring">
+            <a href="#menu" class="text-base transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0">
               View cocktails
             </a>
           </div>
         </div>
       </div>
 
-      <picture id="left-leaf" class="pointer-events-none absolute -left-32 top-48 z-20">
+      <picture id="left-leaf" class="pointer-events-none absolute -left-18 lg:-left-32 -bottom-18 lg:top-48 z-20">
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
           :src="monsteraPng"
@@ -183,10 +183,13 @@ onUnmounted(() => {
           height="326"
           decoding="async"
           aria-hidden="true"
-          class="size-[326px] max-w-none rotate-45 scale-x-[-1]"
+          class="size-[177px] lg:size-[326px] max-w-none rotate-45 scale-x-[-1]"
         />
       </picture>
-      <picture id="right-leaf" class="pointer-events-none absolute -right-47 -top-4 z-20">
+      <picture
+        id="right-leaf"
+        class="pointer-events-none absolute -bottom-18 -right-[70px] lg:translate-y-0 lg:-right-47 lg:-top-4 z-20"
+      >
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
           :src="monsteraPng"
@@ -196,7 +199,7 @@ onUnmounted(() => {
           decoding="async"
           loading="lazy"
           aria-hidden="true"
-          class="size-[356px] max-w-none rotate-[-26deg]"
+          class="size-[173px] lg:size-[356px] max-w-none rotate-[-26deg]"
         />
       </picture>
     </section>
