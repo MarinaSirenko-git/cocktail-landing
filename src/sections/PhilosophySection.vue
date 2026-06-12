@@ -115,7 +115,7 @@ onUnmounted(() => {
         </p>
         <h2
           id="philosophy-title"
-          class="font-display text-white text-[clamp(3rem,2.65rem+1.5vw,4rem)] w-full max-w-[550px] leading-[0.9]"
+          class="font-display text-foreground text-[clamp(3rem,2.65rem+1.5vw,4rem)] w-full max-w-[550px] leading-[0.9]"
         >
           Where every detail matters - from muddle to garnish
         </h2>
@@ -123,7 +123,7 @@ onUnmounted(() => {
 
       <div class="lg:col-span-1 lg:justify-self-end w-full max-w-[430px]">
         <div class="flex flex-col gap-[32px]">
-          <p id="philosophy-paragraph" class="text-md lg:text-lg text-white">
+          <p id="philosophy-paragraph" class="text-md lg:text-lg text-foreground">
             Every cocktail we serve is a reflection of our obsession with detail — from the first
             muddle to the final garnish. That care is what turns a simple drink into something truly
             memorable.

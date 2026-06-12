@@ -55,14 +55,14 @@ onMounted(() => {
   // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || !contentRef.value || prefersReducedMotion.value) return
 
-  const trigger = isMobile.value ? sectionRef.value : contentRef.value
+  const trigger = isMobile.value ? sectionRef.value : sectionRef.value
   const headerHeight = Math.round(
     Number.parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue('--header-height'),
     ) || 0,
   )
   // Start when trigger top reaches the line below the fixed header (not viewport top).
-  const start = `top top+=${headerHeight}`
+  const start = isMobile.value ? `top top+=${headerHeight}` : `center bottom`
   const pin = isMobile.value ? contentRef.value : sectionRef.value
 
   // Scope selectors to the art section and revert all GSAP work on cleanup.
@@ -71,7 +71,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger,
         start,
-        end: isMobile.value ? '+=280' : 'bottom center',
+        end: isMobile.value ? '+=280' : '+=400',
         scrub: 1.5,
         pin: pin,
       },
@@ -125,7 +125,7 @@ onUnmounted(() => {
     id="the-art"
     ref="sectionRef"
     aria-labelledby="the-art-subtitle"
-    class="relative overflow-hidden bg-section-radial py-[clamp(63px,40px+6vw,127px)] lg:min-h-[100svh]"
+    class="relative overflow-hidden bg-section-radial py-[clamp(63px,40px+6vw,127px)]"
   >
     <div class="container flex-center flex-col">
       <h2
@@ -193,7 +193,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="will-appear pointer-events-none absolute bottom-0 lg:top-100 left-1/2 z-10 w-full -translate-x-1/2 space-y-5 px-5 text-center opacity-0 lg:bottom-16"
+    <div class="will-appear h-fit pointer-events-none absolute bottom-0 lg:top-110 left-1/2 z-10 w-full -translate-x-1/2 space-y-5 px-5 text-center opacity-0 lg:bottom-16"
     >
       <h3
         class="font-display text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] font-normal leading-[0.9] tracking-tight text-foreground w-full"
