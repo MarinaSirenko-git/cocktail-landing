@@ -72,7 +72,7 @@ Length: 39 characters
 
 ### Meta Description
 
-Before: *(missing)*
+Before: _(missing)_
 
 After:
 
@@ -141,25 +141,25 @@ Candidate source (not deployed to `public/`): `src/assets/images/hero-cocktail-m
 
 ## Vue SEO Structure Check
 
-| Check | Status | Detail |
-|-------|--------|--------|
-| Main h1 | ✓ | One h1: “Sip the Spirit of Summer” (`HeroSection.vue`, `id="hero-title"`) |
-| Heading hierarchy | ✓ | h2 per section; h3 for menu items, cards, contact blocks |
-| Semantic landmarks | ✓ | `<header>`, `<main id="main-content">`, `<footer>` via layout components |
-| RouterView inside main | N/A | Single-page app; sections composed directly in `App.vue` |
-| Navigation | ✓ | Desktop + mobile nav; anchor links with meaningful labels |
-| Link text | ✓ | No `href="#"` fake links; social links have `aria-label` |
-| Image alt | ✓ | Meaningful images described; decorative images use `alt=""` |
-| Section ids | ✓ | `#hero`, `#menu`, `#philosophy`, `#the-art`, `#showcase`, `#carousel`, `#contact` |
-| Duplicate ids | ✓ | None in rendered page (`HelloWorld.vue` unused) |
+| Check                  | Status | Detail                                                                            |
+| ---------------------- | ------ | --------------------------------------------------------------------------------- |
+| Main h1                | ✓      | One h1: “Sip the Spirit of Summer” (`HeroSection.vue`, `id="hero-title"`)         |
+| Heading hierarchy      | ✓      | h2 per section; h3 for menu items, cards, contact blocks                          |
+| Semantic landmarks     | ✓      | `<header>`, `<main id="main-content">`, `<footer>` via layout components          |
+| RouterView inside main | N/A    | Single-page app; sections composed directly in `App.vue`                          |
+| Navigation             | ✓      | Desktop + mobile nav; anchor links with meaningful labels                         |
+| Link text              | ✓      | No `href="#"` fake links; social links have `aria-label`                          |
+| Image alt              | ✓      | Meaningful images described; decorative images use `alt=""`                       |
+| Section ids            | ✓      | `#hero`, `#menu`, `#philosophy`, `#the-art`, `#showcase`, `#carousel`, `#contact` |
+| Duplicate ids          | ✓      | None in rendered page (`HelloWorld.vue` unused)                                   |
 
 ## Route SEO Recommendations
 
 Vue Router is not used. Single entry route:
 
-| Route | Component | Suggested Title | Suggested Description | Notes |
-|-------|-----------|-----------------|----------------------|-------|
-| `/` | `App.vue` (composed sections) | Velvet Pour — Sip the Spirit of Summer | *(current meta description)* | Metadata lives in `index.html`; no per-route head management |
+| Route | Component                     | Suggested Title                        | Suggested Description        | Notes                                                        |
+| ----- | ----------------------------- | -------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| `/`   | `App.vue` (composed sections) | Velvet Pour — Sip the Spirit of Summer | _(current meta description)_ | Metadata lives in `index.html`; no per-route head management |
 
 If routes are added later, install head management (`user-setup-vue-head-seo`) and define per-page titles/descriptions.
 
@@ -177,11 +177,11 @@ Verified:
 
 ## Missing Assets
 
-| Asset | Status |
-|-------|--------|
+| Asset                            | Status                                |
+| -------------------------------- | ------------------------------------- |
 | `public/og-image.jpg` (1200×630) | Missing — blocks rich social previews |
-| `public/apple-touch-icon.png` | Missing |
-| `public/favicon.ico` | Missing (SVG favicon used) |
+| `public/apple-touch-icon.png`    | Missing                               |
+| `public/favicon.ico`             | Missing (SVG favicon used)            |
 
 ## Manual Review Needed
 

@@ -76,20 +76,20 @@ Completed
 
 ## Files Updated
 
-| File | Changes |
-|------|---------|
-| `src/styles/theme.css` | Created — full `@theme` token map |
-| `src/styles/main.css` | Imports theme, base body styles |
-| `src/App.vue` | Page wrapper, Tailwind skip link |
-| `src/components/layout/SiteHeader.vue` | Sticky header, nav, mobile menu button |
-| `src/components/layout/SiteFooter.vue` | Border-top footer |
-| `src/sections/HeroSection.vue` | Hero grid, display wordmark, CTA, decorative leaves |
-| `src/sections/MenuSection.vue` | Three-column menu layout |
-| `src/sections/PhilosophySection.vue` | Badge, rating, bento grid, feature card |
-| `src/sections/TheArtSection.vue` | Circular figure, checklist columns, display wordmark |
-| `src/sections/ShowcaseSection.vue` | Bartender image, floating cocktails |
-| `src/sections/CocktailCarouselSection.vue` | Tab list, drink image, recipe panel |
-| `src/sections/ContactSection.vue` | Contact grid, social links, footer image |
+| File                                       | Changes                                              |
+| ------------------------------------------ | ---------------------------------------------------- |
+| `src/styles/theme.css`                     | Created — full `@theme` token map                    |
+| `src/styles/main.css`                      | Imports theme, base body styles                      |
+| `src/App.vue`                              | Page wrapper, Tailwind skip link                     |
+| `src/components/layout/SiteHeader.vue`     | Sticky header, nav, mobile menu button               |
+| `src/components/layout/SiteFooter.vue`     | Border-top footer                                    |
+| `src/sections/HeroSection.vue`             | Hero grid, display wordmark, CTA, decorative leaves  |
+| `src/sections/MenuSection.vue`             | Three-column menu layout                             |
+| `src/sections/PhilosophySection.vue`       | Badge, rating, bento grid, feature card              |
+| `src/sections/TheArtSection.vue`           | Circular figure, checklist columns, display wordmark |
+| `src/sections/ShowcaseSection.vue`         | Bartender image, floating cocktails                  |
+| `src/sections/CocktailCarouselSection.vue` | Tab list, drink image, recipe panel                  |
+| `src/sections/ContactSection.vue`          | Contact grid, social links, footer image             |
 
 **Total files updated: 12**
 

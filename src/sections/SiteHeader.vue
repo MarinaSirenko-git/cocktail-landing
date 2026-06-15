@@ -3,8 +3,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-import logoMark from '../../assets/logos/velvet-pour-mark.png'
-import { usePrefersReducedMotion } from '../../composables/usePrefersReducedMotion'
+import logoMark from '../assets/logos/velvet-pour-mark.png'
+import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 const navItems = [
   { label: 'Cocktails', href: '#menu' },

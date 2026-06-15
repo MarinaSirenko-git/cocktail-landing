@@ -16,8 +16,8 @@
   --color-border: #ffffff;
 
   /* Typography — inferred; substitute licensed fonts for production */
-  --font-display: "Modern Negra Demo", ui-serif, Georgia, serif;
-  --font-main: "Mona Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: 'Modern Negra Demo', ui-serif, Georgia, serif;
+  --font-main: 'Mona Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;

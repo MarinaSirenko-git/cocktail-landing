@@ -14,42 +14,42 @@ Figma source: [Cocktail GSAP Website (Copy) — Hero (mobile)](https://www.figma
 
 ### SVG (6)
 
-| File | Usage |
-| --- | --- |
-| `src/assets/icons/icon-star.svg` | Rating stars |
-| `src/assets/icons/icon-check.svg` | Feature checklist |
-| `src/assets/icons/icon-arrow-right.svg` | Carousel navigation |
-| `src/assets/icons/icon-social-instagram.svg` | Footer social |
-| `src/assets/icons/icon-social-x.svg` | Footer social |
-| `src/assets/icons/icon-social-facebook.svg` | Footer social |
+| File                                         | Usage               |
+| -------------------------------------------- | ------------------- |
+| `src/assets/icons/icon-star.svg`             | Rating stars        |
+| `src/assets/icons/icon-check.svg`            | Feature checklist   |
+| `src/assets/icons/icon-arrow-right.svg`      | Carousel navigation |
+| `src/assets/icons/icon-social-instagram.svg` | Footer social       |
+| `src/assets/icons/icon-social-x.svg`         | Footer social       |
+| `src/assets/icons/icon-social-facebook.svg`  | Footer social       |
 
 ### Logo (1)
 
-| File | Usage |
-| --- | --- |
+| File                                    | Usage                           |
+| --------------------------------------- | ------------------------------- |
 | `src/assets/logos/velvet-pour-mark.png` | Header logo mark (32×32 raster) |
 
 ### Raster Images (17 PNG + 17 WebP)
 
-| WebP (preferred) | Section |
-| --- | --- |
-| `hero-cocktail-mojito.webp` | Hero |
-| `decorative-monstera-leaf.webp` | Decorative (all sections) |
-| `noise-texture.webp` | Grain overlay |
-| `menu-cocktail-center.webp` | Menu |
-| `bento-bartender-pouring.webp` | Philosophy bento |
-| `bento-guests-drinking.webp` | Philosophy bento |
-| `bento-cocktail-garnish.webp` | Philosophy bento |
-| `bento-cocktails-row.webp` | Philosophy bento |
-| `avatar-customer-1.webp` | Rating avatars |
-| `avatar-customer-2.webp` | Rating avatars |
-| `avatar-customer-3.webp` | Rating avatars |
-| `art-section-mask.png` | The ART CSS mask (PNG only) |
-| `bartender-photo.webp` | The ART + showcase |
-| `floating-cocktail-aperol.webp` | Showcase decoration |
-| `floating-cocktail-martini.webp` | Showcase decoration |
-| `carousel-drink-raspberry-mojito.webp` | Carousel |
-| `footer-cocktail-assortment.webp` | Contact/footer |
+| WebP (preferred)                       | Section                     |
+| -------------------------------------- | --------------------------- |
+| `hero-cocktail-mojito.webp`            | Hero                        |
+| `decorative-monstera-leaf.webp`        | Decorative (all sections)   |
+| `noise-texture.webp`                   | Grain overlay               |
+| `menu-cocktail-center.webp`            | Menu                        |
+| `bento-bartender-pouring.webp`         | Philosophy bento            |
+| `bento-guests-drinking.webp`           | Philosophy bento            |
+| `bento-cocktail-garnish.webp`          | Philosophy bento            |
+| `bento-cocktails-row.webp`             | Philosophy bento            |
+| `avatar-customer-1.webp`               | Rating avatars              |
+| `avatar-customer-2.webp`               | Rating avatars              |
+| `avatar-customer-3.webp`               | Rating avatars              |
+| `art-section-mask.png`                 | The ART CSS mask (PNG only) |
+| `bartender-photo.webp`                 | The ART + showcase          |
+| `floating-cocktail-aperol.webp`        | Showcase decoration         |
+| `floating-cocktail-martini.webp`       | Showcase decoration         |
+| `carousel-drink-raspberry-mojito.webp` | Carousel                    |
+| `footer-cocktail-assortment.webp`      | Contact/footer              |
 
 PNG originals are kept alongside each WebP for fallback editing.
 

@@ -53,7 +53,7 @@ Length: 39 characters
 
 ### Meta Description
 
-Before: *(missing)*
+Before: _(missing)_
 
 After:
 
@@ -116,16 +116,16 @@ Not added: `twitter:image` — no absolute preview image URL available
 
 Body content is rendered by Vue (`#app`). Structure reviewed via mounted components:
 
-| Check | Status | Notes |
-|-------|--------|-------|
-| H1 | ✓ | One h1: “Sip the Spirit of Summer” in `HeroSection.vue` |
-| Heading hierarchy | ✓ | h2 per section; h3 for cards/items (see vue-a11y-report) |
-| Semantic landmarks | ✓ | `<header>`, `<main id="main-content">`, `<footer>` in Vue |
-| Navigation | ✓ | Desktop + mobile nav with meaningful link text |
-| Link text | ✓ | Anchor links use section names, not empty or `#` |
-| Image alt | ✓ | Meaningful images have descriptive alt; decorative use `alt=""` |
-| Section ids | ✓ | `#hero`, `#menu`, `#philosophy`, `#the-art`, `#showcase`, `#carousel`, `#contact` |
-| Duplicate ids | ✓ | None in rendered page |
+| Check              | Status | Notes                                                                             |
+| ------------------ | ------ | --------------------------------------------------------------------------------- |
+| H1                 | ✓      | One h1: “Sip the Spirit of Summer” in `HeroSection.vue`                           |
+| Heading hierarchy  | ✓      | h2 per section; h3 for cards/items (see vue-a11y-report)                          |
+| Semantic landmarks | ✓      | `<header>`, `<main id="main-content">`, `<footer>` in Vue                         |
+| Navigation         | ✓      | Desktop + mobile nav with meaningful link text                                    |
+| Link text          | ✓      | Anchor links use section names, not empty or `#`                                  |
+| Image alt          | ✓      | Meaningful images have descriptive alt; decorative use `alt=""`                   |
+| Section ids        | ✓      | `#hero`, `#menu`, `#philosophy`, `#the-art`, `#showcase`, `#carousel`, `#contact` |
+| Duplicate ids      | ✓      | None in rendered page                                                             |
 
 ## Fixes Applied
 
@@ -138,11 +138,11 @@ Body content is rendered by Vue (`#app`). Structure reviewed via mounted compone
 
 ## Missing Assets
 
-| Asset | Status |
-|-------|--------|
+| Asset                              | Status                                      |
+| ---------------------------------- | ------------------------------------------- |
 | `og-image.jpg/png/webp` (1200×630) | Not found — social previews will lack image |
-| `apple-touch-icon.png` | Not found |
-| `favicon.ico` | Not found (SVG favicon used instead) |
+| `apple-touch-icon.png`             | Not found                                   |
+| `favicon.ico`                      | Not found (SVG favicon used instead)        |
 
 **Recommendation:** Add `public/og-image.jpg` (1200×630) featuring Velvet Pour branding or hero cocktail, then add `og:image` and `twitter:image` with absolute URL.
 

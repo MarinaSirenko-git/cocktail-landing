@@ -44,14 +44,53 @@
         "role": "main page title"
       },
       "elements": [
-        { "name": "display-type", "bemElement": "display-type", "htmlTag": "p", "role": "decorative background wordmark (MOJITO)", "manualReview": true },
-        { "name": "eyebrow", "bemElement": "eyebrow", "htmlTag": "p", "role": "Cool. Crisp. Classic." },
+        {
+          "name": "display-type",
+          "bemElement": "display-type",
+          "htmlTag": "p",
+          "role": "decorative background wordmark (MOJITO)",
+          "manualReview": true
+        },
+        {
+          "name": "eyebrow",
+          "bemElement": "eyebrow",
+          "htmlTag": "p",
+          "role": "Cool. Crisp. Classic."
+        },
         { "name": "title", "bemElement": "title", "htmlTag": "h1", "role": "section heading" },
-        { "name": "description", "bemElement": "description", "htmlTag": "p", "role": "hero supporting copy" },
-        { "name": "cta", "bemElement": "cta", "htmlTag": "a", "role": "link to #menu", "href": "#menu" },
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "hero cocktail image" },
-        { "name": "scroll-indicator", "bemElement": "scroll-indicator", "htmlTag": "a", "role": "skip to next section", "href": "#menu" },
-        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative grain overlay", "ariaHidden": true }
+        {
+          "name": "description",
+          "bemElement": "description",
+          "htmlTag": "p",
+          "role": "hero supporting copy"
+        },
+        {
+          "name": "cta",
+          "bemElement": "cta",
+          "htmlTag": "a",
+          "role": "link to #menu",
+          "href": "#menu"
+        },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "hero cocktail image"
+        },
+        {
+          "name": "scroll-indicator",
+          "bemElement": "scroll-indicator",
+          "htmlTag": "a",
+          "role": "skip to next section",
+          "href": "#menu"
+        },
+        {
+          "name": "noise",
+          "bemElement": "noise",
+          "htmlTag": "div",
+          "role": "decorative grain overlay",
+          "ariaHidden": true
+        }
       ],
       "repeatedItems": [
         { "pattern": "decorative-leaf", "count": 2, "bemBlock": "hero", "bemElement": "leaf" }
@@ -62,7 +101,13 @@
         "src/assets/images/noise-texture.webp"
       ],
       "components": ["DecorativeLeaf"],
-      "designTokens": ["--color-accent", "--text-h2-size", "--text-display-xl-size", "--effect-header-blur", "--effect-blend-hero-image"],
+      "designTokens": [
+        "--color-accent",
+        "--text-h2-size",
+        "--text-display-xl-size",
+        "--effect-header-blur",
+        "--effect-blend-hero-image"
+      ],
       "a11yNotes": [
         "Only one h1 on the page — use hero-title for Sip the Spirit of Summer",
         "MOJITO display type is decorative; use aria-hidden or presentational styling, not a heading",
@@ -100,10 +145,32 @@
         "role": "left column section label"
       },
       "elements": [
-        { "name": "title-right", "bemElement": "title-right", "htmlTag": "h2", "id": "menu-title-right", "role": "right column section label" },
-        { "name": "columns", "bemElement": "columns", "htmlTag": "div", "role": "two-column layout wrapper" },
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "center cocktail image" },
-        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative overlay", "ariaHidden": true }
+        {
+          "name": "title-right",
+          "bemElement": "title-right",
+          "htmlTag": "h2",
+          "id": "menu-title-right",
+          "role": "right column section label"
+        },
+        {
+          "name": "columns",
+          "bemElement": "columns",
+          "htmlTag": "div",
+          "role": "two-column layout wrapper"
+        },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "center cocktail image"
+        },
+        {
+          "name": "noise",
+          "bemElement": "noise",
+          "htmlTag": "div",
+          "role": "decorative overlay",
+          "ariaHidden": true
+        }
       ],
       "repeatedItems": [
         {
@@ -122,7 +189,13 @@
         "src/assets/images/noise-texture.webp"
       ],
       "components": ["MenuColumn", "MenuItem", "DecorativeLeaf"],
-      "designTokens": ["--color-accent", "--text-h3-size", "--text-price-size", "--space-36", "--space-80"],
+      "designTokens": [
+        "--color-accent",
+        "--text-h3-size",
+        "--text-price-size",
+        "--space-36",
+        "--space-80"
+      ],
       "a11yNotes": [
         "Use two h2 elements for column labels or one h2 with visually hidden structure — avoid skipping levels",
         "Menu items should be ul > li with name in strong or heading level h3",
@@ -158,17 +231,58 @@
         "role": "section heading"
       },
       "elements": [
-        { "name": "badge", "bemElement": "badge", "htmlTag": "span", "role": "Best Cocktails pill" },
+        {
+          "name": "badge",
+          "bemElement": "badge",
+          "htmlTag": "span",
+          "role": "Best Cocktails pill"
+        },
         { "name": "intro", "bemElement": "intro", "htmlTag": "p", "role": "supporting paragraph" },
-        { "name": "rating", "bemElement": "rating", "htmlTag": "div", "role": "star rating + score" },
-        { "name": "avatars", "bemElement": "avatars", "htmlTag": "div", "role": "customer avatar stack" },
+        {
+          "name": "rating",
+          "bemElement": "rating",
+          "htmlTag": "div",
+          "role": "star rating + score"
+        },
+        {
+          "name": "avatars",
+          "bemElement": "avatars",
+          "htmlTag": "div",
+          "role": "customer avatar stack"
+        },
         { "name": "bento", "bemElement": "bento", "htmlTag": "div", "role": "image grid gallery" },
-        { "name": "feature-card", "bemElement": "feature-card", "htmlTag": "article", "role": "Crafted to Impress checklist card" }
+        {
+          "name": "feature-card",
+          "bemElement": "feature-card",
+          "htmlTag": "article",
+          "role": "Crafted to Impress checklist card"
+        }
       ],
       "repeatedItems": [
-        { "pattern": "checklist-item", "count": 4, "bemBlock": "philosophy", "bemElement": "check-item", "htmlTag": "li", "parentList": "ul" },
-        { "pattern": "bento-card", "count": 4, "bemBlock": "philosophy", "bemElement": "bento-card", "htmlTag": "figure", "variants": ["image", "checklist"] },
-        { "pattern": "star-icon", "count": 5, "bemBlock": "philosophy", "bemElement": "star", "htmlTag": "span", "decorative": true }
+        {
+          "pattern": "checklist-item",
+          "count": 4,
+          "bemBlock": "philosophy",
+          "bemElement": "check-item",
+          "htmlTag": "li",
+          "parentList": "ul"
+        },
+        {
+          "pattern": "bento-card",
+          "count": 4,
+          "bemBlock": "philosophy",
+          "bemElement": "bento-card",
+          "htmlTag": "figure",
+          "variants": ["image", "checklist"]
+        },
+        {
+          "pattern": "star-icon",
+          "count": 5,
+          "bemBlock": "philosophy",
+          "bemElement": "star",
+          "htmlTag": "span",
+          "decorative": true
+        }
       ],
       "assets": [
         "src/assets/icons/icon-star.svg",
@@ -183,7 +297,13 @@
         "src/assets/images/noise-texture.webp"
       ],
       "components": ["Badge", "RatingBlock", "AvatarStack", "FeatureChecklist", "BentoCard"],
-      "designTokens": ["--text-h1-size", "--radius-lg", "--radius-pill", "--color-surface-muted", "--color-accent-badge"],
+      "designTokens": [
+        "--text-h1-size",
+        "--radius-lg",
+        "--radius-pill",
+        "--color-surface-muted",
+        "--color-accent-badge"
+      ],
       "a11yNotes": [
         "Rating needs visible text (4.5/5) plus aria-label on star group",
         "Avatars decorative when adjacent to +12000 customers text",
@@ -198,10 +318,7 @@
         "Bento grid must collapse to single column on mobile",
         "manualReview: bento-guests-drinking and bento-cocktail-garnish exports are low resolution"
       ],
-      "implementationRisks": [
-        "Complex bento grid proportions",
-        "Small bento image asset quality"
-      ]
+      "implementationRisks": ["Complex bento grid proportions", "Small bento image asset quality"]
     },
     {
       "id": "the-art",
@@ -221,14 +338,47 @@
         "manualReview": true
       },
       "elements": [
-        { "name": "display-type", "bemElement": "display-type", "htmlTag": "p", "role": "large background The ART", "ariaHidden": true },
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "masked circular composite" },
-        { "name": "checklist-left", "bemElement": "checklist-left", "htmlTag": "ul", "role": "left feature list" },
-        { "name": "checklist-right", "bemElement": "checklist-right", "htmlTag": "ul", "role": "right feature list" },
-        { "name": "subtitle", "bemElement": "subtitle", "htmlTag": "h2", "id": "the-art-subtitle", "text": "Sip-Worthy Perfection" }
+        {
+          "name": "display-type",
+          "bemElement": "display-type",
+          "htmlTag": "p",
+          "role": "large background The ART",
+          "ariaHidden": true
+        },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "masked circular composite"
+        },
+        {
+          "name": "checklist-left",
+          "bemElement": "checklist-left",
+          "htmlTag": "ul",
+          "role": "left feature list"
+        },
+        {
+          "name": "checklist-right",
+          "bemElement": "checklist-right",
+          "htmlTag": "ul",
+          "role": "right feature list"
+        },
+        {
+          "name": "subtitle",
+          "bemElement": "subtitle",
+          "htmlTag": "h2",
+          "id": "the-art-subtitle",
+          "text": "Sip-Worthy Perfection"
+        }
       ],
       "repeatedItems": [
-        { "pattern": "checklist-item", "count": 8, "bemBlock": "the-art", "bemElement": "check-item", "htmlTag": "li" }
+        {
+          "pattern": "checklist-item",
+          "count": 8,
+          "bemBlock": "the-art",
+          "bemElement": "check-item",
+          "htmlTag": "li"
+        }
       ],
       "assets": [
         "src/assets/images/art-section-mask.png",
@@ -272,12 +422,30 @@
         "role": "section heading"
       },
       "elements": [
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "bartender photo" },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "bartender photo"
+        },
         { "name": "subtitle", "bemElement": "subtitle", "htmlTag": "p", "role": "supporting line" },
-        { "name": "noise", "bemElement": "noise", "htmlTag": "div", "role": "decorative", "ariaHidden": true }
+        {
+          "name": "noise",
+          "bemElement": "noise",
+          "htmlTag": "div",
+          "role": "decorative",
+          "ariaHidden": true
+        }
       ],
       "repeatedItems": [
-        { "pattern": "floating-cocktail", "count": 2, "bemBlock": "showcase", "bemElement": "floating-cocktail", "htmlTag": "img", "decorative": true }
+        {
+          "pattern": "floating-cocktail",
+          "count": 2,
+          "bemBlock": "showcase",
+          "bemElement": "floating-cocktail",
+          "htmlTag": "img",
+          "decorative": true
+        }
       ],
       "assets": [
         "src/assets/images/bartender-photo.webp",
@@ -299,9 +467,7 @@
         "Hide or simplify floating elements on small screens",
         "Image full-bleed with max-width container"
       ],
-      "implementationRisks": [
-        "Same bartender-photo asset reused from the-art section — share src"
-      ]
+      "implementationRisks": ["Same bartender-photo asset reused from the-art section — share src"]
     },
     {
       "id": "carousel",
@@ -321,16 +487,46 @@
       },
       "elements": [
         { "name": "tabs", "bemElement": "tabs", "htmlTag": "div", "role": "tablist" },
-        { "name": "tab", "bemElement": "tab", "htmlTag": "button", "role": "tab with aria-selected" },
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "active drink image" },
-        { "name": "nav-prev", "bemElement": "nav-prev", "htmlTag": "button", "role": "previous slide" },
+        {
+          "name": "tab",
+          "bemElement": "tab",
+          "htmlTag": "button",
+          "role": "tab with aria-selected"
+        },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "active drink image"
+        },
+        {
+          "name": "nav-prev",
+          "bemElement": "nav-prev",
+          "htmlTag": "button",
+          "role": "previous slide"
+        },
         { "name": "nav-next", "bemElement": "nav-next", "htmlTag": "button", "role": "next slide" },
         { "name": "eyebrow", "bemElement": "eyebrow", "htmlTag": "p", "text": "Recipes for:" },
-        { "name": "description-title", "bemElement": "description-title", "htmlTag": "h3", "text": "A Zesty Classic That Never Fails" },
-        { "name": "description", "bemElement": "description", "htmlTag": "p", "role": "recipe copy" }
+        {
+          "name": "description-title",
+          "bemElement": "description-title",
+          "htmlTag": "h3",
+          "text": "A Zesty Classic That Never Fails"
+        },
+        {
+          "name": "description",
+          "bemElement": "description",
+          "htmlTag": "p",
+          "role": "recipe copy"
+        }
       ],
       "repeatedItems": [
-        { "pattern": "carousel-tab", "count": 4, "labels": ["Classic Mojito", "Raspberry Mojito", "Violet Breeze", "Tipsy Tales"], "bemElement": "tab" }
+        {
+          "pattern": "carousel-tab",
+          "count": 4,
+          "labels": ["Classic Mojito", "Raspberry Mojito", "Violet Breeze", "Tipsy Tales"],
+          "bemElement": "tab"
+        }
       ],
       "assets": [
         "src/assets/images/carousel-drink-raspberry-mojito.webp",
@@ -379,13 +575,36 @@
       },
       "elements": [
         { "name": "location", "bemElement": "location", "htmlTag": "div", "role": "address block" },
-        { "name": "phone-email", "bemElement": "contact-details", "htmlTag": "div", "role": "tel and email" },
+        {
+          "name": "phone-email",
+          "bemElement": "contact-details",
+          "htmlTag": "div",
+          "role": "tel and email"
+        },
         { "name": "hours", "bemElement": "hours", "htmlTag": "div", "role": "opening hours" },
-        { "name": "socials", "bemElement": "socials", "htmlTag": "nav", "role": "social links", "ariaLabel": "Social media" },
-        { "name": "visual", "bemElement": "visual", "htmlTag": "figure", "role": "decorative cocktail assortment", "ariaHidden": true }
+        {
+          "name": "socials",
+          "bemElement": "socials",
+          "htmlTag": "nav",
+          "role": "social links",
+          "ariaLabel": "Social media"
+        },
+        {
+          "name": "visual",
+          "bemElement": "visual",
+          "htmlTag": "figure",
+          "role": "decorative cocktail assortment",
+          "ariaHidden": true
+        }
       ],
       "repeatedItems": [
-        { "pattern": "social-link", "count": 3, "platforms": ["instagram", "x", "facebook"], "bemElement": "social-link", "htmlTag": "a" },
+        {
+          "pattern": "social-link",
+          "count": 3,
+          "platforms": ["instagram", "x", "facebook"],
+          "bemElement": "social-link",
+          "htmlTag": "a"
+        },
         { "pattern": "hours-row", "count": 4, "bemElement": "hours-row", "htmlTag": "p" }
       ],
       "assets": [
@@ -408,9 +627,7 @@
         "Centered content column (880px) with large display title",
         "Decorative cocktail image bottom-right absolute"
       ],
-      "responsiveNotes": [
-        "Stack contact blocks; reduce title size on mobile"
-      ],
+      "responsiveNotes": ["Stack contact blocks; reduce title size on mobile"],
       "implementationRisks": [
         "Project SiteFooter vs Figma contact section overlap — decide single footer component",
         "Email in design: hello@jsmcocktail.com — verify brand email"
@@ -422,7 +639,9 @@
       "name": "SiteHeader",
       "suggestedClass": "site-header",
       "vuePath": "src/components/layout/SiteHeader.vue",
-      "usage": ["Global nav — merge Figma hero header: logo, Cocktails, About Us, The Art, Contact"],
+      "usage": [
+        "Global nav — merge Figma hero header: logo, Cocktails, About Us, The Art, Contact"
+      ],
       "assets": ["src/assets/logos/velvet-pour-mark.png"],
       "notes": "Figma embeds header inside hero; recommend sticky header with anchor links"
     },
@@ -430,7 +649,9 @@
       "name": "SiteFooter",
       "suggestedClass": "site-footer",
       "vuePath": "src/components/layout/SiteFooter.vue",
-      "usage": ["Currently placeholder — may defer to ContactSection or slim copyright bar below contact"],
+      "usage": [
+        "Currently placeholder — may defer to ContactSection or slim copyright bar below contact"
+      ],
       "notes": "manualReview: reconcile with contact section"
     },
     {

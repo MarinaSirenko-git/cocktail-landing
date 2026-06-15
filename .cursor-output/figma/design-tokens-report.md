@@ -16,11 +16,11 @@ The user-provided URL targets the **mobile Hero** frame. Site-wide tokens (menu,
 
 ## Source Quality
 
-| Source | Result |
-| --- | --- |
-| Figma variables found | **No** — `get_variable_defs` returned `{}` |
-| Text styles found | **No** — not exposed as Figma variables |
-| Inferred values used | **Yes** — all tokens are inferred from layer styles |
+| Source                | Result                                              |
+| --------------------- | --------------------------------------------------- |
+| Figma variables found | **No** — `get_variable_defs` returned `{}`          |
+| Text styles found     | **No** — not exposed as Figma variables             |
+| Inferred values used  | **Yes** — all tokens are inferred from layer styles |
 
 ## Colors
 
@@ -53,12 +53,12 @@ None detected as Figma variables.
 
 24 typography tokens extracted:
 
-| Role | Desktop | Mobile (Hero node) |
-| --- | --- | --- |
+| Role       | Desktop                 | Mobile (Hero node)       |
+| ---------- | ----------------------- | ------------------------ |
 | Display XL | 330px / tracking -6.6px | 132px / tracking -2.64px |
-| Brand | 30px / 40px lh | 30px / 40px lh |
-| Nav | 16px / 24px lh | 14px / 20px lh |
-| Body | 16–18px | 16px centered in hero |
+| Brand      | 30px / 40px lh          | 30px / 40px lh           |
+| Nav        | 16px / 24px lh          | 14px / 20px lh           |
+| Body       | 16–18px                 | 16px centered in hero    |
 
 **Font families (from Figma):**
 

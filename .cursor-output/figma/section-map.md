@@ -13,22 +13,22 @@ Figma source: [Cocktail GSAP Website (Copy) — Desktop](https://www.figma.com/d
 
 ## Page Overview
 
-| Property | Value |
-| --- | --- |
-| **Page name** | Velvet Pour Landing |
-| **Type** | Single-page marketing landing |
-| **Vue entry** | `src/App.vue` → `<main id="main-content">` |
-| **Section directory** | `src/sections/` |
-| **Only h1** | Hero — “Sip the Spirit of Summer” |
+| Property              | Value                                      |
+| --------------------- | ------------------------------------------ |
+| **Page name**         | Velvet Pour Landing                        |
+| **Type**              | Single-page marketing landing              |
+| **Vue entry**         | `src/App.vue` → `<main id="main-content">` |
+| **Section directory** | `src/sections/`                            |
+| **Only h1**           | Hero — “Sip the Spirit of Summer”          |
 
 ### Scroll anchor map
 
-| Nav label | Section ID |
-| --- | --- |
-| Cocktails | `#menu` |
-| About Us | `#philosophy` |
-| The Art | `#the-art` |
-| Contact | `#contact` |
+| Nav label | Section ID    |
+| --------- | ------------- |
+| Cocktails | `#menu`       |
+| About Us  | `#philosophy` |
+| The Art   | `#the-art`    |
+| Contact   | `#contact`    |
 
 ## Detected Sections
 
@@ -132,32 +132,32 @@ Figma source: [Cocktail GSAP Website (Copy) — Desktop](https://www.figma.com/d
 
 ## Global Components
 
-| Component | Class / path | Used in |
-| --- | --- | --- |
-| SiteHeader | `site-header` / `src/components/layout/SiteHeader.vue` | Global nav (from Figma hero header) |
-| SiteFooter | `site-footer` / `src/components/layout/SiteFooter.vue` | Placeholder — reconcile with contact |
-| FeatureChecklist | `feature-checklist` | philosophy, the-art |
-| MenuItem | `menu__item` | menu |
-| RatingBlock | `rating` | philosophy |
-| AvatarStack | `avatars` | philosophy |
-| CocktailCarousel | `cocktail-carousel` | carousel |
-| SocialLinks | `socials` | contact |
-| DecorativeLeaf | `decorative-leaf` | hero, menu, carousel, contact |
-| NoiseOverlay | `noise-overlay` | all dark sections |
-| Badge | `badge` | philosophy |
+| Component        | Class / path                                           | Used in                              |
+| ---------------- | ------------------------------------------------------ | ------------------------------------ |
+| SiteHeader       | `site-header` / `src/components/layout/SiteHeader.vue` | Global nav (from Figma hero header)  |
+| SiteFooter       | `site-footer` / `src/components/layout/SiteFooter.vue` | Placeholder — reconcile with contact |
+| FeatureChecklist | `feature-checklist`                                    | philosophy, the-art                  |
+| MenuItem         | `menu__item`                                           | menu                                 |
+| RatingBlock      | `rating`                                               | philosophy                           |
+| AvatarStack      | `avatars`                                              | philosophy                           |
+| CocktailCarousel | `cocktail-carousel`                                    | carousel                             |
+| SocialLinks      | `socials`                                              | contact                              |
+| DecorativeLeaf   | `decorative-leaf`                                      | hero, menu, carousel, contact        |
+| NoiseOverlay     | `noise-overlay`                                        | all dark sections                    |
+| Badge            | `badge`                                                | philosophy                           |
 
 ## Asset Usage Map
 
-| Section | Primary assets |
-| --- | --- |
-| hero | hero-cocktail-mojito.webp, decorative-monstera-leaf.webp, noise-texture.webp |
-| menu | menu-cocktail-center.webp |
-| philosophy | bento-*.webp, avatar-*.webp, icon-star.svg, icon-check.svg |
-| the-art | art-section-mask.png, bartender-photo.webp, icon-check.svg |
-| showcase | bartender-photo.webp, floating-cocktail-*.webp |
-| carousel | carousel-drink-raspberry-mojito.webp, icon-arrow-right.svg |
-| contact | footer-cocktail-assortment.webp, icon-social-*.svg |
-| global header | velvet-pour-mark.png |
+| Section       | Primary assets                                                               |
+| ------------- | ---------------------------------------------------------------------------- |
+| hero          | hero-cocktail-mojito.webp, decorative-monstera-leaf.webp, noise-texture.webp |
+| menu          | menu-cocktail-center.webp                                                    |
+| philosophy    | bento-_.webp, avatar-_.webp, icon-star.svg, icon-check.svg                   |
+| the-art       | art-section-mask.png, bartender-photo.webp, icon-check.svg                   |
+| showcase      | bartender-photo.webp, floating-cocktail-\*.webp                              |
+| carousel      | carousel-drink-raspberry-mojito.webp, icon-arrow-right.svg                   |
+| contact       | footer-cocktail-assortment.webp, icon-social-\*.svg                          |
+| global header | velvet-pour-mark.png                                                         |
 
 ## Accessibility Plan
 

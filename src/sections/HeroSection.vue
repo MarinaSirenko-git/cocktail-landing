@@ -4,6 +4,7 @@ import { useMediaQuery } from '@vueuse/core'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
@@ -11,7 +12,7 @@ import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 // register GSAP plugin
-gsap.registerPlugin(SplitText, ScrollTrigger)
+gsap.registerPlugin(SplitText, ScrollTrigger, ScrollToPlugin)
 
 // detect screens less then 768 as mobile devices and reduced motion
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -24,6 +25,7 @@ const videoRef = ref<HTMLVideoElement | null>(null)
 
 // create variable to store the animation context
 let ctx: gsap.Context | undefined
+let activeScrollTween: gsap.core.Tween | null = null
 
 // make actions only after the component is mounted
 onMounted(() => {
@@ -123,85 +125,126 @@ onMounted(() => {
 // clean listeners
 onUnmounted(() => {
   ctx?.revert()
+  activeScrollTween?.kill()
+  activeScrollTween = null
 })
+
+function scrollToSection(hash: string) {
+  const target = document.querySelector(hash)
+  if (!target) return
+
+  const offsetY = document.querySelector('header')?.getBoundingClientRect().height ?? 0
+
+  activeScrollTween?.kill()
+
+  if (prefersReducedMotion.value) {
+    const top = target.getBoundingClientRect().top + window.scrollY - offsetY
+    window.scrollTo({ top, behavior: 'instant' })
+    return
+  }
+
+  activeScrollTween = gsap.to(window, {
+    duration: 0.9,
+    ease: 'power2.inOut',
+    scrollTo: { y: target, offsetY },
+    onComplete: () => {
+      activeScrollTween = null
+    },
+  })
+}
+
+function onCtaClick(event: MouseEvent) {
+  event.preventDefault()
+  scrollToSection('#menu')
+}
 </script>
 
 <template>
-  <div class="hero-stage relative h-[calc(100dvh-var(--header-height,0px))] w-full">
+  <div class="hero-stage relative w-full">
     <section
       ref="sectionRef"
       id="hero"
       aria-labelledby="hero-title"
-      class="noisy relative z-20 flex h-full w-full flex-col flex-start lg:flex-between border border-transparent pt-[50px] pb-[70px]"
+      class="flex flex-col justify-center noisy relative z-20 flex h-[calc(100dvh-var(--header-height,0px))] w-full flex-start lg:flex-between border border-transparent"
     >
-      <h1 id="title" class="container mt-12 lg:mt-0 decorative-text relative z-20 flex-center">MOJITO</h1>
+      <div class="container flex flex-col md:justify-between h-full">
+        <h1 id="title" class="decorative-text text-[132px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
 
-      <div class="relative z-20 container flex-between">
-        <a
-          href="#menu"
-          aria-label="Scroll to cocktails menu"
-          class="absolute right-0 top-[-240px] z-20 hover:opacity-80 focus-ring"
-        >
-          <img
-            :src="iconArrowDown"
-            alt=""
-            width="23"
-            height="152"
-            decoding="async"
-            aria-hidden="true"
-            class="arrow h-auto w-auto hidden lg:block"
-          />
-        </a>
+        <div class="relative z-20 flex-start md:h-[50%] flex md:justify-between">
+          <a
+            href="#menu"
+            aria-label="Scroll to cocktails menu"
+            class="absolute right-0 top-[-30%] z-20 hover:opacity-80 focus-ring"
+            @click="onCtaClick"
+          >
+            <img
+              :src="iconArrowDown"
+              alt=""
+              width="23"
+              height="152"
+              decoding="async"
+              aria-hidden="true"
+              class="arrow h-auto w-auto hidden lg:block"
+            />
+          </a>
 
-        <div class="flex flex-col gap-2 hidden lg:block">
-          <p class="text-base">Cool. Crisp. Classic.</p>
-          <h2 class="animation-marker font-display text-[50px] leading-none text-accent">
-            Sip the Spirit <br />
-            of Summer
-          </h2>
-        </div>
+          <div class="flex flex-col gap-2 hidden lg:block">
+            <p class="text-base xl:text-lg xl:mb-5">Cool. Crisp. Classic.</p>
+            <h2 class="animation-marker font-display text-[4vw] leading-none text-accent">
+              Sip the Spirit <br />
+              of Summer
+            </h2>
+          </div>
 
-        <div class="flex w-full lg:max-w-[270px] flex-col items-center lg:items-start gap-2">
-          <p class="animation-marker text-base leading-7 text-center lg:text-start">
-            Every cocktail on our menu is a blend of premium ingredients, creative flair, and
-            timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
-          </p>
-          <div class="flex">
-            <a href="#menu" class="text-base transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0">
-              View cocktails
-            </a>
+          <div class="flex w-full lg:max-w-[270px] xl:max-w-[300px] flex-col items-center lg:items-start gap-2">
+            <p class="animation-marker text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start">
+              Every cocktail on our menu is a blend of premium ingredients, creative flair, and
+              timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
+            </p>
+            <div class="flex">
+              <a
+                href="#menu"
+                class="text-base xl:text-lg xl:mb-5 transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0"
+                @click="onCtaClick"
+              >
+                View cocktails
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <picture id="left-leaf" class="pointer-events-none absolute -left-18 lg:-left-32 -bottom-18 lg:top-48 z-20">
-        <source :srcset="monsteraWebp" type="image/webp" />
-        <img
-          :src="monsteraPng"
-          alt=""
-          width="326"
-          height="326"
-          decoding="async"
-          aria-hidden="true"
-          class="size-[177px] lg:size-[326px] max-w-none rotate-45 scale-x-[-1]"
-        />
-      </picture>
-      <picture
-        id="right-leaf"
-        class="pointer-events-none absolute -bottom-18 -right-[70px] lg:translate-y-0 lg:-right-47 lg:-top-4 z-20"
-      >
-        <source :srcset="monsteraWebp" type="image/webp" />
-        <img
-          :src="monsteraPng"
-          alt=""
-          width="356"
-          height="356"
-          decoding="async"
-          loading="lazy"
-          aria-hidden="true"
-          class="size-[173px] lg:size-[356px] max-w-none rotate-[-26deg]"
-        />
-      </picture>
+        <picture
+          id="left-leaf"
+          class="pointer-events-none absolute -left-18 lg:-left-32 -bottom-18 lg:top-40 xxl:top-100 z-20"
+        >
+          <source :srcset="monsteraWebp" type="image/webp" />
+          <img
+            :src="monsteraPng"
+            alt=""
+            width="326"
+            height="326"
+            decoding="async"
+            aria-hidden="true"
+            class="size-[177px] lg:size-[326px] xl:size-[clamp(356px,24vw,560px)] max-w-none rotate-45 scale-x-[-1]"
+          />
+        </picture>
+        <picture
+          id="right-leaf"
+          class="pointer-events-none absolute -bottom-18 -right-[70px] lg:translate-y-0 lg:-right-47 lg:-top-4 z-20"
+        >
+          <source :srcset="monsteraWebp" type="image/webp" />
+          <img
+            :src="monsteraPng"
+            alt=""
+            width="356"
+            height="356"
+            decoding="async"
+            loading="lazy"
+            aria-hidden="true"
+            class="size-[173px] lg:size-[356px] xl:size-[clamp(356px,24vw,560px)] max-w-none rotate-[-26deg]"
+          />
+        </picture>
+      </div>
     </section>
     <div class="pointer-events-none absolute inset-0 z-10">
       <video

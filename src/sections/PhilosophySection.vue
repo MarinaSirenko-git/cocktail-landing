@@ -17,7 +17,7 @@ import bentoGarnishPng from '../assets/images/bento-cocktail-garnish.png'
 import bentoRowWebp from '../assets/images/bento-cocktails-row.webp'
 import bentoRowPng from '../assets/images/bento-cocktails-row.png'
 import iconStar from '../assets/icons/icon-star.svg'
-import iconCheck from '../assets/icons/icon-check.svg'
+import iconCheck from '../assets/icons/icon-check.png'
 import avatar1Webp from '../assets/images/avatar-customer-1.webp'
 import avatar1Png from '../assets/images/avatar-customer-1.png'
 import avatar2Webp from '../assets/images/avatar-customer-2.webp'
@@ -104,7 +104,7 @@ onUnmounted(() => {
     ref="sectionRef"
     id="philosophy"
     aria-labelledby="philosophy-title"
-    class="min-h-[100svh] py-[clamp(50px,6vw,100px)]"
+    class="flex flex-col justify-center min-h-[calc(100dvh-var(--header-height,0px))] py-[clamp(50px,6vw,100px)]"
   >
     <div class="container grid grid-cols-1 lg:grid-cols-2 gap-y-[clamp(32px,6vw,80px)]">
       <div class="lg:col-span-1 flex flex-col gap-[32px]">

@@ -74,7 +74,7 @@ onUnmounted(() => {
     ref="sectionRef"
     id="menu"
     aria-labelledby="menu-title-left"
-    class="noisy relative z-20 min-h-dvh w-full overflow-hidden"
+    class="flex flex-col justify-center noisy relative z-20 min-h-[calc(100dvh-var(--header-height,0px))] w-full overflow-hidden"
   >
     <div
       class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 lg:px-5 pt-40 md:flex-row 2xl:px-0"
@@ -107,7 +107,7 @@ onUnmounted(() => {
             class="flex items-start justify-between flex-nowrap"
           >
             <div class="me-28">
-              <h3 class="font-display text-[30px] text-accent leading-none ">
+              <h3 class="font-display text-[30px] text-accent leading-none">
                 {{ item.name }}
               </h3>
               <p class="text-sm">{{ item.meta }}</p>

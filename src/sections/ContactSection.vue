@@ -25,12 +25,10 @@ const hours = [
   <section
     id="contact"
     aria-labelledby="contact-title"
-    class="relative overflow-hidden bg-section-radial py-16 md:py-24 lg:pb-32"
+    class="relative overflow-hidden bg-section-radial py-16 md:py-24 lg:pb-20"
   >
-    <div
-      class="relative z-10 mx-auto grid max-w-[1260px] gap-12 px-5 lg:min-h-[520px] lg:grid-cols-2 lg:items-start lg:gap-10 lg:px-20"
-    >
-      <div>
+    <div class="relative z-10 mx-auto max-w-[1260px] px-5 lg:min-h-[640px]">
+      <div class="mx-auto w-full max-w-[760px] text-center">
         <h2
           id="contact-title"
           class="font-display text-4xl font-normal leading-[0.9] tracking-tight text-foreground sm:text-5xl lg:text-[64px]"
@@ -38,20 +36,22 @@ const hours = [
           Where to Find Us
         </h2>
 
-        <div class="mt-10 grid gap-8 sm:grid-cols-2">
-          <div class="space-y-2">
-            <h3 class="font-display text-xl text-accent">Visit our store</h3>
-            <address class="text-base leading-7 text-muted not-italic">
-              456, Raq Blvd. #404, Los Angeles, CA 90210
+        <div class="mt-10 space-y-8 lg:space-y-10">
+          <div class="space-y-3">
+            <h3 class="text-lg uppercase tracking-wide text-muted-subtle">Visit our store</h3>
+            <address
+              class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] leading-tight text-foreground not-italic"
+            >
+              Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000
             </address>
           </div>
 
           <div class="space-y-2">
-            <h3 class="font-display text-xl text-accent">Contact us</h3>
+            <h3 class="text-lg uppercase tracking-wide text-muted-subtle">Contact us</h3>
             <p>
               <a
                 href="tel:+15559876543"
-                class="text-base text-muted transition-colors hover:text-foreground"
+                class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
               >
                 (555) 987-6543
               </a>
@@ -59,7 +59,7 @@ const hours = [
             <p>
               <a
                 href="mailto:hello@jsmcocktail.com"
-                class="text-base text-muted transition-colors hover:text-foreground"
+                class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
               >
                 hello@jsmcocktail.com
               </a>
@@ -67,22 +67,26 @@ const hours = [
           </div>
 
           <div class="space-y-2">
-            <h3 class="font-display text-xl text-accent">Open every day</h3>
-            <p v-for="line in hours" :key="line" class="text-base leading-7 text-muted">
+            <h3 class="text-lg uppercase tracking-wide text-muted-subtle">Open every day</h3>
+            <p
+              v-for="line in hours"
+              :key="line"
+              class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] leading-tight text-foreground"
+            >
               {{ line }}
             </p>
           </div>
 
           <nav aria-label="Social media" class="space-y-3">
-            <h3 class="font-display text-xl text-accent">Socials</h3>
-            <ul class="flex items-center gap-4">
+            <h3 class="text-lg uppercase tracking-wide text-muted-subtle">Socials</h3>
+            <ul class="flex items-center justify-center gap-4">
               <li v-for="link in socialLinks" :key="link.label">
                 <a
                   :href="link.href"
                   :aria-label="link.label"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex-center size-10 rounded-full border border-border transition-opacity hover:opacity-80"
+                  class="transition-opacity hover:opacity-80"
                 >
                   <img
                     :src="link.icon"
@@ -101,7 +105,7 @@ const hours = [
       </div>
 
       <figure
-        class="relative mx-auto w-full max-w-[526px] lg:absolute lg:bottom-0 lg:right-20 lg:mx-0 lg:max-w-[580px] lg:translate-y-8"
+        class="pointer-events-none relative mx-auto mt-14 w-full max-w-[526px] lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:mx-0 lg:w-[min(54vw,640px)] lg:max-w-none"
       >
         <picture>
           <source :srcset="footerCocktailsWebp" type="image/webp" />

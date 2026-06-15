@@ -21,7 +21,6 @@
 
 @utility decorative-text {
   @apply bg-display-text bg-clip-text font-display font-normal leading-none tracking-[-0.02em] text-transparent whitespace-nowrap;
-  font-size: clamp(118px, 31vw, 252px);
 }
 
 @utility noisy {
@@ -51,5 +50,16 @@
 }
 
 @utility video {
-  @apply w-full lg:h-[80%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[56%_100%];
+  @apply w-full lg:h-[67%] 2xl:h-[80%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[50%_100%] xl:object-[56%_100%];
+}
+
+@utility masked-img {
+  -webkit-mask-image: url("/src/assets/images/art-section-mask.png");
+  mask-image: url("/src/assets/images/art-section-mask.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 50%;
+  mask-size: 50%;
 }

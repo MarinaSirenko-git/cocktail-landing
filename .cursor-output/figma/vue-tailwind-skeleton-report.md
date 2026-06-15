@@ -15,11 +15,11 @@ Generated from:
 
 ## Project Detection
 
-| Item | Result |
-| --- | --- |
-| Vue detected | Yes (`vue` 3.5, `src/App.vue`) |
-| Tailwind detected | Yes (`tailwindcss`, `@import "tailwindcss"` in `main.css`) |
-| Vue Router detected | No |
+| Item                | Result                                                     |
+| ------------------- | ---------------------------------------------------------- |
+| Vue detected        | Yes (`vue` 3.5, `src/App.vue`)                             |
+| Tailwind detected   | Yes (`tailwindcss`, `@import "tailwindcss"` in `main.css`) |
+| Vue Router detected | No                                                         |
 
 ## Regeneration Mode
 
@@ -58,22 +58,22 @@ src/components/layout/SiteFooter.vue
 
 ## Generated Components
 
-| Component | Path |
-| --- | --- |
+| Component  | Path                                   |
+| ---------- | -------------------------------------- |
 | SiteHeader | `src/components/layout/SiteHeader.vue` |
 | SiteFooter | `src/components/layout/SiteFooter.vue` |
 
 ## Generated Sections
 
-| Section | File | `id` |
-| --- | --- | --- |
-| Hero | `HeroSection.vue` | `hero` |
-| Menu | `MenuSection.vue` | `menu` |
-| Philosophy | `PhilosophySection.vue` | `philosophy` |
-| The Art | `TheArtSection.vue` | `the-art` |
-| Showcase | `ShowcaseSection.vue` | `showcase` |
-| Carousel | `CocktailCarouselSection.vue` | `carousel` |
-| Contact | `ContactSection.vue` | `contact` |
+| Section    | File                          | `id`         |
+| ---------- | ----------------------------- | ------------ |
+| Hero       | `HeroSection.vue`             | `hero`       |
+| Menu       | `MenuSection.vue`             | `menu`       |
+| Philosophy | `PhilosophySection.vue`       | `philosophy` |
+| The Art    | `TheArtSection.vue`           | `the-art`    |
+| Showcase   | `ShowcaseSection.vue`         | `showcase`   |
+| Carousel   | `CocktailCarouselSection.vue` | `carousel`   |
+| Contact    | `ContactSection.vue`          | `contact`    |
 
 ## Asset Usage
 

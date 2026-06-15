@@ -39,38 +39,38 @@ Screenshot captured: **Yes**
 
 ### Colors
 
-| Role | Inferred value | Usage |
-| --- | --- | --- |
-| Page background | `#000000` / radial gray gradients | Section backgrounds |
-| Primary text | `#FFFFFF`, `#EFEFEF` | Body copy, nav |
-| Accent gold | `#E7D393` | Display headings, menu item titles |
-| Muted display | `#898989`, `#505050` | Large background typography (“MOJITO”, “The ART”) |
-| Card gradient | `#313131` → `#0F0F0F` | Feature card, avatar pill |
-| Badge accent | `#B2B6F4` | “+12k” avatar chip |
-| Nav blur header | `backdrop-blur(20px)` on dark hero | Sticky-style header treatment |
+| Role            | Inferred value                     | Usage                                             |
+| --------------- | ---------------------------------- | ------------------------------------------------- |
+| Page background | `#000000` / radial gray gradients  | Section backgrounds                               |
+| Primary text    | `#FFFFFF`, `#EFEFEF`               | Body copy, nav                                    |
+| Accent gold     | `#E7D393`                          | Display headings, menu item titles                |
+| Muted display   | `#898989`, `#505050`               | Large background typography (“MOJITO”, “The ART”) |
+| Card gradient   | `#313131` → `#0F0F0F`              | Feature card, avatar pill                         |
+| Badge accent    | `#B2B6F4`                          | “+12k” avatar chip                                |
+| Nav blur header | `backdrop-blur(20px)` on dark hero | Sticky-style header treatment                     |
 
 ### Typography
 
-| Style | Inferred font | Sizes observed | Notes |
-| --- | --- | --- | --- |
+| Style           | Inferred font       | Sizes observed                | Notes                                                                               |
+| --------------- | ------------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
 | Display / brand | `Modern Negra Demo` | 30px, 36px, 50px, 64px, 330px | Demo font name in Figma — verify licensing or substitute (e.g. high-contrast serif) |
-| Body / UI | `Mona Sans` | 14px–24px | Medium/Bold/SemiBold weights used |
-| Menu prices | Mona Sans Medium | 22px | Em dash prefix (`— $10`) |
-| Section labels | Mona Sans Medium | 20px | Column headings |
+| Body / UI       | `Mona Sans`         | 14px–24px                     | Medium/Bold/SemiBold weights used                                                   |
+| Menu prices     | Mona Sans Medium    | 22px                          | Em dash prefix (`— $10`)                                                            |
+| Section labels  | Mona Sans Medium    | 20px                          | Column headings                                                                     |
 
 **Line heights observed:** 18px, 20px, 24px, 28px, 30px, 36px, 46px, 0.9 (display)
 
 ### Spacing
 
-| Pattern | Value |
-| --- | --- |
+| Pattern                 | Value                                                            |
+| ----------------------- | ---------------------------------------------------------------- |
 | Page horizontal padding | 80px (left content), 90px (navbar container width 1260 centered) |
-| Nav link gap | 48px |
-| Menu row gap | 36px between items |
-| Checklist item gap | 14px |
-| Bento card radius | 20px |
-| Pill/badge radius | 50px–60px |
-| Section heights | 837px–1104px (fixed desktop blocks) |
+| Nav link gap            | 48px                                                             |
+| Menu row gap            | 36px between items                                               |
+| Checklist item gap      | 14px                                                             |
+| Bento card radius       | 20px                                                             |
+| Pill/badge radius       | 50px–60px                                                        |
+| Section heights         | 837px–1104px (fixed desktop blocks)                              |
 
 ### Radius
 
@@ -158,33 +158,33 @@ Screenshot captured: **Yes**
 
 ## Naming Issues
 
-| Issue | Examples |
-| --- | --- |
-| Generic frame names | `Section` (used 5×), `Frame 870`, `Frame 871`, `Frame 858` |
-| Typos | `poitns` instead of “points” |
-| Screenshot-based names | `Screenshot 2025-05-08 at 11.04.12 PM 1` |
+| Issue                   | Examples                                                                                |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| Generic frame names     | `Section` (used 5×), `Frame 870`, `Frame 871`, `Frame 858`                              |
+| Typos                   | `poitns` instead of “points”                                                            |
+| Screenshot-based names  | `Screenshot 2025-05-08 at 11.04.12 PM 1`                                                |
 | Reused long stock names | `vibrant-green-monstera-deliciosa-leaf-isolated-transparent-background…` (numbered 1–3) |
-| Ambiguous nav frames | inner frames named `nav` used for menu rows and checklist rows |
-| Misleading layer reuse | checklist frame named `Frame 854` duplicated in multiple sections |
+| Ambiguous nav frames    | inner frames named `nav` used for menu rows and checklist rows                          |
+| Misleading layer reuse  | checklist frame named `Frame 854` duplicated in multiple sections                       |
 
 **Recommendation:** Map to semantic frontend section names (`hero`, `menu`, `philosophy`, `the-art`, `showcase`, `carousel`, `contact`) — do not copy Figma layer names into CSS.
 
 ## Component Opportunities
 
-| Component | Reuse potential |
-| --- | --- |
-| `SiteHeader` / Navbar | Logo + 4 nav links + blur background |
-| `MenuColumn` | Title + list of `MenuItem` rows |
-| `MenuItem` | Name, meta line, price |
-| `FeatureChecklist` | Icon + label rows (used in 3 sections) |
-| `RatingBlock` | Stars + score + customer count |
-| `AvatarStack` | Overlapping avatars + count chip |
-| `BentoCard` | Image or gradient card with radius |
-| `SectionBadge` | Pill label (“Best Cocktails”) |
-| `CocktailCarousel` | Tabs + main visual + prev/next + copy panel |
-| `ContactBlock` | Title + detail lines |
-| `SocialLinks` | Icon row |
-| `DecorativeLeaf` | Positioned parallax asset |
+| Component             | Reuse potential                             |
+| --------------------- | ------------------------------------------- |
+| `SiteHeader` / Navbar | Logo + 4 nav links + blur background        |
+| `MenuColumn`          | Title + list of `MenuItem` rows             |
+| `MenuItem`            | Name, meta line, price                      |
+| `FeatureChecklist`    | Icon + label rows (used in 3 sections)      |
+| `RatingBlock`         | Stars + score + customer count              |
+| `AvatarStack`         | Overlapping avatars + count chip            |
+| `BentoCard`           | Image or gradient card with radius          |
+| `SectionBadge`        | Pill label (“Best Cocktails”)               |
+| `CocktailCarousel`    | Tabs + main visual + prev/next + copy panel |
+| `ContactBlock`        | Title + detail lines                        |
+| `SocialLinks`         | Icon row                                    |
+| `DecorativeLeaf`      | Positioned parallax asset                   |
 
 ## Code Connect Opportunities
 

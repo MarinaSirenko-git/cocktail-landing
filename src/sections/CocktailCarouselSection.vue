@@ -100,11 +100,7 @@ function animateDesktopActiveSlide() {
   })
 
   if (image) {
-    desktopSlideTimeline.fromTo(
-      image,
-      { x: 20, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.8 },
-    )
+    desktopSlideTimeline.fromTo(image, { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 })
   }
 
   if (title) {
@@ -231,97 +227,151 @@ watch(activeTabIndex, async () => {
     id="carousel"
     ref="sectionRef"
     aria-labelledby="carousel-recipe-title"
-    class="relative overflow-hidden bg-section-radial pt-[clamp(40px,23.8px+4.32vw,86px)] pb-[90px]"
+    class="flex flex-col justify-center relative overflow-hidden bg-section-radial min-h-[calc(100dvh-var(--header-height,0px))] pt-[clamp(40px,23.8px+4.32vw,86px)] pb-[90px]"
   >
-    <div class="relative z-10 container">
-      <div
-        role="tablist"
-        aria-label="Featured cocktails"
-        class="mb-12 flex flex-wrap justify-center gap-[40px] lg:gap-x-[85px]"
-      >
-        <button
+    <div>
+      <div class="relative z-10 container">
+        <div
+          role="tablist"
+          aria-label="Featured cocktails"
+          class="mb-12 flex flex-wrap justify-center gap-[40px] lg:gap-x-[85px]"
+        >
+          <button
+            v-for="(slide, index) in slides"
+            :key="slide.name"
+            type="button"
+            role="tab"
+            :aria-selected="index === activeTabIndex"
+            :tabindex="index === activeTabIndex ? 0 : -1"
+            :id="`carousel-tab-${index}`"
+            :aria-controls="`carousel-panel-${index}`"
+            class="cursor-pointer border-b pb-2 font-display text-[clamp(20px,15.77px+1.127vw,32px)] leading-none font-medium focus-ring lg:pb-1"
+            :class="index === activeTabIndex ? 'text-foreground' : 'opacity-40 hover:opacity-100'"
+            @click="setActiveSlide(index)"
+          >
+            {{ slide.name }}
+          </button>
+        </div>
+
+        <div
+          class="pointer-events-none absolute inset-x-0 top-[250px] z-20 flex items-center justify-between lg:top-1/2 lg:-translate-y-1/2"
+        >
+          <button
+            type="button"
+            class="pointer-events-auto flex flex-col items-start justify-end gap-2 text-left text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
+            :disabled="!isDesktop && isFirstSlide"
+            :aria-disabled="!isDesktop && isFirstSlide"
+            @click="goToPreviousSlide"
+          >
+            <p
+              class="hidden max-w-[100px] font-display text-[32px] leading-none text-foreground lg:block"
+            >
+              {{ slides[(activeTabIndex - 1 + slides.length) % slides.length]?.name }}
+            </p>
+            <img
+              :src="iconArrow"
+              alt=""
+              width="38"
+              height="38"
+              decoding="async"
+              aria-hidden="true"
+              class="shrink-0 rotate-180 lg:size-[38px]"
+            />
+          </button>
+
+          <button
+            type="button"
+            class="pointer-events-auto flex flex-col items-end gap-2 text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
+            :disabled="!isDesktop && isLastSlide"
+            :aria-disabled="!isDesktop && isLastSlide"
+            @click="goToNextSlide"
+          >
+            <p
+              class="hidden max-w-[100px] text-end font-display text-[32px] leading-none text-foreground lg:block"
+            >
+              {{ slides[(activeTabIndex + 1) % slides.length]?.name }}
+            </p>
+            <img
+              :src="iconArrow"
+              alt=""
+              width="38"
+              height="38"
+              decoding="async"
+              aria-hidden="true"
+              class="shrink-0 lg:size-[38px]"
+            />
+          </button>
+        </div>
+
+        <div
+          ref="mobileTrackRef"
+          class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth lg:hidden"
+          @scroll="onMobileTrackScroll"
+        >
+          <article
+            v-for="(slide, index) in slides"
+            :key="`mobile-slide-${slide.name}`"
+            :data-slide-index="index"
+            class="min-w-full snap-start px-1"
+          >
+            <div class="grid grid-cols-1 items-end gap-4">
+              <div class="order-2">
+                <p class="text-sm text-foreground">Recipes for:</p>
+                <h2
+                  class="mt-2 font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent"
+                >
+                  {{ slide.name }}
+                </h2>
+              </div>
+              <div class="order-1">
+                <figure class="mx-auto h-[306px] overflow-hidden">
+                  <img
+                    :src="slide.image"
+                    :alt="slide.alt"
+                    width="401"
+                    height="592"
+                    decoding="async"
+                    loading="lazy"
+                    class="h-full w-full object-contain object-center"
+                  />
+                </figure>
+              </div>
+              <div class="order-3">
+                <h3
+                  class="font-dm-serif leading-[1.15] font-normal text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] text-foreground"
+                >
+                  {{ slide.title }}
+                </h3>
+                <p class="mt-4 text-base lg:text-md">{{ slide.description }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div
           v-for="(slide, index) in slides"
-          :key="slide.name"
-          type="button"
-          role="tab"
-          :aria-selected="index === activeTabIndex"
-          :tabindex="index === activeTabIndex ? 0 : -1"
-          :id="`carousel-tab-${index}`"
-          :aria-controls="`carousel-panel-${index}`"
-          class="cursor-pointer border-b pb-2 font-display text-[clamp(20px,15.77px+1.127vw,32px)] leading-none font-medium focus-ring lg:pb-1"
-          :class="index === activeTabIndex ? 'text-foreground' : 'opacity-40 hover:opacity-100'"
-          @click="setActiveSlide(index)"
+          :key="`panel-${slide.name}`"
+          role="tabpanel"
+          :id="`carousel-panel-${index}`"
+          :aria-labelledby="`carousel-tab-${index}`"
+          :hidden="index !== activeTabIndex"
+          class="hidden lg:block"
         >
-          {{ slide.name }}
-        </button>
-      </div>
-
-      <div
-        class="pointer-events-none absolute inset-x-0 top-[250px] z-20 flex items-center justify-between lg:top-1/2 lg:-translate-y-1/2"
-      >
-        <button
-          type="button"
-          class="pointer-events-auto flex flex-col items-start justify-end gap-2 text-left text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
-          :disabled="!isDesktop && isFirstSlide"
-          :aria-disabled="!isDesktop && isFirstSlide"
-          @click="goToPreviousSlide"
-        >
-          <p class="hidden max-w-[100px] font-display text-[32px] leading-none text-foreground lg:block">
-            {{ slides[(activeTabIndex - 1 + slides.length) % slides.length]?.name }}
-          </p>
-          <img
-            :src="iconArrow"
-            alt=""
-            width="38"
-            height="38"
-            decoding="async"
-            aria-hidden="true"
-            class="shrink-0 rotate-180 lg:size-[38px]"
-          />
-        </button>
-
-        <button
-          type="button"
-          class="pointer-events-auto flex flex-col items-end gap-2 text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
-          :disabled="!isDesktop && isLastSlide"
-          :aria-disabled="!isDesktop && isLastSlide"
-          @click="goToNextSlide"
-        >
-          <p class="hidden max-w-[100px] text-end font-display text-[32px] leading-none text-foreground lg:block">
-            {{ slides[(activeTabIndex + 1) % slides.length]?.name }}
-          </p>
-          <img
-            :src="iconArrow"
-            alt=""
-            width="38"
-            height="38"
-            decoding="async"
-            aria-hidden="true"
-            class="shrink-0 lg:size-[38px]"
-          />
-        </button>
-      </div>
-
-      <div
-        ref="mobileTrackRef"
-        class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth lg:hidden"
-        @scroll="onMobileTrackScroll"
-      >
-        <article
-          v-for="(slide, index) in slides"
-          :key="`mobile-slide-${slide.name}`"
-          :data-slide-index="index"
-          class="min-w-full snap-start px-1"
-        >
-          <div class="grid grid-cols-1 items-end gap-4">
-            <div class="order-2">
+          <div
+            v-if="index === activeTabIndex"
+            class="js-desktop-active-panel grid grid-cols-1 items-end gap-4 lg:gap-8 lg:grid-cols-[repeat(3,minmax(0,440px))] lg:justify-between"
+          >
+            <div class="js-desktop-slide-title order-2 lg:order-1 lg:mb-7 lg:max-w-[201px] lg:pl-20">
               <p class="text-sm text-foreground">Recipes for:</p>
-              <h2 class="mt-2 font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent">
+              <h2
+                id="carousel-recipe-title"
+                class="mt-2 leading-none font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent"
+              >
                 {{ slide.name }}
               </h2>
             </div>
-            <div class="order-1">
-              <figure class="mx-auto h-[306px] overflow-hidden">
+            <div class="order-1 lg:order-2">
+              <figure class="mx-auto h-[306px] lg:h-[592px] lg:w-[401px]">
                 <img
                   :src="slide.image"
                   :alt="slide.alt"
@@ -329,89 +379,52 @@ watch(activeTabIndex, async () => {
                   height="592"
                   decoding="async"
                   loading="lazy"
-                  class="h-full w-full object-contain object-center"
+                  class="js-desktop-slide-image h-full w-full object-contain lg:object-cover lg:object-center"
                 />
               </figure>
             </div>
-            <div class="order-3">
-              <h3 class="font-dm-serif leading-[1.15] font-normal text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] text-foreground">
+            <div class="order-3 lg:mb-7 lg:max-w-[400px]">
+              <h3
+                class="js-desktop-slide-heading font-dm-serif leading-[1.15] font-normal text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] text-foreground"
+              >
                 {{ slide.title }}
               </h3>
-              <p class="mt-4 text-base lg:text-md">{{ slide.description }}</p>
+              <p class="js-desktop-slide-copy mt-4 text-base lg:text-md">{{ slide.description }}</p>
             </div>
-          </div>
-        </article>
-      </div>
-
-      <div
-        v-for="(slide, index) in slides"
-        :key="`panel-${slide.name}`"
-        role="tabpanel"
-        :id="`carousel-panel-${index}`"
-        :aria-labelledby="`carousel-tab-${index}`"
-        :hidden="index !== activeTabIndex"
-        class="hidden lg:block"
-      >
-        <div
-          v-if="index === activeTabIndex"
-          class="js-desktop-active-panel grid grid-cols-1 items-end gap-4 lg:gap-8 lg:grid-cols-[repeat(3,minmax(0,440px))] lg:justify-between"
-        >
-          <div class="js-desktop-slide-title order-2 lg:order-1 lg:mb-7 lg:max-w-[201px] lg:pl-20">
-            <p class="text-sm text-foreground">Recipes for:</p>
-            <h2 id="carousel-recipe-title" class="mt-2 leading-none font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent">
-              {{ slide.name }}
-            </h2>
-          </div>
-          <div class="order-1 lg:order-2">
-            <figure class="mx-auto h-[306px] lg:h-[592px] lg:w-[401px]">
-              <img
-                :src="slide.image"
-                :alt="slide.alt"
-                width="401"
-                height="592"
-                decoding="async"
-                loading="lazy"
-                class="js-desktop-slide-image h-full w-full object-contain lg:object-cover lg:object-center"
-              />
-            </figure>
-          </div>
-          <div class="order-3 lg:mb-7 lg:max-w-[400px]">
-            <h3 class="js-desktop-slide-heading font-dm-serif leading-[1.15] font-normal text-[clamp(2.25rem,1.99rem+1.13vw,3rem)] text-foreground">
-              {{ slide.title }}
-            </h3>
-            <p class="js-desktop-slide-copy mt-4 text-base lg:text-md">{{ slide.description }}</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <picture class="pointer-events-none absolute left-[clamp(-240px,-16vw,-40px)] bottom-[clamp(-270px,-18vw,-70px)] z-0 rotate-[20deg] scale-x-[-1]">
-      <source :srcset="monsteraWebp" type="image/webp" />
-      <img
-        :src="monsteraPng"
-        alt=""
-        width="456"
-        height="456"
-        decoding="async"
-        loading="lazy"
-        aria-hidden="true"
-        class="size-[clamp(117px,-2px+31.8vw,456px)] max-w-none"
-      />
-    </picture>
-    <picture
-      class="pointer-events-none absolute right-[clamp(-270px,2px-18.9vw,-69px)] top-[clamp(-165px,1px-11.5vw,-42px)] z-0 rotate-[20deg] scale-y-[-1]"
-    >
-      <source :srcset="monsteraWebp" type="image/webp" />
-      <img
-        :src="monsteraPng"
-        alt=""
-        width="456"
-        height="456"
-        decoding="async"
-        loading="lazy"
-        aria-hidden="true"
-        class="size-[clamp(117px,-2px+31.8vw,456px)] max-w-none"
-      />
-    </picture>
+      <picture
+        class="pointer-events-none absolute left-[clamp(-240px,-16vw,-40px)] bottom-[clamp(-270px,-18vw,-70px)] z-0 rotate-[20deg] scale-x-[-1]"
+      >
+        <source :srcset="monsteraWebp" type="image/webp" />
+        <img
+          :src="monsteraPng"
+          alt=""
+          width="456"
+          height="456"
+          decoding="async"
+          loading="lazy"
+          aria-hidden="true"
+          class="size-[clamp(117px,-2px+31.8vw,456px)] max-w-none"
+        />
+      </picture>
+      <picture
+        class="pointer-events-none absolute right-[clamp(-270px,2px-18.9vw,-69px)] top-[clamp(-165px,1px-11.5vw,-42px)] z-0 rotate-[20deg] scale-y-[-1]"
+      >
+        <source :srcset="monsteraWebp" type="image/webp" />
+        <img
+          :src="monsteraPng"
+          alt=""
+          width="456"
+          height="456"
+          decoding="async"
+          loading="lazy"
+          aria-hidden="true"
+          class="size-[clamp(117px,-2px+31.8vw,456px)] max-w-none"
+        />
+      </picture>
+    </div>
   </section>
 </template>

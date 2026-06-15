@@ -21,13 +21,13 @@ Completed
 
 ## Screenshots
 
-| Source | File | Notes |
-|--------|------|-------|
-| Figma full page | `.cursor-output/figma/review-figma-desktop.png` | MCP capture, 441×2048 (scaled from 1440×6697) |
-| Figma hero | `.cursor-output/figma/review-figma-hero.png` | Section 42001:1164 |
-| Implementation desktop | `.cursor-output/figma/review-impl-desktop-1440.png` | 1440×900 viewport, full page |
-| Implementation tablet | `.cursor-output/figma/review-impl-tablet-768.png` | 768×1024 viewport, full page |
-| Implementation mobile | `.cursor-output/figma/review-impl-mobile-390.png` | 390×844 viewport, full page |
+| Source                 | File                                                | Notes                                         |
+| ---------------------- | --------------------------------------------------- | --------------------------------------------- |
+| Figma full page        | `.cursor-output/figma/review-figma-desktop.png`     | MCP capture, 441×2048 (scaled from 1440×6697) |
+| Figma hero             | `.cursor-output/figma/review-figma-hero.png`        | Section 42001:1164                            |
+| Implementation desktop | `.cursor-output/figma/review-impl-desktop-1440.png` | 1440×900 viewport, full page                  |
+| Implementation tablet  | `.cursor-output/figma/review-impl-tablet-768.png`   | 768×1024 viewport, full page                  |
+| Implementation mobile  | `.cursor-output/figma/review-impl-mobile-390.png`   | 390×844 viewport, full page                   |
 
 - Figma screenshot captured: **Yes**
 - Implementation screenshot captured: **Yes**
@@ -53,52 +53,52 @@ Structure and content are largely in place (7 sections, correct order, dark luxu
 
 ## Critical Issues
 
-| Section | Issue | Figma expectation | Current implementation | Recommended fix |
-|---------|-------|-------------------|------------------------|-----------------|
-| Hero | Desktop layout structure | Centered hero: oversized MOJITO behind cocktail; eyebrow + h1 bottom-left; body + text CTA bottom-right; scroll indicator on right | `lg:grid-cols-2` splits copy and image vertically centered in columns | Rebuild hero as absolute/stacked composition on `lg+`: center figure, anchor copy blocks to bottom corners per Figma audit |
-| Hero | CTA treatment | “View cocktails” appears as text link (no filled pill in Figma hero) | White pill button (`bg-surface rounded-button`) | Match Figma: text link or minimal underline CTA; keep accessible focus styles |
-| The ART | Masked visual | Circular glass-distortion composite using mask asset + bartender photo | `rounded-full` photo crop; mask PNG hidden/unused | Implement CSS `mask-image` composite with `art-section-mask.png`; position checklists left/right of figure |
-| Philosophy | Bento image quality | Four clear photos in grid (guests, garnish, row, bartender) | `bento-guests-drinking` and `bento-cocktail-garnish` exports ~1–2 KB — likely broken in UI | Re-export from Figma; verify in browser before layout tweaks |
-| Showcase | Section prominence | Full-width bartender pour photo dominates section before headline | Image inside `rounded-card` container with standard section padding — feels smaller/card-like | Use full-bleed or near full-bleed figure (`max-w-none` / breakout); reduce radius; match Figma 968px-wide photo scale |
-| Carousel | Tab visual pattern | Text tabs with baseline rules; active tab underlined; minimal chrome | Bordered pill `role="tab"` buttons | Restyle tabs: text-only, bottom border/underline for active state; add divider lines per Figma |
-| Typography | Display fonts | Modern Negra Demo for brand/display; Mona Sans for UI | Theme references fonts but webfonts not loaded — fallback appearance | Load licensed/substitute webfonts; map to `font-display` / `font-sans` |
+| Section    | Issue                    | Figma expectation                                                                                                                  | Current implementation                                                                        | Recommended fix                                                                                                            |
+| ---------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Hero       | Desktop layout structure | Centered hero: oversized MOJITO behind cocktail; eyebrow + h1 bottom-left; body + text CTA bottom-right; scroll indicator on right | `lg:grid-cols-2` splits copy and image vertically centered in columns                         | Rebuild hero as absolute/stacked composition on `lg+`: center figure, anchor copy blocks to bottom corners per Figma audit |
+| Hero       | CTA treatment            | “View cocktails” appears as text link (no filled pill in Figma hero)                                                               | White pill button (`bg-surface rounded-button`)                                               | Match Figma: text link or minimal underline CTA; keep accessible focus styles                                              |
+| The ART    | Masked visual            | Circular glass-distortion composite using mask asset + bartender photo                                                             | `rounded-full` photo crop; mask PNG hidden/unused                                             | Implement CSS `mask-image` composite with `art-section-mask.png`; position checklists left/right of figure                 |
+| Philosophy | Bento image quality      | Four clear photos in grid (guests, garnish, row, bartender)                                                                        | `bento-guests-drinking` and `bento-cocktail-garnish` exports ~1–2 KB — likely broken in UI    | Re-export from Figma; verify in browser before layout tweaks                                                               |
+| Showcase   | Section prominence       | Full-width bartender pour photo dominates section before headline                                                                  | Image inside `rounded-card` container with standard section padding — feels smaller/card-like | Use full-bleed or near full-bleed figure (`max-w-none` / breakout); reduce radius; match Figma 968px-wide photo scale      |
+| Carousel   | Tab visual pattern       | Text tabs with baseline rules; active tab underlined; minimal chrome                                                               | Bordered pill `role="tab"` buttons                                                            | Restyle tabs: text-only, bottom border/underline for active state; add divider lines per Figma                             |
+| Typography | Display fonts            | Modern Negra Demo for brand/display; Mona Sans for UI                                                                              | Theme references fonts but webfonts not loaded — fallback appearance                          | Load licensed/substitute webfonts; map to `font-display` / `font-sans`                                                     |
 
 ## Medium Issues
 
-| Section | Issue | Figma expectation | Current implementation | Recommended fix |
-|---------|-------|-------------------|------------------------|-----------------|
-| Hero | MOJITO layering | MOJITO behind cocktail, cocktail uses `mix-blend-lighten`, ice cube above glass | MOJITO centered in section; cocktail in right column — layering differs | Position MOJITO absolute center; single cocktail stack in center on desktop |
-| Hero | Section height | ~927px fixed desktop hero block | `lg:min-h-[927px]` present but grid layout changes proportions | After layout restructure, enforce min-height and vertical anchor points |
-| Menu | Column + image layout | Lists flank central cocktail; cocktail large and centered between columns | Three-column grid at `lg` — directionally correct | Tighten column widths, increase center image scale, match 36px row gaps (`space-y-9` ≈ 36px — close) |
-| Menu | Column label typography | Gold labels ~20px/30px line-height | `text-xl` / `lg:text-[20px]` — close | Verify font family once webfonts loaded |
-| Philosophy | Bento grid composition | Feature card sits in grid between images with specific spans | `md:grid-cols-12` with spans — structurally similar | Fine-tune col spans and card placement after images fixed |
-| Philosophy | Avatar chip | Overlapping avatars with +12k badge adjacent to rating | Rating block separate from `aria-hidden` avatar row below | Move avatar stack adjacent to rating (single visual group) per Figma |
-| The ART | Checklist placement | Lists flank masked circle left/right | Lists below figure in stacked layout on mobile; side-by-side only at `lg` | On desktop, position lists absolute left/right of circle per Figma |
-| The ART | Heading position | “Sip-Worthy Perfection” below image + lists | Same order — OK on structure | Ensure heading spacing matches Figma vertical rhythm |
-| Showcase | Floating cocktails | Decorative aperol/martini cutouts overlap scene edges | Present but `hidden lg:block` with approximate offsets | Tune absolute positions/sizes against Figma screenshot |
-| Carousel | Side prev/next labels | Text labels with arrow icons and horizontal rules | Buttons with text visible at `lg` — missing divider lines | Add decorative rules; align typography to Figma |
-| Carousel | Drink image | Tall raspberry mojito in coupe/martini style per design | Exported drink image may differ from Figma active tab visual | Confirm asset match; re-export if needed |
-| Contact | Layout | Copy left, cocktail assortment overlapping bottom-right | Two-column grid — generally correct | Increase overlap/absolute positioning of footer cocktail image; tune column spacing |
-| Contact | Social icons | Circular outlined icons in row | Similar treatment — close | Minor size/spacing alignment |
-| Header | Container padding | 1260px content width, ~90px horizontal padding | `max-w-[1260px] lg:px-[90px]` — matches audit | OK — verify after hero restructure |
-| Mobile | Hero stacking | Mobile Figma frame (42001:1366) centers copy and scales display type | Centered copy + image stack — reasonable | Compare against mobile Figma frame in follow-up (not fully diffed here) |
+| Section    | Issue                   | Figma expectation                                                               | Current implementation                                                    | Recommended fix                                                                                      |
+| ---------- | ----------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Hero       | MOJITO layering         | MOJITO behind cocktail, cocktail uses `mix-blend-lighten`, ice cube above glass | MOJITO centered in section; cocktail in right column — layering differs   | Position MOJITO absolute center; single cocktail stack in center on desktop                          |
+| Hero       | Section height          | ~927px fixed desktop hero block                                                 | `lg:min-h-[927px]` present but grid layout changes proportions            | After layout restructure, enforce min-height and vertical anchor points                              |
+| Menu       | Column + image layout   | Lists flank central cocktail; cocktail large and centered between columns       | Three-column grid at `lg` — directionally correct                         | Tighten column widths, increase center image scale, match 36px row gaps (`space-y-9` ≈ 36px — close) |
+| Menu       | Column label typography | Gold labels ~20px/30px line-height                                              | `text-xl` / `lg:text-[20px]` — close                                      | Verify font family once webfonts loaded                                                              |
+| Philosophy | Bento grid composition  | Feature card sits in grid between images with specific spans                    | `md:grid-cols-12` with spans — structurally similar                       | Fine-tune col spans and card placement after images fixed                                            |
+| Philosophy | Avatar chip             | Overlapping avatars with +12k badge adjacent to rating                          | Rating block separate from `aria-hidden` avatar row below                 | Move avatar stack adjacent to rating (single visual group) per Figma                                 |
+| The ART    | Checklist placement     | Lists flank masked circle left/right                                            | Lists below figure in stacked layout on mobile; side-by-side only at `lg` | On desktop, position lists absolute left/right of circle per Figma                                   |
+| The ART    | Heading position        | “Sip-Worthy Perfection” below image + lists                                     | Same order — OK on structure                                              | Ensure heading spacing matches Figma vertical rhythm                                                 |
+| Showcase   | Floating cocktails      | Decorative aperol/martini cutouts overlap scene edges                           | Present but `hidden lg:block` with approximate offsets                    | Tune absolute positions/sizes against Figma screenshot                                               |
+| Carousel   | Side prev/next labels   | Text labels with arrow icons and horizontal rules                               | Buttons with text visible at `lg` — missing divider lines                 | Add decorative rules; align typography to Figma                                                      |
+| Carousel   | Drink image             | Tall raspberry mojito in coupe/martini style per design                         | Exported drink image may differ from Figma active tab visual              | Confirm asset match; re-export if needed                                                             |
+| Contact    | Layout                  | Copy left, cocktail assortment overlapping bottom-right                         | Two-column grid — generally correct                                       | Increase overlap/absolute positioning of footer cocktail image; tune column spacing                  |
+| Contact    | Social icons            | Circular outlined icons in row                                                  | Similar treatment — close                                                 | Minor size/spacing alignment                                                                         |
+| Header     | Container padding       | 1260px content width, ~90px horizontal padding                                  | `max-w-[1260px] lg:px-[90px]` — matches audit                             | OK — verify after hero restructure                                                                   |
+| Mobile     | Hero stacking           | Mobile Figma frame (42001:1366) centers copy and scales display type            | Centered copy + image stack — reasonable                                  | Compare against mobile Figma frame in follow-up (not fully diffed here)                              |
 
 ## Low Priority Polish
 
-| Section | Issue | Recommended fix |
-|---------|-------|-----------------|
-| Hero | Scroll indicator | Replace `↓` text with Figma line/arrow icon styling |
-| Hero | Monstera leaf rotation/scale | Tune absolute positions and rotation to match Figma parallax intent |
-| Menu | Monstera framing | Adjust crop overlap at section edges |
-| Philosophy | “Best Cocktails” badge | Slightly increase pill padding to match 20px horizontal Figma spec |
-| Philosophy | Star rating | Figma shows 4.5 with visual half-star treatment — verify |
-| Cards | Radius | Figma uses 20px card radius — `rounded-card` (1.25rem) is close |
-| Cards | Feature card shadow | Figma card gradient without heavy shadow — OK |
-| Footer | Border | Thin top border present — matches |
-| Global | Noise overlay | 30% opacity grain — present; verify intensity |
-| Global | GSAP motion | Figma implies scroll/parallax — not implemented (expected) |
-| Nav | Link casing | Figma nav appears title case; implementation matches |
-| Showcase | Not in nav | Figma nav excludes showcase — matches implementation |
+| Section    | Issue                        | Recommended fix                                                     |
+| ---------- | ---------------------------- | ------------------------------------------------------------------- |
+| Hero       | Scroll indicator             | Replace `↓` text with Figma line/arrow icon styling                 |
+| Hero       | Monstera leaf rotation/scale | Tune absolute positions and rotation to match Figma parallax intent |
+| Menu       | Monstera framing             | Adjust crop overlap at section edges                                |
+| Philosophy | “Best Cocktails” badge       | Slightly increase pill padding to match 20px horizontal Figma spec  |
+| Philosophy | Star rating                  | Figma shows 4.5 with visual half-star treatment — verify            |
+| Cards      | Radius                       | Figma uses 20px card radius — `rounded-card` (1.25rem) is close     |
+| Cards      | Feature card shadow          | Figma card gradient without heavy shadow — OK                       |
+| Footer     | Border                       | Thin top border present — matches                                   |
+| Global     | Noise overlay                | 30% opacity grain — present; verify intensity                       |
+| Global     | GSAP motion                  | Figma implies scroll/parallax — not implemented (expected)          |
+| Nav        | Link casing                  | Figma nav appears title case; implementation matches                |
+| Showcase   | Not in nav                   | Figma nav excludes showcase — matches implementation                |
 
 ## Section-by-section Review
 

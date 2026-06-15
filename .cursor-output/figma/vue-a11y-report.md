@@ -30,14 +30,14 @@ Completed
 
 ## Fixes Applied
 
-| File | Fix |
-|------|-----|
-| `SiteHeader.vue` | Implemented mobile menu with `isMenuOpen` state; dynamic `:aria-expanded`; `id="mobile-menu"` panel; dynamic open/close `aria-label`; nav closes on link click; removed redundant logo `aria-label` (visible text present) |
-| `MenuSection.vue` | Removed duplicate `sr-only` h2 headings; moved `id` attributes to visible column h2 elements |
-| `CocktailCarouselSection.vue` | Added all 4 `tabpanel` elements matching `aria-controls`; added `tabindex` roving pattern for tabs; removed redundant `aria-label` on prev/next buttons (visible text provides name) |
-| `HeroSection.vue` | Wrapped scroll arrow in `<span aria-hidden="true">` |
-| `ContactSection.vue` | Wrapped store address in semantic `<address>`; added `target="_blank"` + `rel="noopener noreferrer"` on external social links |
-| `PhilosophySection.vue` | Added `role="group"` to rating block; marked decorative star icons `aria-hidden` |
+| File                          | Fix                                                                                                                                                                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SiteHeader.vue`              | Implemented mobile menu with `isMenuOpen` state; dynamic `:aria-expanded`; `id="mobile-menu"` panel; dynamic open/close `aria-label`; nav closes on link click; removed redundant logo `aria-label` (visible text present) |
+| `MenuSection.vue`             | Removed duplicate `sr-only` h2 headings; moved `id` attributes to visible column h2 elements                                                                                                                               |
+| `CocktailCarouselSection.vue` | Added all 4 `tabpanel` elements matching `aria-controls`; added `tabindex` roving pattern for tabs; removed redundant `aria-label` on prev/next buttons (visible text provides name)                                       |
+| `HeroSection.vue`             | Wrapped scroll arrow in `<span aria-hidden="true">`                                                                                                                                                                        |
+| `ContactSection.vue`          | Wrapped store address in semantic `<address>`; added `target="_blank"` + `rel="noopener noreferrer"` on external social links                                                                                              |
+| `PhilosophySection.vue`       | Added `role="group"` to rating block; marked decorative star icons `aria-hidden`                                                                                                                                           |
 
 **Total fixes: 11 across 6 files**
 
@@ -51,11 +51,11 @@ Completed
 
 ## Heading Structure
 
-| Level | Elements |
-|-------|----------|
-| h1 | `hero-title` — one per page ✓ |
-| h2 | Menu columns (×2), Philosophy, The Art, Showcase, Carousel recipe, Contact |
-| h3 | Menu items, Philosophy feature card, Contact subsections, Carousel subtitle |
+| Level | Elements                                                                    |
+| ----- | --------------------------------------------------------------------------- |
+| h1    | `hero-title` — one per page ✓                                               |
+| h2    | Menu columns (×2), Philosophy, The Art, Showcase, Carousel recipe, Contact  |
+| h3    | Menu items, Philosophy feature card, Contact subsections, Carousel subtitle |
 
 **Notes:**
 
@@ -65,15 +65,15 @@ Completed
 
 ## Sections and Labels
 
-| Section | id | aria-labelledby | Heading id exists |
-|---------|-----|-----------------|-------------------|
-| Hero | `hero` | `hero-title` | ✓ |
-| Menu | `menu` | `menu-title-left` | ✓ |
-| Philosophy | `philosophy` | `philosophy-title` | ✓ |
-| The Art | `the-art` | `the-art-subtitle` | ✓ |
-| Showcase | `showcase` | `showcase-title` | ✓ |
-| Carousel | `carousel` | `carousel-recipe-title` | ✓ |
-| Contact | `contact` | `contact-title` | ✓ |
+| Section    | id           | aria-labelledby         | Heading id exists |
+| ---------- | ------------ | ----------------------- | ----------------- |
+| Hero       | `hero`       | `hero-title`            | ✓                 |
+| Menu       | `menu`       | `menu-title-left`       | ✓                 |
+| Philosophy | `philosophy` | `philosophy-title`      | ✓                 |
+| The Art    | `the-art`    | `the-art-subtitle`      | ✓                 |
+| Showcase   | `showcase`   | `showcase-title`        | ✓                 |
+| Carousel   | `carousel`   | `carousel-recipe-title` | ✓                 |
+| Contact    | `contact`    | `contact-title`         | ✓                 |
 
 Sub-regions:
 
@@ -114,14 +114,14 @@ Sub-regions:
 
 ## Images
 
-| Category | Status |
-|----------|--------|
-| Hero LCP image | Descriptive alt, `fetchpriority="high"`, no `loading="lazy"` ✓ |
-| Content images | Descriptive alt where meaningful ✓ |
-| Decorative images | `alt=""` + `aria-hidden="true"` ✓ |
-| Icons in checklists/social | `alt=""` + `aria-hidden="true"` ✓ |
-| width/height | Present on reviewed images ✓ |
-| decoding="async" | Present on reviewed images ✓ |
+| Category                   | Status                                                         |
+| -------------------------- | -------------------------------------------------------------- |
+| Hero LCP image             | Descriptive alt, `fetchpriority="high"`, no `loading="lazy"` ✓ |
+| Content images             | Descriptive alt where meaningful ✓                             |
+| Decorative images          | `alt=""` + `aria-hidden="true"` ✓                              |
+| Icons in checklists/social | `alt=""` + `aria-hidden="true"` ✓                              |
+| width/height               | Present on reviewed images ✓                                   |
+| decoding="async"           | Present on reviewed images ✓                                   |
 
 No alt text invented for unclear images.
 
@@ -149,13 +149,13 @@ No FAQ or accordion components present.
 
 ## ARIA References
 
-| Reference | Target | Status |
-|-----------|--------|--------|
-| `aria-labelledby` on sections | Matching heading ids | ✓ All valid |
-| `aria-controls` on carousel tabs | `carousel-panel-0` … `carousel-panel-3` | ✓ Fixed — all panels exist |
-| `aria-labelledby` on tabpanels | `carousel-tab-{n}` | ✓ |
-| `aria-controls` on mobile menu button | `mobile-menu` | ✓ |
-| `aria-label` on social links | Icon-only links | ✓ |
+| Reference                             | Target                                  | Status                     |
+| ------------------------------------- | --------------------------------------- | -------------------------- |
+| `aria-labelledby` on sections         | Matching heading ids                    | ✓ All valid                |
+| `aria-controls` on carousel tabs      | `carousel-panel-0` … `carousel-panel-3` | ✓ Fixed — all panels exist |
+| `aria-labelledby` on tabpanels        | `carousel-tab-{n}`                      | ✓                          |
+| `aria-controls` on mobile menu button | `mobile-menu`                           | ✓                          |
+| `aria-label` on social links          | Icon-only links                         | ✓                          |
 
 **ARIA references checked: 18**
 

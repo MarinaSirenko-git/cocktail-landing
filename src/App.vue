@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SiteHeader from './components/layout/SiteHeader.vue'
-import SiteFooter from './components/layout/SiteFooter.vue'
+import SiteHeader from './sections/SiteHeader.vue'
+import SiteFooter from './sections/SiteFooter.vue'
 import HeroSection from './sections/HeroSection.vue'
 import MenuSection from './sections/MenuSection.vue'
 import PhilosophySection from './sections/PhilosophySection.vue'
