@@ -1,12 +1,32 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 import { useMediaQuery } from '@vueuse/core'
 
-// register GSAP plugin
-gsap.registerPlugin(ScrollTrigger)
+type ArtGsapBundle = {
+  gsap: typeof import('gsap').default
+}
+
+let artGsapBundle: ArtGsapBundle | null = null
+let artGsapBundlePromise: Promise<ArtGsapBundle> | null = null
+
+async function loadArtGsapBundle() {
+  if (artGsapBundle) return artGsapBundle
+
+  if (!artGsapBundlePromise) {
+    artGsapBundlePromise = (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+      gsap.registerPlugin(ScrollTrigger)
+      return { gsap }
+    })()
+  }
+
+  artGsapBundle = await artGsapBundlePromise
+  return artGsapBundle
+}
 
 import iconCheck from '../assets/icons/icon-check.png'
 import bartenderWebp from '../assets/images/bartender-photo.webp'
@@ -34,20 +54,21 @@ const prefersReducedMotion = usePrefersReducedMotion()
 const sectionRef = ref<HTMLElement | null>(null)
 
 // create variable to store the animation context
-let ctx: gsap.Context | undefined
+let ctx: { revert: () => void } | undefined
 
 // make actions only after the component is mounted
-onMounted(() => {
+onMounted(async () => {
   // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
+  const { gsap } = await loadArtGsapBundle()
   const trigger = sectionRef.value
 
   // Start when trigger top reaches the line below the fixed header (not viewport top).
   const start = isMobile.value ? `top 20%` : `top top`
 
   // Scope selectors to the art section and revert all GSAP work on cleanup.
-  ctx = gsap.context(function (this: gsap.Context) {
+  ctx = gsap.context(function () {
     const maskTimeline = gsap.timeline({
       scrollTrigger: {
         trigger,

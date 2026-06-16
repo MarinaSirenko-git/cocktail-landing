@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
@@ -29,22 +27,47 @@ const lovedMocktails: MenuItem[] = [
 // type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
-// register plugin
-gsap.registerPlugin(ScrollTrigger)
+type MenuGsapBundle = {
+  gsap: typeof import('gsap').default
+}
+
+let menuGsapBundle: MenuGsapBundle | null = null
+let menuGsapBundlePromise: Promise<MenuGsapBundle> | null = null
+
+async function loadMenuGsapBundle() {
+  if (menuGsapBundle) return menuGsapBundle
+
+  if (!menuGsapBundlePromise) {
+    menuGsapBundlePromise = (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+      gsap.registerPlugin(ScrollTrigger)
+      return { gsap }
+    })()
+  }
+
+  menuGsapBundle = await menuGsapBundlePromise
+  return menuGsapBundle
+}
 
 const prefersReducedMotion = usePrefersReducedMotion()
 
 // create variable to store the animation context
-let ctx: gsap.Context | undefined
+let ctx: { revert: () => void } | undefined
 
-onMounted(() => {
+onMounted(async () => {
   // add check if  user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
+
+  const { gsap } = await loadMenuGsapBundle()
+  const mountedSection = sectionRef.value
 
   ctx = gsap.context(function (this: gsap.Context) {
     const timeline = gsap.timeline({
       scrollTrigger: {
-        trigger: sectionRef.value,
+        trigger: mountedSection,
         start: 'top 30%',
         end: 'bottom 80%',
         scrub: true,
@@ -60,7 +83,7 @@ onMounted(() => {
         x: 100,
         y: 100,
       })
-  }, sectionRef.value)
+  }, mountedSection)
 })
 
 onUnmounted(() => {

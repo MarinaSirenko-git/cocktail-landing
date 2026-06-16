@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import logoMark from '../assets/logos/velvet-pour-mark.png'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
@@ -13,8 +10,31 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ]
 
-// register plugin
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+type HeaderGsapBundle = {
+  gsap: typeof import('gsap').default
+}
+
+let headerGsapBundle: HeaderGsapBundle | null = null
+let headerGsapBundlePromise: Promise<HeaderGsapBundle> | null = null
+
+async function loadHeaderGsapBundle() {
+  if (headerGsapBundle) return headerGsapBundle
+
+  if (!headerGsapBundlePromise) {
+    headerGsapBundlePromise = (async () => {
+      const [{ default: gsap }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+        import('gsap/ScrollToPlugin'),
+      ])
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+      return { gsap }
+    })()
+  }
+
+  headerGsapBundle = await headerGsapBundlePromise
+  return headerGsapBundle
+}
 
 // create reactive variables
 const headerBackdropRef = ref<HTMLElement | null>(null)
@@ -22,9 +42,9 @@ const headerRef = ref<HTMLElement | null>(null)
 const prefersReducedMotion = usePrefersReducedMotion()
 
 // create variable to store the animation context
-let headerCtx: gsap.Context | undefined
+let headerCtx: { revert: () => void } | undefined
 // create variable to control active animated scroll to kill prev scroll
-let activeScrollTween: gsap.core.Tween | null = null
+let activeScrollTween: any = null
 let headerResizeObserver: ResizeObserver | null = null
 
 function syncHeaderHeightVar() {
@@ -32,7 +52,7 @@ function syncHeaderHeightVar() {
   document.documentElement.style.setProperty('--header-height', `${Math.round(height)}px`)
 }
 
-onMounted(() => {
+onMounted(async () => {
   syncHeaderHeightVar()
   window.addEventListener('resize', syncHeaderHeightVar)
   headerResizeObserver = new ResizeObserver(syncHeaderHeightVar)
@@ -40,6 +60,8 @@ onMounted(() => {
 
   // check if header doesn`t exist or user reduce motion
   if (!headerBackdropRef.value || prefersReducedMotion.value) return
+
+  const { gsap } = await loadHeaderGsapBundle()
 
   // Animate the translucent header backdrop once user scrolls past hero.
   headerCtx = gsap.context(() => {
@@ -97,7 +119,13 @@ function scrollToSection(hash: string) {
   }
 
   // setup animations rules
-  activeScrollTween = gsap.to(window, {
+  if (!headerGsapBundle) {
+    const top = target.getBoundingClientRect().top + window.scrollY - offsetY
+    window.scrollTo({ top, behavior: 'smooth' })
+    return
+  }
+
+  activeScrollTween = headerGsapBundle.gsap.to(window, {
     duration: 0.9,
     ease: 'power2.inOut',
     scrollTo: { y: target, offsetY },

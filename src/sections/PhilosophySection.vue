@@ -1,12 +1,33 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import gsap from 'gsap'
-import { SplitText } from 'gsap/SplitText'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
-// register GSAP plugin
-gsap.registerPlugin(SplitText, ScrollTrigger)
+type PhilosophyGsapBundle = {
+  gsap: typeof import('gsap').default
+  SplitText: typeof import('gsap/SplitText').SplitText
+}
+
+let philosophyGsapBundle: PhilosophyGsapBundle | null = null
+let philosophyGsapBundlePromise: Promise<PhilosophyGsapBundle> | null = null
+
+async function loadPhilosophyGsapBundle() {
+  if (philosophyGsapBundle) return philosophyGsapBundle
+
+  if (!philosophyGsapBundlePromise) {
+    philosophyGsapBundlePromise = (async () => {
+      const [{ default: gsap }, { SplitText }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/SplitText'),
+        import('gsap/ScrollTrigger'),
+      ])
+      gsap.registerPlugin(SplitText, ScrollTrigger)
+      return { gsap, SplitText }
+    })()
+  }
+
+  philosophyGsapBundle = await philosophyGsapBundlePromise
+  return philosophyGsapBundle
+}
 
 import bentoBartenderWebp from '../assets/images/bento-bartender-pouring.webp'
 import bentoGuestsWebp from '../assets/images/bento-guests-drinking.webp'
@@ -39,22 +60,25 @@ const prefersReducedMotion = usePrefersReducedMotion()
 const sectionRef = ref<HTMLElement | null>(null)
 
 // create variable to store the animation context
-let ctx: gsap.Context | undefined
+let ctx: { revert: () => void } | undefined
 
 // make actions only after the component is mounted
-onMounted(() => {
+onMounted(async () => {
   // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
+  const { gsap, SplitText } = await loadPhilosophyGsapBundle()
+  const mountedSection = sectionRef.value
+
   // Scope selectors to the hero section and revert all GSAP work on cleanup.
-  ctx = gsap.context(function (this: gsap.Context) {
+  ctx = gsap.context(function () {
     // initiate elements for SplitText plugin
     const titleSplit = new SplitText('#philosophy-title', { type: 'words', aria: 'auto' })
 
     // Scroll-linked parallax timeline for title and images.
     const timeline = gsap.timeline({
       scrollTrigger: {
-        trigger: sectionRef.value,
+        trigger: mountedSection,
         start: 'top center',
         once: true,
       },
@@ -83,7 +107,7 @@ onMounted(() => {
     return () => {
       titleSplit.revert()
     }
-  }, sectionRef.value)
+  }, mountedSection)
 })
 
 // clean listeners

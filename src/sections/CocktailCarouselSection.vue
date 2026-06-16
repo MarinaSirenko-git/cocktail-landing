@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import gsap from 'gsap'
 import iconArrow from '../assets/icons/icon-arrow-right.svg'
 import drinkClassicMojitoPng from '../assets/images/carousel-drink-classic-mojito.png'
 import drinkRaspberryMojitoPng from '../assets/images/carousel-drink-raspberry-mojito.png'
@@ -61,15 +60,37 @@ const isDesktop = useMediaQuery('(min-width: 1024px)')
 const isFirstSlide = computed(() => activeTabIndex.value === 0)
 const isLastSlide = computed(() => activeTabIndex.value === slides.length - 1)
 
+type CarouselGsapBundle = {
+  gsap: typeof import('gsap').default
+}
+
+let carouselGsapBundle: CarouselGsapBundle | null = null
+let carouselGsapBundlePromise: Promise<CarouselGsapBundle> | null = null
+
+async function loadCarouselGsapBundle() {
+  if (carouselGsapBundle) return carouselGsapBundle
+
+  if (!carouselGsapBundlePromise) {
+    carouselGsapBundlePromise = (async () => {
+      const { default: gsap } = await import('gsap')
+      return { gsap }
+    })()
+  }
+
+  carouselGsapBundle = await carouselGsapBundlePromise
+  return carouselGsapBundle
+}
+
 let scrollEndTimer: number | null = null
-let desktopSlideTimeline: gsap.core.Timeline | null = null
+let desktopSlideTimeline: any = null
 
 function isDesktopViewport() {
   return window.matchMedia('(min-width: 1024px)').matches
 }
 
 function animateDesktopActiveSlide() {
-  if (!sectionRef.value || !isDesktopViewport() || prefersReducedMotion.value) return
+  if (!sectionRef.value || !isDesktopViewport() || prefersReducedMotion.value || !carouselGsapBundle) return
+  const { gsap } = carouselGsapBundle
 
   const panel = sectionRef.value.querySelector<HTMLElement>('.js-desktop-active-panel')
   if (!panel) return
@@ -200,6 +221,7 @@ function onMobileTrackScroll() {
 }
 
 onMounted(async () => {
+  await loadCarouselGsapBundle()
   await nextTick()
   scrollMobileTrackTo(activeTabIndex.value, 'auto')
   animateDesktopActiveSlide()

@@ -1,18 +1,42 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
-import gsap from 'gsap'
-import { SplitText } from 'gsap/SplitText'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
 import heroPosterWebp from '../assets/images/hero-poster.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
-// register GSAP plugin
-gsap.registerPlugin(SplitText, ScrollTrigger, ScrollToPlugin)
+type GsapBundle = {
+  gsap: typeof import('gsap').default
+  SplitText: typeof import('gsap/SplitText').SplitText
+}
+
+let gsapBundle: GsapBundle | null = null
+let gsapBundlePromise: Promise<GsapBundle> | null = null
+
+async function loadGsapBundle() {
+  if (gsapBundle) return gsapBundle
+
+  if (!gsapBundlePromise) {
+    // Lazy-load animation libraries so they don't inflate the initial JS payload.
+    gsapBundlePromise = (async () => {
+      const [{ default: gsap }, { SplitText }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all([
+        import('gsap'),
+        import('gsap/SplitText'),
+        import('gsap/ScrollTrigger'),
+        import('gsap/ScrollToPlugin'),
+      ])
+
+      gsap.registerPlugin(SplitText, ScrollTrigger, ScrollToPlugin)
+
+      return { gsap, SplitText }
+    })()
+  }
+
+  gsapBundle = await gsapBundlePromise
+  return gsapBundle
+}
 
 // detect screens less then 768 as mobile devices and reduced motion
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -26,10 +50,10 @@ const showVideo = ref(false)
 const isVideoReady = ref(false)
 
 // create variable to store the animation context
-let ctx: gsap.Context | undefined
-let activeScrollTween: gsap.core.Tween | null = null
+let ctx: { revert: () => void } | undefined
+let activeScrollTween: any = null
 let idleHandle: number | null = null
-let videoTimeline: gsap.core.Timeline | null = null
+let videoTimeline: any = null
 
 type IdleSchedulerType = 'idle' | 'timeout'
 let idleSchedulerType: IdleSchedulerType | null = null
@@ -54,13 +78,15 @@ function scheduleVideoMount() {
 }
 
 function setupVideoScroll(video: HTMLVideoElement) {
-  if (!sectionRef.value || prefersReducedMotion.value) return
+  if (!sectionRef.value || prefersReducedMotion.value || !gsapBundle) return
+
+  const { gsap } = gsapBundle
 
   const startValue = isMobile.value ? 'top 50%' : 'center 60%'
   const endValue = isMobile.value ? '120% top' : 'bottom top'
 
   videoTimeline?.kill()
-  videoTimeline = gsap.timeline({
+  const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#hero-video',
       start: startValue,
@@ -70,10 +96,11 @@ function setupVideoScroll(video: HTMLVideoElement) {
     },
   })
 
-  videoTimeline.to(video, {
+  timeline.to(video, {
     currentTime: video.duration,
     ease: 'none',
   })
+  videoTimeline = timeline
 }
 
 function onVideoLoadedData() {
@@ -90,69 +117,77 @@ onMounted(() => {
 
   // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
+  const mountedSection = sectionRef.value
 
-  // Scope selectors to the hero section and revert all GSAP work on cleanup.
-  ctx = gsap.context(function (this: gsap.Context) {
-    // initiate elements for SplitText plugin
-    const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
-    const subtitleSplit = !isMobile.value
-      ? new SplitText('.hero-subtitle', { type: 'lines', aria: 'auto' })
-      : null
+  void loadGsapBundle().then(({ gsap, SplitText }) => {
+    // Scope selectors to the hero section and revert all GSAP work on cleanup.
+    ctx = gsap.context(function () {
+      // initiate elements for SplitText plugin
+      const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
+      const subtitleSplit = !isMobile.value
+        ? new SplitText('.hero-subtitle', { type: 'lines', aria: 'auto' })
+        : null
 
-    // add special class to each title's char
-    heroSplit.chars.forEach((char) => char.classList.add('text-gradient'))
+      // add special class to each title's char
+      heroSplit.chars.forEach((char) => char.classList.add('text-gradient'))
 
-    // Text reveal timeline (title chars, then subtitle lines).
-    gsap
-      .timeline()
-      .from(heroSplit.chars, {
-        yPercent: 100,
-        duration: 1.8,
-        ease: 'expo.out',
-        stagger: 0.05,
-      })
-      .from(
-        subtitleSplit ? subtitleSplit.lines : '.hero-subtitle',
-        {
-          opacity: 0,
+      // Text reveal timeline (title chars, then subtitle lines).
+      gsap
+        .timeline()
+        .from(heroSplit.chars, {
           yPercent: 100,
           duration: 1.8,
           ease: 'expo.out',
-          stagger: 0.06,
-        },
-        '>',
-      )
-      .from(
-        '.hero-description',
-        {
-          opacity: 0,
-          yPercent: 20,
-          duration: 1.2,
-          ease: 'expo.out',
-        },
-        '>',
-      )
+          stagger: 0.05,
+        })
+        .from(
+          subtitleSplit ? subtitleSplit.lines : '.hero-subtitle',
+          {
+            opacity: 0,
+            yPercent: 100,
+            duration: 1.8,
+            ease: 'expo.out',
+            stagger: 0.06,
+          },
+          '>',
+        )
+        .from(
+          '.hero-description',
+          {
+            opacity: 0,
+            yPercent: 20,
+            duration: 1.2,
+            ease: 'expo.out',
+          },
+          '>',
+        )
 
-    // Scroll-linked parallax timeline for decorative elements (leaves + arrow).
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      })
-      .to('#right-leaf', { y: 200 }, 0)
-      .to('#left-leaf', { y: -200 }, 0)
-      .to('.arrow', { y: 100 }, 0)
+      // Scroll-linked parallax timeline for decorative elements (leaves + arrow).
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: mountedSection,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+        .to('#right-leaf', { y: 200 }, 0)
+        .to('#left-leaf', { y: -200 }, 0)
+        .to('.arrow', { y: 100 }, 0)
 
-    // On unmount, revert SplitText wrappers and restore original text markup.
-    return () => {
-      heroSplit.revert()
-      subtitleSplit?.revert()
+      // On unmount, revert SplitText wrappers and restore original text markup.
+      return () => {
+        heroSplit.revert()
+        subtitleSplit?.revert()
+      }
+    }, mountedSection)
+
+    const video = videoRef.value
+    if (video && isVideoReady.value) {
+      setupVideoScroll(video)
     }
-  }, sectionRef.value)
+  })
 })
 
 // clean listeners
@@ -188,7 +223,13 @@ function scrollToSection(hash: string) {
     return
   }
 
-  activeScrollTween = gsap.to(window, {
+  if (!gsapBundle) {
+    const top = target.getBoundingClientRect().top + window.scrollY - offsetY
+    window.scrollTo({ top, behavior: 'smooth' })
+    return
+  }
+
+  activeScrollTween = gsapBundle.gsap.to(window, {
     duration: 0.9,
     ease: 'power2.inOut',
     scrollTo: { y: target, offsetY },

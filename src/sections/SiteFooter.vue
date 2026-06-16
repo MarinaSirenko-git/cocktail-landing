@@ -5,15 +5,34 @@ import iconFacebook from '../assets/icons/icon-social-facebook.svg'
 import footerCocktailsWebp from '../assets/images/footer-cocktail-assortment.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import { onMounted, onUnmounted, ref } from 'vue'
-
-import gsap from 'gsap'
-import { SplitText } from 'gsap/SplitText'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
-// register GSAP plugin
-gsap.registerPlugin(SplitText, ScrollTrigger)
+type FooterGsapBundle = {
+  gsap: typeof import('gsap').default
+  SplitText: typeof import('gsap/SplitText').SplitText
+}
+
+let footerGsapBundle: FooterGsapBundle | null = null
+let footerGsapBundlePromise: Promise<FooterGsapBundle> | null = null
+
+async function loadFooterGsapBundle() {
+  if (footerGsapBundle) return footerGsapBundle
+
+  if (!footerGsapBundlePromise) {
+    footerGsapBundlePromise = (async () => {
+      const [{ default: gsap }, { SplitText }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/SplitText'),
+        import('gsap/ScrollTrigger'),
+      ])
+      gsap.registerPlugin(SplitText, ScrollTrigger)
+      return { gsap, SplitText }
+    })()
+  }
+
+  footerGsapBundle = await footerGsapBundlePromise
+  return footerGsapBundle
+}
 
 const socialLinks = [
   { label: 'Instagram', href: 'https://instagram.com', icon: iconInstagram },
@@ -29,11 +48,14 @@ const prefersReducedMotion = usePrefersReducedMotion()
 // type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
-let ctx: gsap.Context | undefined
+let ctx: { revert: () => void } | undefined
 
-onMounted(() => {
+onMounted(async () => {
   if (!sectionRef.value || prefersReducedMotion.value) return
-  ctx = gsap.context(function (this: gsap.Context) {
+  const { gsap, SplitText } = await loadFooterGsapBundle()
+  const mountedSection = sectionRef.value
+
+  ctx = gsap.context(function () {
     const title = new SplitText('#contact-title', { type: 'words', aria: 'auto' })
     const timeline = gsap.timeline({
       scrollTrigger: {
@@ -76,7 +98,7 @@ onMounted(() => {
     return () => {
       title.revert()
     }
-  }, sectionRef.value)
+  }, mountedSection)
 })
 
 onUnmounted(() => {
@@ -115,7 +137,7 @@ onUnmounted(() => {
               <h3 class="text-md uppercase tracking-wide">Contact us</h3>
               <p>
                 <a
-                  href="tel:+15559876543"
+                  href="tel:+66980146914"
                   class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
                 >
                   +66 098 014 6914
