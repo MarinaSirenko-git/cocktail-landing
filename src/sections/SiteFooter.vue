@@ -3,9 +3,7 @@ import iconInstagram from '../assets/icons/icon-social-instagram.svg'
 import iconX from '../assets/icons/icon-social-x.svg'
 import iconFacebook from '../assets/icons/icon-social-facebook.svg'
 import footerCocktailsWebp from '../assets/images/footer-cocktail-assortment.webp'
-import footerCocktailsPng from '../assets/images/footer-cocktail-assortment.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 import gsap from 'gsap'
@@ -177,7 +175,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="footerCocktailsWebp" type="image/webp" />
             <img
-              :src="footerCocktailsPng"
+              :src="footerCocktailsWebp"
               alt=""
               width="526"
               height="544"
@@ -196,7 +194,7 @@ onUnmounted(() => {
       >
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
-          :src="monsteraPng"
+          :src="monsteraWebp"
           alt=""
           width="398"
           height="398"
@@ -212,7 +210,7 @@ onUnmounted(() => {
       >
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
-          :src="monsteraPng"
+          :src="monsteraWebp"
           alt=""
           width="328"
           height="328"

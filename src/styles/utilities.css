@@ -50,7 +50,7 @@
 }
 
 @utility video {
-  @apply w-full lg:h-[67%] 2xl:h-[80%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[50%_100%] xl:object-[56%_100%];
+  @apply w-full lg:h-[67%] 2xl:h-[73%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[50%_100%] xl:object-[56%_100%];
 }
 
 @utility masked-img {

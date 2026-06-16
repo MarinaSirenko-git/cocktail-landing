@@ -7,7 +7,6 @@ import drinkRaspberryMojitoPng from '../assets/images/carousel-drink-raspberry-m
 import drinkVioletBreezePng from '../assets/images/carousel-drink-violet-breeze.png'
 import drinkCuracaoMojitoPng from '../assets/images/carousel-drink-curacao-mojito.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 import { useMediaQuery } from '@vueuse/core'
 
@@ -400,7 +399,7 @@ watch(activeTabIndex, async () => {
       >
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
-          :src="monsteraPng"
+          :src="monsteraWebp"
           alt=""
           width="456"
           height="456"
@@ -415,7 +414,7 @@ watch(activeTabIndex, async () => {
       >
         <source :srcset="monsteraWebp" type="image/webp" />
         <img
-          :src="monsteraPng"
+          :src="monsteraWebp"
           alt=""
           width="456"
           height="456"

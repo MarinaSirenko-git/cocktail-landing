@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onMounted, onUnmounted, ref } from 'vue'
@@ -124,7 +123,7 @@ onUnmounted(() => {
     >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
-        :src="monsteraPng"
+        :src="monsteraWebp"
         alt=""
         width="317"
         height="317"
@@ -140,7 +139,7 @@ onUnmounted(() => {
     >
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
-        :src="monsteraPng"
+        :src="monsteraWebp"
         alt=""
         width="317"
         height="317"

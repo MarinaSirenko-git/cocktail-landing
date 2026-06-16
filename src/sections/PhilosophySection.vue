@@ -9,26 +9,19 @@ import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
 import bentoBartenderWebp from '../assets/images/bento-bartender-pouring.webp'
-import bentoBartenderPng from '../assets/images/bento-bartender-pouring.png'
 import bentoGuestsWebp from '../assets/images/bento-guests-drinking.webp'
-import bentoGuestsPng from '../assets/images/bento-guests-drinking.png'
 import bentoGarnishWebp from '../assets/images/bento-cocktail-garnish.webp'
-import bentoGarnishPng from '../assets/images/bento-cocktail-garnish.png'
 import bentoRowWebp from '../assets/images/bento-cocktails-row.webp'
-import bentoRowPng from '../assets/images/bento-cocktails-row.png'
 import iconStar from '../assets/icons/icon-star.svg'
 import iconCheck from '../assets/icons/icon-check.png'
 import avatar1Webp from '../assets/images/avatar-customer-1.webp'
-import avatar1Png from '../assets/images/avatar-customer-1.png'
 import avatar2Webp from '../assets/images/avatar-customer-2.webp'
-import avatar2Png from '../assets/images/avatar-customer-2.png'
 import avatar3Webp from '../assets/images/avatar-customer-3.webp'
-import avatar3Png from '../assets/images/avatar-customer-3.png'
 
 const customerAvatars = [
-  { webp: avatar1Webp, png: avatar1Png },
-  { webp: avatar2Webp, png: avatar2Png },
-  { webp: avatar3Webp, png: avatar3Png },
+  { webp: avatar1Webp, png: avatar1Webp },
+  { webp: avatar2Webp, png: avatar2Webp },
+  { webp: avatar3Webp, png: avatar3Webp },
 ]
 
 const checklistItems = [
@@ -192,7 +185,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="bentoBartenderWebp" type="image/webp" />
             <img
-              :src="bentoBartenderPng"
+              :src="bentoBartenderWebp"
               alt="Bartender pouring a cocktail"
               width="330"
               height="285"
@@ -237,7 +230,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="bentoGuestsWebp" type="image/webp" />
             <img
-              :src="bentoGuestsPng"
+              :src="bentoGuestsWebp"
               alt="Guests enjoying cocktails at the bar"
               width="580"
               height="285"
@@ -255,7 +248,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="bentoRowWebp" type="image/webp" />
             <img
-              :src="bentoRowPng"
+              :src="bentoRowWebp"
               alt="Assorted colorful cocktails in a row"
               width="780"
               height="285"
@@ -273,7 +266,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="bentoGarnishWebp" type="image/webp" />
             <img
-              :src="bentoGarnishPng"
+              :src="bentoGarnishWebp"
               alt="Cocktail with oranges and flowers"
               width="317"
               height="317"

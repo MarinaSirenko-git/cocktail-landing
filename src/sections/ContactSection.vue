@@ -3,9 +3,7 @@ import iconInstagram from '../assets/icons/icon-social-instagram.svg'
 import iconX from '../assets/icons/icon-social-x.svg'
 import iconFacebook from '../assets/icons/icon-social-facebook.svg'
 import footerCocktailsWebp from '../assets/images/footer-cocktail-assortment.webp'
-import footerCocktailsPng from '../assets/images/footer-cocktail-assortment.png'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 
 const socialLinks = [
   { label: 'Instagram', href: 'https://instagram.com', icon: iconInstagram },
@@ -110,7 +108,7 @@ const hours = [
         <picture>
           <source :srcset="footerCocktailsWebp" type="image/webp" />
           <img
-            :src="footerCocktailsPng"
+            :src="footerCocktailsWebp"
             alt=""
             width="526"
             height="544"
@@ -126,7 +124,7 @@ const hours = [
     <picture class="pointer-events-none absolute -left-24 bottom-0 z-0 hidden opacity-50 lg:block">
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
-        :src="monsteraPng"
+        :src="monsteraWebp"
         alt=""
         width="537"
         height="537"
@@ -139,7 +137,7 @@ const hours = [
     <picture class="pointer-events-none absolute -right-16 top-10 z-0 hidden opacity-50 lg:block">
       <source :srcset="monsteraWebp" type="image/webp" />
       <img
-        :src="monsteraPng"
+        :src="monsteraWebp"
         alt=""
         width="421"
         height="421"

@@ -7,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import monsteraPng from '../assets/images/decorative-monstera-leaf.png'
 import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
@@ -223,7 +222,7 @@ function onCtaClick(event: MouseEvent) {
         >
           <source :srcset="monsteraWebp" type="image/webp" />
           <img
-            :src="monsteraPng"
+            :src="monsteraWebp"
             alt=""
             width="326"
             height="326"
@@ -238,7 +237,7 @@ function onCtaClick(event: MouseEvent) {
         >
           <source :srcset="monsteraWebp" type="image/webp" />
           <img
-            :src="monsteraPng"
+            :src="monsteraWebp"
             alt=""
             width="356"
             height="356"

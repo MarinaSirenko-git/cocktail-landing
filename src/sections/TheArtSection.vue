@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 import iconCheck from '../assets/icons/icon-check.png'
 import bartenderWebp from '../assets/images/bartender-photo.webp'
-import bartenderPng from '../assets/images/bartender-photo.png'
 
 const leftItems = [
   'Handpicked ingredients',
@@ -144,7 +143,7 @@ onUnmounted(() => {
           <picture>
             <source :srcset="bartenderWebp" type="image/webp" />
             <img
-              :src="bartenderPng"
+              :src="bartenderWebp"
               alt="Bartender preparing a cocktail"
               width="1600"
               height="1066"
