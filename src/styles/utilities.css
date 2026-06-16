@@ -24,7 +24,15 @@
 }
 
 @utility noisy {
-  @apply size-full bg-[url("./src/assets/images/noisy.png")];
+  @apply size-full;
+  background-image: image-set(url('../assets/images/noisy.png') 1x);
+  background-size: 420px 420px;
+}
+
+@media (max-width: 767px) {
+  .noisy {
+    background-image: none;
+  }
 }
 
 @utility focus-ring {
@@ -43,7 +51,7 @@
 }
 
 @utility noisy-display-text {
-  background-image: url('./src/assets/images/noisy.png'), linear-gradient(#505050, #505050);
+  background-image: url('../assets/images/noisy.png'), linear-gradient(#505050, #505050);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

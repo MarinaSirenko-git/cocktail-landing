@@ -6,6 +6,7 @@ import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
+import heroPosterWebp from '../assets/images/hero-poster.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
@@ -21,26 +22,81 @@ const prefersReducedMotion = usePrefersReducedMotion()
 // type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
+const showVideo = ref(false)
+const isVideoReady = ref(false)
 
 // create variable to store the animation context
 let ctx: gsap.Context | undefined
 let activeScrollTween: gsap.core.Tween | null = null
+let idleHandle: number | null = null
+let videoTimeline: gsap.core.Timeline | null = null
+
+type IdleSchedulerType = 'idle' | 'timeout'
+let idleSchedulerType: IdleSchedulerType | null = null
+
+function scheduleVideoMount() {
+  const mountVideo = () => {
+    showVideo.value = true
+  }
+
+  if (typeof window.requestIdleCallback === 'function') {
+    idleHandle = window.requestIdleCallback(() => {
+      mountVideo()
+    }, { timeout: 1200 })
+    idleSchedulerType = 'idle'
+    return
+  }
+
+  idleHandle = window.setTimeout(() => {
+    mountVideo()
+  }, 250)
+  idleSchedulerType = 'timeout'
+}
+
+function setupVideoScroll(video: HTMLVideoElement) {
+  if (!sectionRef.value || prefersReducedMotion.value) return
+
+  const startValue = isMobile.value ? 'top 50%' : 'center 60%'
+  const endValue = isMobile.value ? '120% top' : 'bottom top'
+
+  videoTimeline?.kill()
+  videoTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#hero-video',
+      start: startValue,
+      end: endValue,
+      scrub: true,
+      pin: true,
+    },
+  })
+
+  videoTimeline.to(video, {
+    currentTime: video.duration,
+    ease: 'none',
+  })
+}
+
+function onVideoLoadedData() {
+  const video = videoRef.value
+  if (!video) return
+
+  isVideoReady.value = true
+  setupVideoScroll(video)
+}
 
 // make actions only after the component is mounted
 onMounted(() => {
+  scheduleVideoMount()
+
   // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
   // Scope selectors to the hero section and revert all GSAP work on cleanup.
   ctx = gsap.context(function (this: gsap.Context) {
-    // set value for start and end video timeline params
-    const startValue = isMobile.value ? 'top 50%' : 'center 60%'
-    const endValue = isMobile.value ? '120% top' : 'bottom top'
-
     // initiate elements for SplitText plugin
     const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
-    const paragraphSplit = !isMobile.value
-      ? new SplitText('.animation-marker', { type: 'lines', aria: 'auto' })
+    const subtitleSplit = !isMobile.value
+      ? new SplitText('.hero-subtitle', { type: 'lines', aria: 'auto' })
       : null
 
     // add special class to each title's char
@@ -56,13 +112,23 @@ onMounted(() => {
         stagger: 0.05,
       })
       .from(
-        paragraphSplit ? paragraphSplit.lines : '.animation-marker',
+        subtitleSplit ? subtitleSplit.lines : '.hero-subtitle',
         {
           opacity: 0,
           yPercent: 100,
           duration: 1.8,
           ease: 'expo.out',
           stagger: 0.06,
+        },
+        '>',
+      )
+      .from(
+        '.hero-description',
+        {
+          opacity: 0,
+          yPercent: 20,
+          duration: 1.2,
+          ease: 'expo.out',
         },
         '>',
       )
@@ -81,44 +147,10 @@ onMounted(() => {
       .to('#left-leaf', { y: -200 }, 0)
       .to('.arrow', { y: 100 }, 0)
 
-    // get video obj
-    const video = videoRef.value
-    if (!video) return
-
-    const initVideoScroll = () => {
-      // Pin the video section and scrub timeline progress between start/end.
-      const videoTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#hero-video',
-          start: startValue,
-          end: endValue,
-          scrub: true,
-          pin: true,
-        },
-      })
-
-      // Drive playback by animating currentTime from 0 to full duration.
-      videoTimeline.to(video, {
-        currentTime: video.duration,
-      })
-    }
-
-    const onLoadedMetadata = () => {
-      initVideoScroll()
-    }
-
-    // If metadata is ready, start immediately; otherwise wait for it once.
-    if (video.readyState >= 1) {
-      initVideoScroll()
-    } else {
-      video.addEventListener('loadedmetadata', onLoadedMetadata, { once: true })
-    }
-
     // On unmount, revert SplitText wrappers and restore original text markup.
     return () => {
-      video.removeEventListener('loadedmetadata', onLoadedMetadata)
       heroSplit.revert()
-      paragraphSplit?.revert()
+      subtitleSplit?.revert()
     }
   }, sectionRef.value)
 })
@@ -126,8 +158,20 @@ onMounted(() => {
 // clean listeners
 onUnmounted(() => {
   ctx?.revert()
+  videoTimeline?.kill()
+  videoTimeline = null
   activeScrollTween?.kill()
   activeScrollTween = null
+
+  if (idleHandle !== null) {
+    if (idleSchedulerType === 'idle' && typeof window.cancelIdleCallback === 'function') {
+      window.cancelIdleCallback(idleHandle)
+    } else {
+      window.clearTimeout(idleHandle)
+    }
+    idleHandle = null
+    idleSchedulerType = null
+  }
 })
 
 function scrollToSection(hash: string) {
@@ -191,7 +235,7 @@ function onCtaClick(event: MouseEvent) {
 
           <div class="flex flex-col gap-2 hidden lg:block">
             <p class="text-base xl:text-lg xl:mb-5">Cool. Crisp. Classic.</p>
-            <h2 class="animation-marker font-display text-[4vw] leading-none text-accent">
+            <h2 class="hero-subtitle font-display text-[4vw] leading-none text-accent">
               Sip the Spirit <br />
               of Summer
             </h2>
@@ -199,7 +243,7 @@ function onCtaClick(event: MouseEvent) {
 
           <div class="flex w-full lg:max-w-[270px] xl:max-w-[300px] flex-col items-center lg:items-start gap-2 z-20">
             <p
-              class="animation-marker max-w-[32ch] lg:max-w-none text-pretty text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start"
+              class="hero-description max-w-[32ch] lg:max-w-none text-pretty text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start"
             >
               Every cocktail on our menu is a blend of premium ingredients, creative flair, and
               timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
@@ -250,15 +294,31 @@ function onCtaClick(event: MouseEvent) {
       </div>
     </section>
     <div class="pointer-events-none absolute inset-0 z-10">
+      <img
+        :src="heroPosterWebp"
+        alt=""
+        width="1280"
+        height="720"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+        class="video transition-opacity duration-500"
+        :class="isVideoReady ? 'opacity-0' : 'opacity-100'"
+      />
       <video
+        v-if="showVideo"
         id="hero-video"
         ref="videoRef"
         :src="heroVideo"
-        class="video"
+        :poster="heroPosterWebp"
+        class="video transition-opacity duration-500"
+        :class="isVideoReady ? 'opacity-100' : 'opacity-0'"
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         aria-hidden="true"
+        @loadeddata="onVideoLoadedData"
       />
     </div>
   </div>
