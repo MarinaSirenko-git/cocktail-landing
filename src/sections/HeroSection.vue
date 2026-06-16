@@ -40,7 +40,9 @@ onMounted(() => {
 
     // initiate elements for SplitText plugin
     const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
-    const paragraphSplit = new SplitText('.animation-marker', { type: 'lines', aria: 'auto' })
+    const paragraphSplit = !isMobile.value
+      ? new SplitText('.animation-marker', { type: 'lines', aria: 'auto' })
+      : null
 
     // add special class to each title's char
     heroSplit.chars.forEach((char) => char.classList.add('text-gradient'))
@@ -55,7 +57,7 @@ onMounted(() => {
         stagger: 0.05,
       })
       .from(
-        paragraphSplit.lines,
+        paragraphSplit ? paragraphSplit.lines : '.animation-marker',
         {
           opacity: 0,
           yPercent: 100,
@@ -117,7 +119,7 @@ onMounted(() => {
     return () => {
       video.removeEventListener('loadedmetadata', onLoadedMetadata)
       heroSplit.revert()
-      paragraphSplit.revert()
+      paragraphSplit?.revert()
     }
   }, sectionRef.value)
 })
@@ -168,7 +170,7 @@ function onCtaClick(event: MouseEvent) {
       class="flex flex-col justify-center noisy relative z-20 flex h-[calc(100dvh-var(--header-height,0px))] w-full flex-start lg:flex-between border border-transparent"
     >
       <div class="container flex flex-col md:justify-between h-full">
-        <h1 id="title" class="decorative-text text-[132px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
+        <h1 id="title" class="decorative-text text-[115px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
 
         <div class="relative z-20 flex-start md:h-[50%] flex md:justify-between">
           <a
@@ -196,15 +198,17 @@ function onCtaClick(event: MouseEvent) {
             </h2>
           </div>
 
-          <div class="flex w-full lg:max-w-[270px] xl:max-w-[300px] flex-col items-center lg:items-start gap-2">
-            <p class="animation-marker text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start">
+          <div class="flex w-full lg:max-w-[270px] xl:max-w-[300px] flex-col items-center lg:items-start gap-2 z-20">
+            <p
+              class="animation-marker max-w-[32ch] lg:max-w-none text-pretty text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start"
+            >
               Every cocktail on our menu is a blend of premium ingredients, creative flair, and
               timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
             </p>
             <div class="flex">
               <a
                 href="#menu"
-                class="text-base xl:text-lg xl:mb-5 transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0"
+                class="text-base font-semibold xl:text-lg xl:mb-5 transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0"
                 @click="onCtaClick"
               >
                 View cocktails
@@ -215,7 +219,7 @@ function onCtaClick(event: MouseEvent) {
 
         <picture
           id="left-leaf"
-          class="pointer-events-none absolute -left-18 lg:-left-32 -bottom-18 lg:top-40 xxl:top-100 z-20"
+          class="pointer-events-none absolute -left-18 lg:-left-32 -bottom-18 lg:-bottom-60 xxl:top-100 z-20"
         >
           <source :srcset="monsteraWebp" type="image/webp" />
           <img

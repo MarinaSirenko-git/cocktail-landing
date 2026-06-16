@@ -50,10 +50,10 @@ const hours = [
             <h3 class="text-lg uppercase tracking-wide text-muted-subtle">Contact us</h3>
             <p>
               <a
-                href="tel:+15559876543"
+                href="tel:+66980146914"
                 class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
               >
-                (555) 987-6543
+                098-014-69-14
               </a>
             </p>
             <p>

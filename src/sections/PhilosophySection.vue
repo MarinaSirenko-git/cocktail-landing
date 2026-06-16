@@ -104,7 +104,7 @@ onUnmounted(() => {
     ref="sectionRef"
     id="philosophy"
     aria-labelledby="philosophy-title"
-    class="flex flex-col justify-center min-h-[calc(100dvh-var(--header-height,0px))] py-[clamp(50px,6vw,100px)]"
+    class="flex flex-col justify-center min-h-[calc(100dvh-var(--header-height,0px))] py-[clamp(50px,6vw,100px)] overflow-hidden"
   >
     <div class="container grid grid-cols-1 lg:grid-cols-2 gap-y-[clamp(32px,6vw,80px)]">
       <div class="lg:col-span-1 flex flex-col gap-[32px]">

@@ -59,13 +59,19 @@ onMounted(() => {
       },
     })
 
-    maskTimeline
-      .to('.will-fade', {
-        opacity: 0,
-        stagger: 0.2,
-        ease: 'power1.inOut',
-      })
-      .fromTo('.will-fade-title', { opacity: 1 }, { opacity: 0, duration: 1, ease: 'power1.inOut' })
+    if (!isMobile.value) {
+      maskTimeline
+        .to('.will-fade', {
+          opacity: 0,
+          stagger: 0.2,
+          ease: 'power1.inOut',
+        })
+        .fromTo(
+          '.will-fade-title',
+          { opacity: 1 },
+          { opacity: 0, duration: 1, ease: 'power1.inOut' },
+        )
+    }
 
     maskTimeline
       .fromTo(
@@ -110,15 +116,15 @@ onUnmounted(() => {
     id="the-art"
     ref="sectionRef"
     aria-labelledby="the-art-subtitle"
-    class="flex flex-col justify-center relative overflow-hidden bg-section-radial min-h-[calc(100dvh-var(--header-height,0px))] py-[clamp(63px,40px+6vw,127px)]"
+    class="flex flex-col justify-center relative overflow-hidden bg-section-radial min-h-[calc(100dvh-var(--header-height,0px))] py-[clamp(60px,40px+6vw,127px)]"
   >
     <div class="container">
       <h2
-        class="will-fade noisy-display-text text-[clamp(118px,31vw,252px)] text-center relative font-display font-normal leading-none tracking-[-0.02em] text-nowrap"
+        class="will-fade noisy-display-text text-[clamp(100px,20vw,252px)] text-center relative font-display font-normal leading-none tracking-[-0.02em] text-nowrap"
       >
         The ART
       </h2>
-      <div class="flex md:flex-row flex-col justify-between md:mb-16 md:mt-0 mt-40 gap-10">
+      <div class="flex md:flex-row flex-col justify-between md:mb-16 md:mt-0 mt-70 gap-10">
         <ul class="will-fade space-y-4">
           <li class="flex items-center gap-2" v-for="item in leftItems" :key="item">
             <img
@@ -148,7 +154,7 @@ onUnmounted(() => {
             />
           </picture>
         </div>
-        <ul class="will-fade space-y-4">
+        <ul class="will-fade space-y-4 ml-auto md:ml-0">
           <li class="flex items-center gap-2" v-for="item in rightItems" :key="item">
             <img
               :src="iconCheck"
@@ -162,13 +168,13 @@ onUnmounted(() => {
           </li>
         </ul>
       </div>
-      <div class="masked-container absolute bottom-0 left-1/2 -translate-x-1/2">
+      <div class="masked-container absolute top-94 md:top-auto md:bottom-0 left-1/2 -translate-x-1/2">
         <h2
-          class="will-fade-title text-center leading-none font-display text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
+          class="will-fade-title text-center text-nowrap leading-none font-display text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
         >
           Sip-Worthy Perfection
         </h2>
-        <div class="will-appear z-20">
+        <div class="will-appear hidden md:block z-20">
           <h3 class="text-center font-display leading-none text-nowrap text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]">
             Made with Craft and Poured with Passion
           </h3>
