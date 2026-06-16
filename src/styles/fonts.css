@@ -5,3 +5,35 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('../assets/fonts/mona-sans-v4-latin-ext-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('../assets/fonts/mona-sans-v4-latin-ext-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('../assets/fonts/mona-sans-v4-latin-ext-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Serif Text';
+  src: url('../assets/fonts/dm-serif-text-v13-latin_latin-ext-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
