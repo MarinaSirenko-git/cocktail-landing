@@ -147,14 +147,12 @@ onUnmounted(() => {
       <div class="flex md:flex-row flex-col justify-between md:mb-16 md:mt-0 mt-70 gap-10">
         <ul class="will-fade space-y-4">
           <li class="flex items-center gap-2" v-for="item in leftItems" :key="item">
-            <img
-              :src="iconCheck"
-              alt=""
-              width="20"
-              height="20"
-              decoding="async"
+            <span
+              class="flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-panel bg-surface"
               aria-hidden="true"
-            />
+            >
+              <img :src="iconCheck" alt="" width="8" height="7" decoding="async" class="size-2" />
+            </span>
             <p>{{ item }}</p>
           </li>
         </ul>
@@ -176,26 +174,28 @@ onUnmounted(() => {
         </div>
         <ul class="will-fade space-y-4 ml-auto md:ml-0">
           <li class="flex items-center gap-2" v-for="item in rightItems" :key="item">
-            <img
-              :src="iconCheck"
-              alt=""
-              width="20"
-              height="20"
-              decoding="async"
+            <span
+              class="flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-panel bg-surface"
               aria-hidden="true"
-            />
+            >
+              <img :src="iconCheck" alt="" width="8" height="7" decoding="async" class="size-2" />
+            </span>
             <p>{{ item }}</p>
           </li>
         </ul>
       </div>
-      <div class="masked-container absolute top-94 md:top-auto md:bottom-0 left-1/2 -translate-x-1/2">
+      <div
+        class="masked-container absolute top-94 md:top-auto md:bottom-0 left-1/2 -translate-x-1/2"
+      >
         <h2
           class="will-fade-title text-center text-nowrap leading-none font-display text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
         >
           Sip-Worthy Perfection
         </h2>
         <div class="will-appear hidden md:block z-20">
-          <h3 class="text-center font-display leading-none text-nowrap text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]">
+          <h3
+            class="text-center font-display leading-none text-nowrap text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
+          >
             Made with Craft and Poured with Passion
           </h3>
           <p class="text-center text-base md:text-md">

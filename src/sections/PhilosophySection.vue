@@ -174,7 +174,7 @@ onUnmounted(() => {
                 <picture
                   v-for="(avatar, index) in customerAvatars"
                   :key="index"
-                  class="relative -mr-3.5 shrink-0"
+                  class="relative -mr-5 sm:-mr-3.5 shrink-0"
                 >
                   <source :srcset="avatar.webp" type="image/webp" />
                   <img
