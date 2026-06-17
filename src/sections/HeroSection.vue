@@ -2,10 +2,11 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
-import heroPosterWebp from '../assets/images/hero-poster.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
+
+const heroPosterWebp = '/images/hero-poster.webp'
 
 type GsapBundle = {
   gsap: typeof import('gsap').default
