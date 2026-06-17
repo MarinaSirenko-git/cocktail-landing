@@ -16,8 +16,9 @@
  */
 <script setup lang="ts">
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
+import { useI18n } from 'vue-i18n'
 
 type MenuItem = {
   name: string
@@ -25,19 +26,10 @@ type MenuItem = {
   price: string
 }
 
-const popularCocktails: MenuItem[] = [
-  { name: 'Chapel Hill Shiraz', meta: 'AU | Battle', price: '$10' },
-  { name: 'Caten Malbee', meta: 'AU | Battle', price: '$49' },
-  { name: 'Rhino Pale Ale', meta: 'CA | 750 ml', price: '$20' },
-  { name: 'Irish Guinness', meta: 'IE | 600 ml', price: '$29' },
-]
+const { t, tm } = useI18n()
 
-const lovedMocktails: MenuItem[] = [
-  { name: 'Tropical Bloom', meta: 'US | Battle', price: '$10' },
-  { name: 'Passionfruit Mint', meta: 'US | Battle', price: '$49' },
-  { name: 'Citrus Glow', meta: 'CA | 750 ml', price: '$20' },
-  { name: 'Lavender Fizz', meta: 'IE | 600 ml', price: '$29' },
-]
+const popularCocktails = computed<MenuItem[]>(() => tm('menu.popular') as MenuItem[])
+const lovedMocktails = computed<MenuItem[]>(() => tm('menu.loved') as MenuItem[])
 
 const sectionRef = ref<HTMLElement | null>(null)
 
@@ -114,7 +106,7 @@ onUnmounted(() => {
       class="container relative z-10 mx-auto flex flex-col items-start justify-between gap-20 lg:px-5 pt-40 md:flex-row 2xl:px-0"
     >
       <div aria-labelledby="menu-title-left" class="w-full space-y-8 md:w-fit">
-        <h2 id="menu-title-left" class="text-xl font-medium">Most popular cocktails:</h2>
+        <h2 id="menu-title-left" class="text-xl font-medium">{{ t('menu.popularTitle') }}</h2>
         <ul class="space-y-8">
           <li
             v-for="item in popularCocktails"
@@ -133,7 +125,7 @@ onUnmounted(() => {
       </div>
 
       <div aria-labelledby="menu-title-right" class="w-full space-y-8 pb-20 md:w-fit md:pb-0">
-        <h2 id="menu-title-right" class="text-xl font-medium">Most loved mocktails:</h2>
+        <h2 id="menu-title-right" class="text-xl font-medium">{{ t('menu.lovedTitle') }}</h2>
         <ul class="space-y-5 lg:space-y-8">
           <li
             v-for="item in lovedMocktails"

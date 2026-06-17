@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Russian locale flag icon</title>
+  <desc id="desc">Russian tricolor in a rounded square.</desc>
+  <clipPath id="clip">
+    <rect width="64" height="64" rx="12" />
+  </clipPath>
+  <g clip-path="url(#clip)">
+    <rect width="64" height="64" fill="#FFF" />
+    <rect y="21.333" width="64" height="21.334" fill="#0039A6" />
+    <rect y="42.667" width="64" height="21.333" fill="#D52B1E" />
+  </g>
+</svg>

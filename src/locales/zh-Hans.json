@@ -1,0 +1,142 @@
+{
+  "common": {
+    "skipToContent": "跳到主要内容",
+    "language": "语言",
+    "localeName": {
+      "en": "English",
+      "ru": "Русский",
+      "th": "ไทย",
+      "zhHans": "中文"
+    },
+    "recipesFor": "配方适用于："
+  },
+  "seo": {
+    "title": "Velvet Pour - 啜饮盛夏灵感",
+    "description": "在 Velvet Pour 啜饮盛夏灵感。探索手工鸡尾酒与无酒精鸡尾酒、调酒哲学、精选配方，并在洛杉矶与我们相见。",
+    "siteName": "Velvet Pour",
+    "twitterCard": "summary_large_image"
+  },
+  "nav": {
+    "brand": "Velvet Pour",
+    "mainNavigation": "主导航",
+    "cocktails": "鸡尾酒",
+    "aboutUs": "关于我们",
+    "theArt": "艺术",
+    "contact": "联系"
+  },
+  "hero": {
+    "title": "MOJITO",
+    "scrollToMenuAria": "滚动到鸡尾酒菜单",
+    "eyebrow": "清凉。爽脆。经典。",
+    "subtitleLine1": "啜饮盛夏",
+    "subtitleLine2": "灵感",
+    "descriptionLine1": "我们的每一杯鸡尾酒都融合了高品质原料、创意巧思与",
+    "descriptionLine2": "经典配方，只为唤醒你的感官。",
+    "cta": "查看鸡尾酒"
+  },
+  "menu": {
+    "popularTitle": "最受欢迎鸡尾酒：",
+    "lovedTitle": "最受喜爱无酒精鸡尾酒：",
+    "popular": [
+      { "name": "Chapel Hill Shiraz", "meta": "AU | 瓶装", "price": "฿390" },
+      { "name": "Caten Malbee", "meta": "AU | 瓶装", "price": "฿520" },
+      { "name": "Rhino Pale Ale", "meta": "CA | 750 毫升", "price": "฿330" },
+      { "name": "Irish Guinness", "meta": "IE | 600 毫升", "price": "฿360" }
+    ],
+    "loved": [
+      { "name": "Tropical Bloom", "meta": "US | 瓶装", "price": "฿220" },
+      { "name": "Passionfruit Mint", "meta": "US | 瓶装", "price": "฿240" },
+      { "name": "Citrus Glow", "meta": "CA | 750 毫升", "price": "฿210" },
+      { "name": "Lavender Fizz", "meta": "IE | 600 毫升", "price": "฿230" }
+    ]
+  },
+  "philosophy": {
+    "badge": "精选鸡尾酒",
+    "title": "每个细节都至关重要 - 从捣碎到点缀",
+    "paragraph": "我们呈上的每一杯鸡尾酒都体现了对细节的执着 - 从第一下捣压到最后的装饰。正是这份用心，让一杯普通饮品变成真正难忘的体验。",
+    "rating": "4.5/5",
+    "moreThanCustomers": "超过 +{count} 位顾客",
+    "customersAria": "超过 12,000 位顾客",
+    "featureTitle": "匠心打造，惊艳呈现",
+    "checklist": [
+      "风味平衡到位",
+      "装饰精致考究",
+      "始终冰爽可口",
+      "专业摇和与搅拌"
+    ],
+    "alt": {
+      "bartenderPouring": "调酒师正在倒酒",
+      "guestsEnjoying": "客人在吧台享用鸡尾酒",
+      "cocktailRow": "一排色彩缤纷的鸡尾酒",
+      "cocktailGarnish": "配有橙片与花朵装饰的鸡尾酒"
+    }
+  },
+  "art": {
+    "title": "The ART",
+    "leftItems": [
+      "严选食材",
+      "招牌技法",
+      "调酒艺术现场演绎",
+      "新鲜捣制风味"
+    ],
+    "rightItems": [
+      "风味平衡到位",
+      "装饰精致考究",
+      "始终冰爽可口",
+      "专业摇和与搅拌"
+    ],
+    "subtitle": "值得细品的完美",
+    "heading": "以匠心调制，以热爱呈现",
+    "description": "这不只是一杯饮品，而是专为你精心打造的时刻。",
+    "altBartenderPreparing": "调酒师正在准备鸡尾酒"
+  },
+  "carousel": {
+    "ariaFeaturedCocktails": "精选鸡尾酒",
+    "slides": [
+      {
+        "name": "Classic Mojito",
+        "title": "简单配方，浓郁风味",
+        "description": "以龙舌兰、青柠汁与橙味利口酒调制，做法简单却个性十足。杯口加盐，更适合夏夜微醺时光。",
+        "alt": "高脚杯中的 Classic Mojito"
+      },
+      {
+        "name": "Raspberry Mojito",
+        "title": "清新经典，从不失手",
+        "description": "青柠的酸、龙舌兰的顺滑与恰到好处的甜度完美平衡。无论摇制、冰沙或加冰，都同样清爽提神。",
+        "alt": "高脚杯中的 Raspberry Mojito"
+      },
+      {
+        "name": "Violet Breeze",
+        "title": "简单配方，浓郁风味",
+        "description": "以龙舌兰、青柠汁与橙味利口酒调制，做法简单却个性十足。杯口加盐，更适合夏夜微醺时光。",
+        "alt": "高脚杯中的 Violet Breeze"
+      },
+      {
+        "name": "Curacao Mojito",
+        "title": "用心调制，倾心呈上",
+        "description": "每一杯鸡尾酒都以新鲜原料和对细节的热爱调制而成，无论庆祝还是放松，都恰到好处。",
+        "alt": "高脚杯中的 Curacao Mojito"
+      }
+    ]
+  },
+  "footer": {
+    "title": "如何找到我们",
+    "visitBar": "欢迎到店",
+    "address": "Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000",
+    "contactUs": "联系我们",
+    "phone": "+66 098 014 6914",
+    "email": "hello{'@'}jsmcocktail.com",
+    "openEveryDay": "每日营业",
+    "hours": [
+      "周一至周四：17:00 - 00:00",
+      "周五至周六：17:00 - 01:00",
+      "周日：17:00 - 00:00"
+    ],
+    "socials": "社交平台",
+    "social": {
+      "instagram": "Instagram",
+      "x": "X",
+      "facebook": "Facebook"
+    }
+  }
+}

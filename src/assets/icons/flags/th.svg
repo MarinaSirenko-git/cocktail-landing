@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Thai locale flag icon</title>
+  <desc id="desc">Thailand flag in a rounded square.</desc>
+  <clipPath id="clip">
+    <rect width="64" height="64" rx="12" />
+  </clipPath>
+  <g clip-path="url(#clip)">
+    <rect width="64" height="64" fill="#A51931" />
+    <rect y="12.8" width="64" height="9.6" fill="#FFF" />
+    <rect y="22.4" width="64" height="19.2" fill="#2D2A4A" />
+    <rect y="41.6" width="64" height="9.6" fill="#FFF" />
+    <rect y="51.2" width="64" height="12.8" fill="#A51931" />
+  </g>
+</svg>

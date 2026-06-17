@@ -20,12 +20,14 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 const heroPosterWebp = '/images/hero-poster.webp'
+const { t } = useI18n()
 
 type GsapBundle = {
   gsap: typeof import('gsap').default
@@ -301,12 +303,12 @@ function onCtaClick(event: MouseEvent) {
       class="flex flex-col justify-center noisy relative z-20 flex h-[calc(100dvh-var(--header-height,0px))] w-full flex-start lg:flex-between border border-transparent"
     >
       <div class="container flex flex-col md:justify-between h-full">
-        <h1 id="title" class="decorative-text text-[110px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
+        <h1 id="title" class="decorative-text text-[110px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">{{ t('hero.title') }}</h1>
 
         <div class="relative z-20 flex-start md:h-[50%] flex md:justify-between">
           <a
             href="#menu"
-            aria-label="Scroll to cocktails menu"
+            :aria-label="t('hero.scrollToMenuAria')"
             class="absolute right-0 top-[-30%] z-20 hover:opacity-80 focus-ring"
             @click="onCtaClick"
           >
@@ -322,10 +324,10 @@ function onCtaClick(event: MouseEvent) {
           </a>
 
           <div class="flex flex-col gap-2 hidden lg:block">
-            <p class="text-base xl:text-lg xl:mb-5">Cool. Crisp. Classic.</p>
+            <p class="text-base xl:text-lg xl:mb-5">{{ t('hero.eyebrow') }}</p>
             <h2 class="hero-subtitle font-display text-[4vw] leading-none text-accent">
-              Sip the Spirit <br />
-              of Summer
+              {{ t('hero.subtitleLine1') }} <br />
+              {{ t('hero.subtitleLine2') }}
             </h2>
           </div>
 
@@ -333,8 +335,9 @@ function onCtaClick(event: MouseEvent) {
             <p
               class="hero-description max-w-[32ch] lg:max-w-none text-pretty text-base xl:text-lg xl:mb-5 leading-7 text-center lg:text-start"
             >
-              Every cocktail on our menu is a blend of premium ingredients, creative flair, and
-              timeless recipes <br class="hidden lg:block" />— designed to delight your senses.
+              {{ t('hero.descriptionLine1') }}
+              <br class="hidden lg:block" />
+              {{ t('hero.descriptionLine2') }}
             </p>
             <div class="flex">
               <a
@@ -342,7 +345,7 @@ function onCtaClick(event: MouseEvent) {
                 class="text-base font-semibold xl:text-lg xl:mb-5 transition-opacity hover:opacity-80 focus-ring text-accent mt-6 lg:mt-0"
                 @click="onCtaClick"
               >
-                View cocktails
+                {{ t('hero.cta') }}
               </a>
             </div>
           </div>

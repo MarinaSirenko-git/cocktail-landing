@@ -14,9 +14,10 @@
  * - Cleans up GSAP context on unmount to prevent duplicate triggers/memory leaks.
  */
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 import { useMediaQuery } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 
 type ArtGsapBundle = {
   gsap: typeof import('gsap').default
@@ -46,19 +47,9 @@ async function loadArtGsapBundle() {
 import iconCheck from '../assets/icons/icon-check.png'
 import bartenderWebp from '../assets/images/bartender-photo.webp'
 
-const leftItems = [
-  'Handpicked ingredients',
-  'Signature techniques',
-  'Bartending artistry in action',
-  'Freshly muddled flavors',
-]
-
-const rightItems = [
-  'Perfectly balanced blends',
-  'Garnished to perfection',
-  'Ice-cold every time',
-  'Expertly shaken & stirred',
-]
+const { t, tm } = useI18n()
+const leftItems = computed<string[]>(() => tm('art.leftItems') as string[])
+const rightItems = computed<string[]>(() => tm('art.rightItems') as string[])
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 const prefersReducedMotion = usePrefersReducedMotion()
@@ -150,7 +141,7 @@ onUnmounted(() => {
       <h2
         class="will-fade noisy-display-text text-[clamp(100px,20vw,252px)] text-center relative font-display font-normal leading-none tracking-[-0.02em] text-nowrap"
       >
-        The ART
+        {{ t('art.title') }}
       </h2>
       <div class="flex md:flex-row flex-col justify-between md:mb-16 md:mt-0 mt-70 gap-10">
         <ul class="will-fade space-y-4">
@@ -171,7 +162,7 @@ onUnmounted(() => {
             <source :srcset="bartenderWebp" type="image/webp" />
             <img
               :src="bartenderWebp"
-              alt="Bartender preparing a cocktail"
+              :alt="t('art.altBartenderPreparing')"
               width="1600"
               height="1066"
               loading="lazy"
@@ -198,16 +189,16 @@ onUnmounted(() => {
         <h2
           class="will-fade-title text-center text-nowrap leading-none font-display text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
         >
-          Sip-Worthy Perfection
+          {{ t('art.subtitle') }}
         </h2>
         <div class="will-appear hidden md:block z-20">
           <h3
             class="text-center font-display leading-none text-nowrap text-[clamp(2.25rem,1.8rem+1.5vw,3rem)]"
           >
-            Made with Craft and Poured with Passion
+            {{ t('art.heading') }}
           </h3>
           <p class="text-center text-base md:text-md">
-            This isn’t just a drink. It’s a carefully crafted moment made just for you.
+            {{ t('art.description') }}
           </p>
         </div>
       </div>

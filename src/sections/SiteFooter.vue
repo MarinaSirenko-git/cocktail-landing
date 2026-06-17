@@ -21,8 +21,9 @@ import iconX from '../assets/icons/icon-social-x.svg'
 import iconFacebook from '../assets/icons/icon-social-facebook.svg'
 import footerCocktailsWebp from '../assets/images/footer-cocktail-assortment.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
+import { useI18n } from 'vue-i18n'
 
 type FooterGsapBundle = {
   gsap: typeof import('gsap').default
@@ -51,13 +52,15 @@ async function loadFooterGsapBundle() {
   return footerGsapBundle
 }
 
-const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com', icon: iconInstagram },
-  { label: 'X', href: 'https://x.com', icon: iconX },
-  { label: 'Facebook', href: 'https://facebook.com', icon: iconFacebook },
-]
+const { t, tm } = useI18n()
 
-const hours = ['Mon-Thu : 5:00pm - 12:00am', 'Fri-Sat : 5:00pm - 1:00am', 'Sun : 5:00pm - 12:00am']
+const socialLinks = computed(() => [
+  { label: t('footer.social.instagram'), href: 'https://instagram.com', icon: iconInstagram },
+  { label: t('footer.social.x'), href: 'https://x.com', icon: iconX },
+  { label: t('footer.social.facebook'), href: 'https://facebook.com', icon: iconFacebook },
+])
+
+const hours = computed<string[]>(() => tm('footer.hours') as string[])
 
 const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -135,12 +138,12 @@ onUnmounted(() => {
             id="contact-title"
             class="font-display text-[clamp(3rem,1.85rem+5vw,5.625rem)] font-normal leading-[0.9] tracking-tight text-foreground"
           >
-            Where to Find Us
+            {{ t('footer.title') }}
           </h2>
 
           <div class="mt-10 space-y-8 lg:space-y-10">
             <div class="space-y-3">
-              <h3 class="text-md uppercase tracking-wide">Visit our bar</h3>
+              <h3 class="text-md uppercase tracking-wide">{{ t('footer.visitBar') }}</h3>
               <address class="not-italic">
                 <a
                   href="https://maps.google.com/?q=Baba+Nest+Sri+Panwa+88+Sakdidej+Rd+Wichit+Phuket+83000"
@@ -148,19 +151,19 @@ onUnmounted(() => {
                   rel="noopener noreferrer"
                   class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] leading-tight text-foreground transition-colors hover:text-muted"
                 >
-                  Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000
+                  {{ t('footer.address') }}
                 </a>
               </address>
             </div>
 
             <div class="space-y-2">
-              <h3 class="text-md uppercase tracking-wide">Contact us</h3>
+              <h3 class="text-md uppercase tracking-wide">{{ t('footer.contactUs') }}</h3>
               <p>
                 <a
                   href="tel:+66980146914"
                   class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
                 >
-                  +66 098 014 6914
+                  {{ t('footer.phone') }}
                 </a>
               </p>
               <p>
@@ -168,13 +171,13 @@ onUnmounted(() => {
                   href="mailto:hello@jsmcocktail.com"
                   class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
                 >
-                  hello@jsmcocktail.com
+                  {{ t('footer.email') }}
                 </a>
               </p>
             </div>
 
             <div class="space-y-2">
-              <h3 class="text-md uppercase tracking-wide">Open every day</h3>
+              <h3 class="text-md uppercase tracking-wide">{{ t('footer.openEveryDay') }}</h3>
               <p
                 v-for="line in hours"
                 :key="line"
@@ -184,8 +187,8 @@ onUnmounted(() => {
               </p>
             </div>
 
-            <nav aria-label="Social media" class="space-y-3">
-              <h3 class="text-md tracking-wide">Socials</h3>
+            <nav :aria-label="t('footer.socials')" class="space-y-3">
+              <h3 class="text-md tracking-wide">{{ t('footer.socials') }}</h3>
               <ul class="flex items-center justify-center gap-4">
                 <li v-for="link in socialLinks" :key="link.label">
                   <a

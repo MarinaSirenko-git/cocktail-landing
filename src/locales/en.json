@@ -1,0 +1,142 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "language": "Language",
+    "localeName": {
+      "en": "English",
+      "ru": "Russian",
+      "th": "Thai",
+      "zhHans": "Chinese"
+    },
+    "recipesFor": "Recipes for:"
+  },
+  "seo": {
+    "title": "Velvet Pour - Sip the Spirit of Summer",
+    "description": "Sip the Spirit of Summer at Velvet Pour. Explore handcrafted cocktails and mocktails, bartending philosophy, featured recipes, and visit us in Los Angeles.",
+    "siteName": "Velvet Pour",
+    "twitterCard": "summary_large_image"
+  },
+  "nav": {
+    "brand": "Velvet Pour",
+    "mainNavigation": "Main navigation",
+    "cocktails": "Cocktails",
+    "aboutUs": "About Us",
+    "theArt": "The Art",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "MOJITO",
+    "scrollToMenuAria": "Scroll to cocktails menu",
+    "eyebrow": "Cool. Crisp. Classic.",
+    "subtitleLine1": "Sip the Spirit",
+    "subtitleLine2": "of Summer",
+    "descriptionLine1": "Every cocktail on our menu is a blend of premium ingredients, creative flair, and",
+    "descriptionLine2": "timeless recipes - designed to delight your senses.",
+    "cta": "View cocktails"
+  },
+  "menu": {
+    "popularTitle": "Most popular cocktails:",
+    "lovedTitle": "Most loved mocktails:",
+    "popular": [
+      { "name": "Chapel Hill Shiraz", "meta": "AU | Bottle", "price": "฿390" },
+      { "name": "Caten Malbee", "meta": "AU | Bottle", "price": "฿520" },
+      { "name": "Rhino Pale Ale", "meta": "CA | 750 ml", "price": "฿330" },
+      { "name": "Irish Guinness", "meta": "IE | 600 ml", "price": "฿360" }
+    ],
+    "loved": [
+      { "name": "Tropical Bloom", "meta": "US | Bottle", "price": "฿220" },
+      { "name": "Passionfruit Mint", "meta": "US | Bottle", "price": "฿240" },
+      { "name": "Citrus Glow", "meta": "CA | 750 ml", "price": "฿210" },
+      { "name": "Lavender Fizz", "meta": "IE | 600 ml", "price": "฿230" }
+    ]
+  },
+  "philosophy": {
+    "badge": "Best Cocktails",
+    "title": "Where every detail matters - from muddle to garnish",
+    "paragraph": "Every cocktail we serve is a reflection of our obsession with detail - from the first muddle to the final garnish. That care is what turns a simple drink into something truly memorable.",
+    "rating": "4.5/5",
+    "moreThanCustomers": "More than +{count} customer | More than +{count} customers",
+    "customersAria": "More than 12,000 customers",
+    "featureTitle": "Crafted to Impress",
+    "checklist": [
+      "Perfectly balanced blends",
+      "Garnished to perfection",
+      "Ice-cold every time",
+      "Expertly shaken & stirred"
+    ],
+    "alt": {
+      "bartenderPouring": "Bartender pouring a cocktail",
+      "guestsEnjoying": "Guests enjoying cocktails at the bar",
+      "cocktailRow": "Assorted colorful cocktails in a row",
+      "cocktailGarnish": "Cocktail with oranges and flowers"
+    }
+  },
+  "art": {
+    "title": "The ART",
+    "leftItems": [
+      "Handpicked ingredients",
+      "Signature techniques",
+      "Bartending artistry in action",
+      "Freshly muddled flavors"
+    ],
+    "rightItems": [
+      "Perfectly balanced blends",
+      "Garnished to perfection",
+      "Ice-cold every time",
+      "Expertly shaken & stirred"
+    ],
+    "subtitle": "Sip-Worthy Perfection",
+    "heading": "Made with Craft and Poured with Passion",
+    "description": "This isn't just a drink. It's a carefully crafted moment made just for you.",
+    "altBartenderPreparing": "Bartender preparing a cocktail"
+  },
+  "carousel": {
+    "ariaFeaturedCocktails": "Featured cocktails",
+    "slides": [
+      {
+        "name": "Classic Mojito",
+        "title": "Simple Ingredients, Bold Flavor",
+        "description": "Made with tequila, lime juice, and orange liqueur, the Margarita is easy to make and full of character. Add a salted rim for the perfect drink on summer nights.",
+        "alt": "Classic Mojito in a tall cocktail glass"
+      },
+      {
+        "name": "Raspberry Mojito",
+        "title": "A Zesty Classic That Never Fails",
+        "description": "The Margarita is a classic that balances tangy lime, smooth tequila, and a touch of sweetness. Shaken, frozen, or on the rocks - it's always crisp and refreshing.",
+        "alt": "Raspberry Mojito in a tall cocktail glass"
+      },
+      {
+        "name": "Violet Breeze",
+        "title": "Simple Ingredients, Bold Flavor",
+        "description": "Made with tequila, lime juice, and orange liqueur, the Margarita is easy to make and full of character. Add a salted rim for the perfect drink on summer nights.",
+        "alt": "Violet Breeze cocktail in a tall glass"
+      },
+      {
+        "name": "Curacao Mojito",
+        "title": "Crafted With Care, Poured With Love",
+        "description": "Each cocktail is made with fresh ingredients and a passion for perfecting every pour, whether you're celebrating or simply relaxing.",
+        "alt": "Curacao Mojito in a tall cocktail glass"
+      }
+    ]
+  },
+  "footer": {
+    "title": "Where to Find Us",
+    "visitBar": "Visit our bar",
+    "address": "Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000",
+    "contactUs": "Contact us",
+    "phone": "+66 098 014 6914",
+    "email": "hello{'@'}jsmcocktail.com",
+    "openEveryDay": "Open every day",
+    "hours": [
+      "Mon-Thu : 5:00pm - 12:00am",
+      "Fri-Sat : 5:00pm - 1:00am",
+      "Sun : 5:00pm - 12:00am"
+    ],
+    "socials": "Socials",
+    "social": {
+      "instagram": "Instagram",
+      "x": "X",
+      "facebook": "Facebook"
+    }
+  }
+}

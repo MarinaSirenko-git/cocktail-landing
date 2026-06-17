@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">English locale flag icon</title>
+  <desc id="desc">Stylized United Kingdom flag in a rounded square.</desc>
+  <rect width="64" height="64" rx="12" fill="#012169" />
+  <path d="M0 8.5 8.5 0H17L0 17V8.5Zm47 0L55.5 0H64v8.5L47 26V17l17-17h-8.5L38 17h9Z" fill="#FFF" opacity=".95"/>
+  <path d="M64 55.5 55.5 64H47l17-17v8.5Zm-47 0L8.5 64H0v-8.5L17 38v9L0 64h8.5L26 47h-9Z" fill="#FFF" opacity=".95"/>
+  <path d="M0 47 17 64h-8.5L0 55.5V47Zm47 17L64 47v8.5L55.5 64H47Z" fill="#C8102E"/>
+  <path d="M0 17 17 0H8.5L0 8.5V17Zm47-17L64 17V8.5L55.5 0H47Z" fill="#C8102E"/>
+  <rect x="26" width="12" height="64" fill="#FFF" />
+  <rect y="26" width="64" height="12" fill="#FFF" />
+  <rect x="28.5" width="7" height="64" fill="#C8102E" />
+  <rect y="28.5" width="64" height="7" fill="#C8102E" />
+</svg>

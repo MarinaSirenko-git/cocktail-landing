@@ -27,6 +27,7 @@ import drinkCuracaoMojitoPng from '../assets/images/carousel-drink-curacao-mojit
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 import { useMediaQuery } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 
 type CarouselSlide = {
   name: string
@@ -36,40 +37,22 @@ type CarouselSlide = {
   alt: string
 }
 
-const slides: CarouselSlide[] = [
-  {
-    name: 'Classic Mojito',
-    image: drinkClassicMojitoPng,
-    title: 'Simple Ingredients, Bold Flavor',
-    description:
-      'Made with tequila, lime juice, and orange liqueur, the Margarita is easy to make and full of character. Add a salted rim for the perfect drink on summer nights.',
-    alt: 'Classic Mojito in a tall cocktail glass',
-  },
-  {
-    name: 'Raspberry Mojito',
-    image: drinkRaspberryMojitoPng,
-    title: 'A Zesty Classic That Never Fails',
-    description:
-      'The Margarita is a classic that balances tangy lime, smooth tequila, and a touch of sweetness. Shaken, frozen, or on the rocks—it’s always crisp & refreshing.',
-    alt: 'Raspberry Mojito in a tall cocktail glass',
-  },
-  {
-    name: 'Violet Breeze',
-    image: drinkVioletBreezePng,
-    title: 'Simple Ingredients, Bold Flavor',
-    description:
-      'Made with tequila, lime juice, and orange liqueur, the Margarita is easy to make and full of character. Add a salted rim for the perfect drink on summer nights.',
-    alt: 'Violet Breeze cocktail in a tall glass',
-  },
-  {
-    name: 'Curacao Mojito',
-    image: drinkCuracaoMojitoPng,
-    title: 'Crafted With Care, Poured With Love',
-    description:
-      "Each cocktail is made with fresh ingredients and a passion for perfecting every pour, whether you're celebrating or simply relaxing.",
-    alt: 'Curacao Mojito in a tall cocktail glass',
-  },
-]
+const { t, tm } = useI18n()
+
+const slides = computed<CarouselSlide[]>(() => {
+  const localizedSlides = tm('carousel.slides') as Array<Omit<CarouselSlide, 'image'>>
+  const images = [
+    drinkClassicMojitoPng,
+    drinkRaspberryMojitoPng,
+    drinkVioletBreezePng,
+    drinkCuracaoMojitoPng,
+  ]
+
+  return localizedSlides.map((slide, index) => ({
+    ...slide,
+    image: images[index] ?? drinkClassicMojitoPng,
+  }))
+})
 
 const activeTabIndex = ref(1)
 const sectionRef = ref<HTMLElement | null>(null)
@@ -77,7 +60,7 @@ const mobileTrackRef = ref<HTMLElement | null>(null)
 const prefersReducedMotion = usePrefersReducedMotion()
 const isDesktop = useMediaQuery('(min-width: 1024px)')
 const isFirstSlide = computed(() => activeTabIndex.value === 0)
-const isLastSlide = computed(() => activeTabIndex.value === slides.length - 1)
+const isLastSlide = computed(() => activeTabIndex.value === slides.value.length - 1)
 
 type CarouselGsapBundle = {
   gsap: typeof import('gsap').default
@@ -181,7 +164,7 @@ function setActiveSlide(index: number) {
 
 function goToPreviousSlide() {
   if (isDesktop.value) {
-    const nextIndex = (activeTabIndex.value - 1 + slides.length) % slides.length
+    const nextIndex = (activeTabIndex.value - 1 + slides.value.length) % slides.value.length
     setActiveSlide(nextIndex)
     return
   }
@@ -193,7 +176,7 @@ function goToPreviousSlide() {
 
 function goToNextSlide() {
   if (isDesktop.value) {
-    const nextIndex = (activeTabIndex.value + 1) % slides.length
+    const nextIndex = (activeTabIndex.value + 1) % slides.value.length
     setActiveSlide(nextIndex)
     return
   }
@@ -273,7 +256,7 @@ watch(activeTabIndex, async () => {
       <div class="relative z-10 container">
         <div
           role="tablist"
-          aria-label="Featured cocktails"
+          :aria-label="t('carousel.ariaFeaturedCocktails')"
           class="mb-12 flex flex-wrap justify-center gap-[40px] lg:gap-x-[85px]"
         >
           <button
@@ -356,7 +339,7 @@ watch(activeTabIndex, async () => {
           >
             <div class="grid grid-cols-1 items-end gap-4">
               <div class="order-2">
-                <p class="text-sm text-foreground">Recipes for:</p>
+                <p class="text-sm text-foreground">{{ t('common.recipesFor') }}</p>
                 <h2
                   class="mt-2 font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent"
                 >
@@ -402,7 +385,7 @@ watch(activeTabIndex, async () => {
             class="js-desktop-active-panel grid grid-cols-1 items-end gap-4 lg:gap-8 lg:grid-cols-[repeat(3,minmax(0,440px))] lg:justify-between"
           >
             <div class="js-desktop-slide-title order-2 lg:order-1 lg:mb-7 lg:max-w-[201px] lg:pl-20">
-              <p class="text-sm text-foreground">Recipes for:</p>
+              <p class="text-sm text-foreground">{{ t('common.recipesFor') }}</p>
               <h2
                 id="carousel-recipe-title"
                 class="mt-2 leading-none font-display text-[clamp(1.875rem,1.44rem+1.88vw,3.125rem)] text-accent"

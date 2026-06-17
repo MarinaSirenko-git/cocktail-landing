@@ -12,8 +12,9 @@
  * - Section-scoped GSAP context and SplitText revert keep markup clean on unmount.
  */
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
+import { useI18n } from 'vue-i18n'
 
 type PhilosophyGsapBundle = {
   gsap: typeof import('gsap').default
@@ -58,12 +59,8 @@ const customerAvatars = [
   { webp: avatar3Webp, png: avatar3Webp },
 ]
 
-const checklistItems = [
-  'Perfectly balanced blends',
-  'Garnished to perfection',
-  'Ice-cold every time',
-  'Expertly shaken & stirred',
-]
+const { t, tm } = useI18n()
+const checklistItems = computed<string[]>(() => tm('philosophy.checklist') as string[])
 
 const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -128,24 +125,22 @@ onUnmounted(() => {
     <div class="container grid grid-cols-1 lg:grid-cols-2 gap-y-[clamp(32px,6vw,80px)]">
       <div class="lg:col-span-1 flex flex-col gap-[32px]">
         <p
-          class="flex-center rounded-pill bg-white text-black text-sm px-4 py-2 text-lg font-medium max-w-[136px]"
+          class="flex-center text-nowrap rounded-pill bg-white text-black text-sm px-4 py-2 text-lg font-medium max-w-[136px]"
         >
-          Best Cocktails
+          {{ t('philosophy.badge') }}
         </p>
         <h2
           id="philosophy-title"
           class="font-display text-foreground text-[clamp(3rem,2.65rem+1.5vw,4rem)] w-full max-w-[550px] leading-[0.9]"
         >
-          Where every detail matters - from muddle to garnish
+          {{ t('philosophy.title') }}
         </h2>
       </div>
 
       <div class="lg:col-span-1 lg:justify-self-end w-full max-w-[430px]">
         <div class="flex flex-col gap-[32px]">
           <p id="philosophy-paragraph" class="text-md lg:text-lg text-foreground">
-            Every cocktail we serve is a reflection of our obsession with detail — from the first
-            muddle to the final garnish. That care is what turns a simple drink into something truly
-            memorable.
+            {{ t('philosophy.paragraph') }}
           </p>
           <div class="flex flex-nowrap items-center gap-4">
             <div
@@ -163,13 +158,15 @@ onUnmounted(() => {
                   class="size-4"
                 />
               </div>
-              <p class="font-bold text-[clamp(1.25rem,1.16rem+0.4vw,1.5rem)]">4.5/5</p>
-              <p class="text-xs lg:text-sm text-muted-subtle">More than +12000 customers</p>
+              <p class="font-bold text-[clamp(1.25rem,1.16rem+0.4vw,1.5rem)]">{{ t('philosophy.rating') }}</p>
+              <p class="text-xs lg:text-sm text-muted-subtle">
+                {{ t('philosophy.moreThanCustomers', 12000) }}
+              </p>
             </div>
 
             <div
               class="relative flex h-[85px] w-[196px] items-center justify-center overflow-hidden rounded-pill bg-card-gradient"
-              aria-label="More than 12,000 customers"
+              :aria-label="t('philosophy.customersAria')"
             >
               <div aria-hidden="true" class="noisy pointer-events-none absolute inset-0 z-10" />
               <div class="flex items-center z-20">
@@ -212,7 +209,7 @@ onUnmounted(() => {
             <source :srcset="bentoBartenderWebp" type="image/webp" />
             <img
               :src="bentoBartenderWebp"
-              alt="Bartender pouring a cocktail"
+              :alt="t('philosophy.alt.bartenderPouring')"
               width="330"
               height="285"
               decoding="async"
@@ -231,7 +228,7 @@ onUnmounted(() => {
             id="philosophy-feature-title"
             class="font-display text-[clamp(1.875rem,1.74rem+0.56vw,2.25rem)] leading-none text-foreground z-20"
           >
-            Crafted to Impress
+            {{ t('philosophy.featureTitle') }}
           </h3>
           <ul class="pt-5 border-t mt-3.5 flex flex-col gap-3.5 border-white/20 z-20">
             <li v-for="item in checklistItems" :key="item" class="flex items-center gap-2.5">
@@ -257,7 +254,7 @@ onUnmounted(() => {
             <source :srcset="bentoGuestsWebp" type="image/webp" />
             <img
               :src="bentoGuestsWebp"
-              alt="Guests enjoying cocktails at the bar"
+              :alt="t('philosophy.alt.guestsEnjoying')"
               width="580"
               height="285"
               decoding="async"
@@ -275,7 +272,7 @@ onUnmounted(() => {
             <source :srcset="bentoRowWebp" type="image/webp" />
             <img
               :src="bentoRowWebp"
-              alt="Assorted colorful cocktails in a row"
+              :alt="t('philosophy.alt.cocktailRow')"
               width="780"
               height="285"
               decoding="async"
@@ -293,7 +290,7 @@ onUnmounted(() => {
             <source :srcset="bentoGarnishWebp" type="image/webp" />
             <img
               :src="bentoGarnishWebp"
-              alt="Cocktail with oranges and flowers"
+              :alt="t('philosophy.alt.cocktailGarnish')"
               width="317"
               height="317"
               decoding="async"
