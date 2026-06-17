@@ -55,6 +55,9 @@ let ctx: { revert: () => void } | undefined
 let activeScrollTween: any = null
 let idleHandle: number | null = null
 let videoTimeline: any = null
+const videoScrubProxy = { time: 0 }
+let lastScrubTime = -1
+let videoScrollInitialized = false
 
 type IdleSchedulerType = 'idle' | 'timeout'
 let idleSchedulerType: IdleSchedulerType | null = null
@@ -78,8 +81,28 @@ function scheduleVideoMount() {
   idleSchedulerType = 'timeout'
 }
 
+function applyVideoScrubTime(video: HTMLVideoElement, target: number) {
+  if (!Number.isFinite(target)) return
+
+  const rounded = Math.round(target * 50) / 50
+  if (rounded === lastScrubTime) return
+  if (Math.abs(video.currentTime - rounded) < 0.02) return
+
+  lastScrubTime = rounded
+
+  try {
+    video.currentTime = rounded
+  } catch {
+    // Chrome may reject seeks while data is still buffering.
+  }
+}
+
 function setupVideoScroll(video: HTMLVideoElement) {
+  if (videoScrollInitialized) return
   if (!sectionRef.value || prefersReducedMotion.value || !gsapBundle) return
+
+  const duration = video.duration
+  if (!Number.isFinite(duration) || duration <= 0) return
 
   const { gsap } = gsapBundle
 
@@ -87,6 +110,9 @@ function setupVideoScroll(video: HTMLVideoElement) {
   const endValue = isMobile.value ? '120% top' : 'bottom top'
 
   videoTimeline?.kill()
+  videoScrubProxy.time = video.currentTime
+  lastScrubTime = -1
+
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#hero-video',
@@ -97,19 +123,37 @@ function setupVideoScroll(video: HTMLVideoElement) {
     },
   })
 
-  timeline.to(video, {
-    currentTime: video.duration,
+  timeline.to(videoScrubProxy, {
+    time: duration,
     ease: 'none',
+    onUpdate: () => {
+      applyVideoScrubTime(video, videoScrubProxy.time)
+    },
   })
+
   videoTimeline = timeline
+  videoScrollInitialized = true
+}
+
+function trySetupVideoScroll() {
+  const video = videoRef.value
+  if (!video || !isVideoReady.value) return
+  setupVideoScroll(video)
+}
+
+function markVideoReady() {
+  if (isVideoReady.value) return
+  isVideoReady.value = true
+  trySetupVideoScroll()
 }
 
 function onVideoLoadedData() {
   const video = videoRef.value
   if (!video) return
 
-  isVideoReady.value = true
-  setupVideoScroll(video)
+  // Buffer frames in the background without calling load(), which crashes Chromium/Firefox.
+  video.preload = 'auto'
+  markVideoReady()
 }
 
 // make actions only after the component is mounted
@@ -184,10 +228,7 @@ onMounted(() => {
       }
     }, mountedSection)
 
-    const video = videoRef.value
-    if (video && isVideoReady.value) {
-      setupVideoScroll(video)
-    }
+    trySetupVideoScroll()
   })
 })
 
@@ -196,6 +237,8 @@ onUnmounted(() => {
   ctx?.revert()
   videoTimeline?.kill()
   videoTimeline = null
+  videoScrollInitialized = false
+  lastScrubTime = -1
   activeScrollTween?.kill()
   activeScrollTween = null
 
@@ -255,7 +298,7 @@ function onCtaClick(event: MouseEvent) {
       class="flex flex-col justify-center noisy relative z-20 flex h-[calc(100dvh-var(--header-height,0px))] w-full flex-start lg:flex-between border border-transparent"
     >
       <div class="container flex flex-col md:justify-between h-full">
-        <h1 id="title" class="decorative-text text-[115px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
+        <h1 id="title" class="decorative-text text-[110px] md:text-[16vw] relative z-20 flex-center h-[30%] md:h-[50%]">MOJITO</h1>
 
         <div class="relative z-20 flex-start md:h-[50%] flex md:justify-between">
           <a

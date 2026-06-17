@@ -172,12 +172,12 @@ function onNavClick(event: MouseEvent, href: string) {
 
       <nav aria-label="Main navigation" class="w-full md:w-auto">
         <ul
-          class="flex items-center justify-center gap-6 text-sm font-medium text-muted md:gap-12 md:text-base"
+          class="flex items-center justify-center gap-4 text-sm font-medium text-muted md:gap-12 md:text-base"
         >
           <li v-for="item in navItems" :key="item.href">
             <a
               :href="item.href"
-              class="focus-ring transition-opacity hover:opacity-80"
+              class="focus-ring transition-opacity hover:opacity-80 text-nowrap"
               @click="onNavClick($event, item.href)"
             >
               {{ item.label }}
