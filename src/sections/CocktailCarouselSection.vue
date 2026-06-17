@@ -1,3 +1,22 @@
+/**
+ * Cocktail Carousel section
+ *
+ * GSAP behavior:
+ * - Animates the active desktop slide content (`image`, `title`, `heading`, `copy`)
+ *   whenever the active tab changes.
+ * - Rebuilds a short reveal timeline per active slide and kills previous tweens/timelines
+ *   to avoid animation overlap.
+ *
+ * Interaction model:
+ * - Desktop: tab buttons + cyclic prev/next arrows.
+ * - Mobile: horizontal snap track with scroll position syncing to active tab index.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP import (`loadCarouselGsapBundle`) keeps initial bundle smaller.
+ * - Reduced-motion users skip desktop GSAP slide transitions.
+ * - Animation work is scoped to the active desktop panel only.
+ * - Timers/timelines are cleaned up on unmount.
+ */
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import iconArrow from '../assets/icons/icon-arrow-right.svg'
@@ -279,7 +298,7 @@ watch(activeTabIndex, async () => {
         >
           <button
             type="button"
-            class="pointer-events-auto flex flex-col items-start justify-end gap-2 text-left text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
+            class="pointer-events-auto flex flex-col items-start justify-end gap-2 text-left text-muted transition-colors hover:text-foreground focus-ring lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
             :disabled="!isDesktop && isFirstSlide"
             :aria-disabled="!isDesktop && isFirstSlide"
             @click="goToPreviousSlide"
@@ -302,7 +321,7 @@ watch(activeTabIndex, async () => {
 
           <button
             type="button"
-            class="pointer-events-auto flex flex-col items-end gap-2 text-muted transition-colors hover:text-foreground lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
+            class="pointer-events-auto flex flex-col items-end gap-2 text-muted transition-colors hover:text-foreground focus-ring lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
             :disabled="!isDesktop && isLastSlide"
             :aria-disabled="!isDesktop && isLastSlide"
             @click="goToNextSlide"

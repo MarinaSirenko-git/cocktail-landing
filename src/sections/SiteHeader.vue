@@ -1,3 +1,21 @@
+/**
+ * Site header
+ *
+ * GSAP behavior:
+ * - Adds a scroll-triggered backdrop transition (transparent -> blurred tinted backdrop)
+ *   when the page is scrolled beyond the hero area.
+ * - Uses ScrollToPlugin for smooth in-page navigation to section anchors.
+ *
+ * Interaction behavior:
+ * - Navigation links intercept hash clicks and apply header offset compensation.
+ * - Active smooth scroll tween is cancelled before starting a new one.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP loading (`gsap`, `ScrollTrigger`, `ScrollToPlugin`) reduces initial bundle cost.
+ * - Skips animated scrolling/backdrop effects when reduced-motion is enabled.
+ * - Keeps `--header-height` CSS variable in sync via resize listener + ResizeObserver.
+ * - Cleans up observer, listeners, GSAP context, and active tween on unmount.
+ */
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import logoMark from '../assets/logos/velvet-pour-mark.png'
@@ -36,14 +54,11 @@ async function loadHeaderGsapBundle() {
   return headerGsapBundle
 }
 
-// create reactive variables
 const headerBackdropRef = ref<HTMLElement | null>(null)
 const headerRef = ref<HTMLElement | null>(null)
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create variable to store the animation context
 let headerCtx: { revert: () => void } | undefined
-// create variable to control active animated scroll to kill prev scroll
 let activeScrollTween: any = null
 let headerResizeObserver: ResizeObserver | null = null
 
@@ -58,12 +73,10 @@ onMounted(async () => {
   headerResizeObserver = new ResizeObserver(syncHeaderHeightVar)
   if (headerRef.value) headerResizeObserver.observe(headerRef.value)
 
-  // check if header doesn`t exist or user reduce motion
   if (!headerBackdropRef.value || prefersReducedMotion.value) return
 
   const { gsap } = await loadHeaderGsapBundle()
 
-  // Animate the translucent header backdrop once user scrolls past hero.
   headerCtx = gsap.context(() => {
     const navTween = gsap.timeline({
       scrollTrigger: {
@@ -73,7 +86,6 @@ onMounted(async () => {
       },
     })
 
-    // use fromTo to control back/forvard state striktly
     navTween.fromTo(
       headerBackdropRef.value,
       {
@@ -90,7 +102,6 @@ onMounted(async () => {
   })
 })
 
-// clean all animations
 onUnmounted(() => {
   window.removeEventListener('resize', syncHeaderHeightVar)
   headerResizeObserver?.disconnect()
@@ -101,24 +112,19 @@ onUnmounted(() => {
 })
 
 function scrollToSection(hash: string) {
-  // find target section by id
   const target = document.querySelector(hash)
   if (!target) return
 
-  // find height of header
   const offsetY = document.querySelector('header')?.getBoundingClientRect().height ?? 0
 
-  // if active scroll exist kill the process
   activeScrollTween?.kill()
 
-  // Skip animated scroll when user requests reduced motion.
   if (prefersReducedMotion.value) {
     const top = target.getBoundingClientRect().top + window.scrollY - offsetY
     window.scrollTo({ top, behavior: 'instant' })
     return
   }
 
-  // setup animations rules
   if (!headerGsapBundle) {
     const top = target.getBoundingClientRect().top + window.scrollY - offsetY
     window.scrollTo({ top, behavior: 'smooth' })
@@ -135,7 +141,6 @@ function scrollToSection(hash: string) {
   })
 }
 
-// call fn by click or enter
 function onNavClick(event: MouseEvent, href: string) {
   if (!href.startsWith('#')) return
 

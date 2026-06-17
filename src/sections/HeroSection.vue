@@ -1,3 +1,22 @@
+/**
+ * Hero section
+ *
+ * GSAP behavior:
+ * - Splits and animates the hero heading/subtitle text on mount.
+ * - Runs a scroll-linked parallax timeline for leaves and CTA arrow.
+ * - Drives hero video progress with ScrollTrigger + scrubbed `currentTime` updates.
+ *
+ * Interaction model:
+ * - Defers video mount with idle scheduling to reduce initial main-thread pressure.
+ * - Keeps poster visible until video is ready, then cross-fades to video.
+ * - Supports smooth anchor scrolling to the menu section via ScrollToPlugin.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP loading (`gsap`, `SplitText`, `ScrollTrigger`, `ScrollToPlugin`)
+ *   keeps initial bundle smaller.
+ * - Guards all animation setup when reduced-motion is enabled.
+ * - Uses scoped GSAP context and cleanup on unmount to avoid duplicate triggers.
+ */
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
@@ -20,7 +39,6 @@ async function loadGsapBundle() {
   if (gsapBundle) return gsapBundle
 
   if (!gsapBundlePromise) {
-    // Lazy-load animation libraries so they don't inflate the initial JS payload.
     gsapBundlePromise = (async () => {
       const [{ default: gsap }, { SplitText }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all([
         import('gsap'),
@@ -39,18 +57,14 @@ async function loadGsapBundle() {
   return gsapBundle
 }
 
-// detect screens less then 768 as mobile devices and reduced motion
 const isMobile = useMediaQuery('(max-width: 767px)')
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create reactive container with .value field where Vue will add real DOM element value
-// type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
 const showVideo = ref(false)
 const isVideoReady = ref(false)
 
-// create variable to store the animation context
 let ctx: { revert: () => void } | undefined
 let activeScrollTween: any = null
 let idleHandle: number | null = null
@@ -93,7 +107,6 @@ function applyVideoScrubTime(video: HTMLVideoElement, target: number) {
   try {
     video.currentTime = rounded
   } catch {
-    // Chrome may reject seeks while data is still buffering.
   }
 }
 
@@ -151,32 +164,25 @@ function onVideoLoadedData() {
   const video = videoRef.value
   if (!video) return
 
-  // Buffer frames in the background without calling load(), which crashes Chromium/Firefox.
   video.preload = 'auto'
   markVideoReady()
 }
 
-// make actions only after the component is mounted
 onMounted(() => {
   scheduleVideoMount()
 
-  // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
   const mountedSection = sectionRef.value
 
   void loadGsapBundle().then(({ gsap, SplitText }) => {
-    // Scope selectors to the hero section and revert all GSAP work on cleanup.
     ctx = gsap.context(function () {
-      // initiate elements for SplitText plugin
       const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
       const subtitleSplit = !isMobile.value
         ? new SplitText('.hero-subtitle', { type: 'lines', aria: 'auto' })
         : null
 
-      // add special class to each title's char
       heroSplit.chars.forEach((char) => char.classList.add('text-gradient'))
 
-      // Text reveal timeline (title chars, then subtitle lines).
       gsap
         .timeline()
         .from(heroSplit.chars, {
@@ -207,7 +213,6 @@ onMounted(() => {
           '>',
         )
 
-      // Scroll-linked parallax timeline for decorative elements (leaves + arrow).
       gsap
         .timeline({
           scrollTrigger: {
@@ -221,7 +226,6 @@ onMounted(() => {
         .to('#left-leaf', { y: -200 }, 0)
         .to('.arrow', { y: 100 }, 0)
 
-      // On unmount, revert SplitText wrappers and restore original text markup.
       return () => {
         heroSplit.revert()
         subtitleSplit?.revert()
@@ -232,7 +236,6 @@ onMounted(() => {
   })
 })
 
-// clean listeners
 onUnmounted(() => {
   ctx?.revert()
   videoTimeline?.kill()

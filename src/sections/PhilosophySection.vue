@@ -1,3 +1,16 @@
+/**
+ * Philosophy section
+ *
+ * GSAP behavior:
+ * - Splits the main heading into words with SplitText for a staggered reveal.
+ * - Runs a one-time scroll-triggered timeline to animate heading words and
+ *   then fade in all philosophy grid items.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP loading (`gsap`, `SplitText`, `ScrollTrigger`) reduces initial bundle cost.
+ * - Animation setup is skipped when users prefer reduced motion.
+ * - Section-scoped GSAP context and SplitText revert keep markup clean on unmount.
+ */
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
@@ -52,30 +65,21 @@ const checklistItems = [
   'Expertly shaken & stirred',
 ]
 
-// detect reduced motion
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create reactive container with .value field where Vue will add real DOM element value
-// type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
-// create variable to store the animation context
 let ctx: { revert: () => void } | undefined
 
-// make actions only after the component is mounted
 onMounted(async () => {
-  // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
   const { gsap, SplitText } = await loadPhilosophyGsapBundle()
   const mountedSection = sectionRef.value
 
-  // Scope selectors to the hero section and revert all GSAP work on cleanup.
   ctx = gsap.context(function () {
-    // initiate elements for SplitText plugin
     const titleSplit = new SplitText('#philosophy-title', { type: 'words', aria: 'auto' })
 
-    // Scroll-linked parallax timeline for title and images.
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: mountedSection,
@@ -103,14 +107,12 @@ onMounted(async () => {
         '-=0.5',
       )
 
-    // restore original text markup
     return () => {
       titleSplit.revert()
     }
   }, mountedSection)
 })
 
-// clean listeners
 onUnmounted(() => {
   ctx?.revert()
 })

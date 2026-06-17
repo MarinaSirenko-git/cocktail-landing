@@ -1,3 +1,19 @@
+/**
+ * Menu section
+ *
+ * GSAP behavior:
+ * - Creates a scroll-linked timeline that animates decorative side leaves
+ *   into place while the menu enters the viewport.
+ *
+ * Content behavior:
+ * - Renders two static menu groups (popular cocktails and loved mocktails)
+ *   from typed arrays for predictable ordering and easy edits.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP loading (`gsap` + `ScrollTrigger`) keeps initial bundle smaller.
+ * - Skips animation setup when reduced-motion is enabled.
+ * - Uses section-scoped GSAP context with unmount cleanup.
+ */
 <script setup lang="ts">
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import { onMounted, onUnmounted, ref } from 'vue'
@@ -23,8 +39,6 @@ const lovedMocktails: MenuItem[] = [
   { name: 'Lavender Fizz', meta: 'IE | 600 ml', price: '$29' },
 ]
 
-// create reactive container with .value field where Vue will add real DOM element value
-// type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
 type MenuGsapBundle = {
@@ -54,11 +68,9 @@ async function loadMenuGsapBundle() {
 
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create variable to store the animation context
 let ctx: { revert: () => void } | undefined
 
 onMounted(async () => {
-  // add check if  user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
   const { gsap } = await loadMenuGsapBundle()

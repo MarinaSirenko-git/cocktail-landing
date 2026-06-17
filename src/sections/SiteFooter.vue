@@ -1,3 +1,20 @@
+/**
+ * Footer contact section
+ *
+ * GSAP behavior:
+ * - Splits footer title into words and reveals them on first viewport entry.
+ * - Staggers in contact content (`h3`, `address`, links, paragraphs).
+ * - Applies subtle parallax shifts for decorative leaves.
+ *
+ * Content behavior:
+ * - Renders social links and opening hours from local arrays.
+ * - Exposes phone/email as actionable links and address as a Google Maps link.
+ *
+ * Optimizations and accessibility:
+ * - Dynamic GSAP loading (`gsap`, `SplitText`, `ScrollTrigger`) reduces initial bundle cost.
+ * - Skips animation setup when reduced-motion is enabled.
+ * - Cleans up SplitText/GSAP context on unmount.
+ */
 <script setup lang="ts">
 import iconInstagram from '../assets/icons/icon-social-instagram.svg'
 import iconX from '../assets/icons/icon-social-x.svg'
@@ -44,8 +61,6 @@ const hours = ['Mon-Thu : 5:00pm - 12:00am', 'Fri-Sat : 5:00pm - 1:00am', 'Sun :
 
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create reactive container with .value field where Vue will add real DOM element value
-// type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
 let ctx: { revert: () => void } | undefined
@@ -126,10 +141,15 @@ onUnmounted(() => {
           <div class="mt-10 space-y-8 lg:space-y-10">
             <div class="space-y-3">
               <h3 class="text-md uppercase tracking-wide">Visit our bar</h3>
-              <address
-                class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] leading-tight text-foreground not-italic"
-              >
-                Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000
+              <address class="not-italic">
+                <a
+                  href="https://maps.google.com/?q=Baba+Nest+Sri+Panwa+88+Sakdidej+Rd+Wichit+Phuket+83000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] leading-tight text-foreground transition-colors hover:text-muted"
+                >
+                  Baba Nest, Sri Panwa, 88 Sakdidej Rd, Wichit, Phuket 83000
+                </a>
               </address>
             </div>
 
@@ -138,7 +158,7 @@ onUnmounted(() => {
               <p>
                 <a
                   href="tel:+66980146914"
-                  class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
+                  class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
                 >
                   +66 098 014 6914
                 </a>
@@ -146,7 +166,7 @@ onUnmounted(() => {
               <p>
                 <a
                   href="mailto:hello@jsmcocktail.com"
-                  class="text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
+                  class="focus-ring text-[clamp(1.25rem,1.14rem+0.49vw,1.563rem)] text-foreground transition-colors hover:text-muted"
                 >
                   hello@jsmcocktail.com
                 </a>
@@ -173,7 +193,7 @@ onUnmounted(() => {
                     :aria-label="link.label"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="transition-opacity"
+                    class="focus-ring transition-opacity"
                   >
                     <img
                       :src="link.icon"

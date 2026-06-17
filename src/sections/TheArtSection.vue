@@ -1,3 +1,18 @@
+/**
+ * The Art section
+ *
+ * GSAP behavior:
+ * - Pins section during scroll via ScrollTrigger.
+ * - On desktop, fades out side lists/title, then expands mask on the bartender image,
+ *   and reveals the final caption block.
+ * - Uses scrubbed timeline for scroll-linked progression.
+ *
+ * Optimizations:
+ * - Dynamic GSAP loading (`gsap` + `ScrollTrigger`) to reduce initial bundle size.
+ * - Mobile-specific behavior: desktop fade sequence is skipped on small screens.
+ * - Respects reduced-motion user preference and skips animation setup entirely.
+ * - Cleans up GSAP context on unmount to prevent duplicate triggers/memory leaks.
+ */
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
@@ -45,20 +60,14 @@ const rightItems = [
   'Expertly shaken & stirred',
 ]
 
-// detect screens less then 768 as mobile devices and reduced motion
 const isMobile = useMediaQuery('(max-width: 767px)')
 const prefersReducedMotion = usePrefersReducedMotion()
 
-// create reactive container with .value field where Vue will add real DOM element value
-// type null is important because element exists only after mount
 const sectionRef = ref<HTMLElement | null>(null)
 
-// create variable to store the animation context
 let ctx: { revert: () => void } | undefined
 
-// make actions only after the component is mounted
 onMounted(async () => {
-  // add check if section isn`t found or user has reduced motion
   if (!sectionRef.value || prefersReducedMotion.value) return
 
   const { gsap } = await loadArtGsapBundle()
@@ -125,7 +134,6 @@ onMounted(async () => {
   }, sectionRef.value)
 })
 
-// clean listeners
 onUnmounted(() => {
   ctx?.revert()
 })
