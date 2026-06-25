@@ -7,6 +7,67 @@
 }
 
 @font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/cormorant-garamond-v21-cyrillic_latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/cormorant-garamond-v21-cyrillic_latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif SC';
+  src: url('/fonts/noto-serif-sc-v35-chinese-simplified_latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif SC';
+  src: url('/fonts/noto-serif-sc-v35-chinese-simplified_latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif Thai';
+  src: url('/fonts/noto-serif-thai-v28-latin_thai-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif Thai';
+  src: url('/fonts/noto-serif-thai-v28-latin_thai-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Display-serif fallbacks per locale — Modern Negra Demo is Latin-only. */
+html[lang='ru'] {
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+}
+
+html[lang='zh-Hans'] {
+  --font-display: 'Noto Serif SC', ui-serif, Georgia, serif;
+}
+
+html[lang='th'] {
+  --font-display: 'Noto Serif Thai', ui-serif, Georgia, serif;
+}
+
+@font-face {
   font-family: 'Mona Sans';
   src: url('../assets/fonts/mona-sans-v4-latin-ext-regular.woff2') format('woff2');
   font-weight: 400;

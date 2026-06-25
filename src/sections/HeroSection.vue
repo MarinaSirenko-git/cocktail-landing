@@ -18,7 +18,7 @@
  * - Uses scoped GSAP context and cleanup on unmount to avoid duplicate triggers.
  */
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import iconArrowDown from '../assets/icons/arrow-down.svg'
@@ -27,7 +27,7 @@ import heroVideo from '../assets/video/output.mp4'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 
 const heroPosterWebp = '/images/hero-poster.webp'
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 type GsapBundle = {
   gsap: typeof import('gsap').default
@@ -63,9 +63,39 @@ const isMobile = useMediaQuery('(max-width: 767px)')
 const prefersReducedMotion = usePrefersReducedMotion()
 
 const sectionRef = ref<HTMLElement | null>(null)
+const subtitleRef = ref<HTMLElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
 const showVideo = ref(false)
 const isVideoReady = ref(false)
+
+let subtitleSplit: InstanceType<GsapBundle['SplitText']> | null = null
+
+function revertSubtitleSplit() {
+  subtitleSplit?.revert()
+  subtitleSplit = null
+}
+
+async function animateSubtitleOnLocaleChange() {
+  revertSubtitleSplit()
+  await nextTick()
+
+  const el = subtitleRef.value
+  if (!el || isMobile.value || prefersReducedMotion.value || !gsapBundle) return
+
+  const { gsap, SplitText } = gsapBundle
+  subtitleSplit = new SplitText(el, { type: 'lines', aria: 'auto' })
+  gsap.from(subtitleSplit.lines, {
+    opacity: 0,
+    yPercent: 40,
+    duration: 0.8,
+    ease: 'expo.out',
+    stagger: 0.06,
+  })
+}
+
+watch(locale, () => {
+  void animateSubtitleOnLocaleChange()
+})
 
 let ctx: { revert: () => void } | undefined
 let activeScrollTween: any = null
@@ -179,9 +209,10 @@ onMounted(() => {
   void loadGsapBundle().then(({ gsap, SplitText }) => {
     ctx = gsap.context(function () {
       const heroSplit = new SplitText('#title', { type: 'chars,words', aria: 'auto' })
-      const subtitleSplit = !isMobile.value
-        ? new SplitText('.hero-subtitle', { type: 'lines', aria: 'auto' })
-        : null
+      subtitleSplit =
+        !isMobile.value && subtitleRef.value
+          ? new SplitText(subtitleRef.value, { type: 'lines', aria: 'auto' })
+          : null
 
       heroSplit.chars.forEach((char) => char.classList.add('text-gradient'))
 
@@ -239,6 +270,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  revertSubtitleSplit()
   ctx?.revert()
   videoTimeline?.kill()
   videoTimeline = null
@@ -325,7 +357,11 @@ function onCtaClick(event: MouseEvent) {
 
           <div class="flex flex-col gap-2 hidden lg:block">
             <p class="text-base xl:text-lg xl:mb-5">{{ t('hero.eyebrow') }}</p>
-            <h2 class="hero-subtitle font-display text-[4vw] leading-none text-accent">
+            <h2
+              ref="subtitleRef"
+              :key="locale"
+              class="hero-subtitle font-display text-[4vw] leading-none text-accent"
+            >
               {{ t('hero.subtitleLine1') }} <br />
               {{ t('hero.subtitleLine2') }}
             </h2>

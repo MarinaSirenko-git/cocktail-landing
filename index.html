@@ -7,13 +7,13 @@
     <meta name="description" content="" />
     <link rel="canonical" href="https://cocktail-landing.marina-sirenko1-80f.workers.dev/" />
     <link rel="icon" type="image/png" href="/src/assets/logos/velvet-pour-mark.png" />
-    <link
-      rel="preload"
-      href="/fonts/modern-negra-demo.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <script>
+      ;(function () {
+        var locale = localStorage.getItem('locale') || 'en'
+        if (['en', 'ru', 'zh-Hans', 'th'].indexOf(locale) === -1) locale = 'en'
+        document.documentElement.lang = locale
+      })()
+    </script>
     <link
       rel="preload"
       href="/images/hero-poster.webp"
