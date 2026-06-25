@@ -46,6 +46,18 @@ async function loadArtGsapBundle() {
 
 import iconCheck from '../assets/icons/icon-check.png'
 import bartenderWebp from '../assets/images/bartender-photo.webp'
+import artSectionMask from '../assets/images/art-section-mask.png'
+
+const artSectionMaskStyle = {
+  WebkitMaskImage: `url(${artSectionMask})`,
+  maskImage: `url(${artSectionMask})`,
+  WebkitMaskRepeat: 'no-repeat',
+  maskRepeat: 'no-repeat',
+  WebkitMaskPosition: 'center',
+  maskPosition: 'center',
+  WebkitMaskSize: '50%',
+  maskSize: '50%',
+} as const
 
 const { t, tm } = useI18n()
 const leftItems = computed<string[]>(() => tm('art.leftItems') as string[])
@@ -167,6 +179,7 @@ onUnmounted(() => {
               height="1066"
               loading="lazy"
               decoding="async"
+              :style="artSectionMaskStyle"
               class="abs-center masked-img object-contain"
             />
           </picture>

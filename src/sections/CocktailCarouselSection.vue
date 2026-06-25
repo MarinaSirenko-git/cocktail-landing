@@ -20,20 +20,64 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import iconArrow from '../assets/icons/icon-arrow-right.svg'
-import drinkClassicMojitoPng from '../assets/images/carousel-drink-classic-mojito.png'
-import drinkRaspberryMojitoPng from '../assets/images/carousel-drink-raspberry-mojito.png'
-import drinkVioletBreezePng from '../assets/images/carousel-drink-violet-breeze.png'
-import drinkCuracaoMojitoPng from '../assets/images/carousel-drink-curacao-mojito.png'
+import drinkClassicMojito456Png from '../assets/images/carousel-drink-classic-mojito-456.png'
+import drinkClassicMojito456Webp from '../assets/images/carousel-drink-classic-mojito-456.webp'
+import drinkClassicMojito912Webp from '../assets/images/carousel-drink-classic-mojito-912.webp'
+import drinkRaspberryMojito456Png from '../assets/images/carousel-drink-raspberry-mojito-456.png'
+import drinkRaspberryMojito456Webp from '../assets/images/carousel-drink-raspberry-mojito-456.webp'
+import drinkRaspberryMojito912Webp from '../assets/images/carousel-drink-raspberry-mojito-912.webp'
+import drinkVioletBreeze456Png from '../assets/images/carousel-drink-violet-breeze-456.png'
+import drinkVioletBreeze456Webp from '../assets/images/carousel-drink-violet-breeze-456.webp'
+import drinkVioletBreeze912Webp from '../assets/images/carousel-drink-violet-breeze-912.webp'
+import drinkCuracaoMojito456Png from '../assets/images/carousel-drink-curacao-mojito-456.png'
+import drinkCuracaoMojito456Webp from '../assets/images/carousel-drink-curacao-mojito-456.webp'
+import drinkCuracaoMojito912Webp from '../assets/images/carousel-drink-curacao-mojito-912.webp'
 import monsteraWebp from '../assets/images/decorative-monstera-leaf.webp'
 import { usePrefersReducedMotion } from '../composables/usePrefersReducedMotion'
 import { useMediaQuery } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
+type CarouselImageSources = {
+  png: string
+  webpSrcset: string
+  width: number
+  height: number
+}
+
+const CAROUSEL_DRINK_IMAGE_SIZES = '(min-width: 1024px) 401px, 350px'
+
+const carouselImages: CarouselImageSources[] = [
+  {
+    png: drinkClassicMojito456Png,
+    webpSrcset: `${drinkClassicMojito456Webp} 453w, ${drinkClassicMojito912Webp} 505w`,
+    width: 453,
+    height: 456,
+  },
+  {
+    png: drinkRaspberryMojito456Png,
+    webpSrcset: `${drinkRaspberryMojito456Webp} 310w, ${drinkRaspberryMojito912Webp} 402w`,
+    width: 310,
+    height: 456,
+  },
+  {
+    png: drinkVioletBreeze456Png,
+    webpSrcset: `${drinkVioletBreeze456Webp} 427w, ${drinkVioletBreeze912Webp} 538w`,
+    width: 427,
+    height: 456,
+  },
+  {
+    png: drinkCuracaoMojito456Png,
+    webpSrcset: `${drinkCuracaoMojito456Webp} 422w, ${drinkCuracaoMojito912Webp} 532w`,
+    width: 422,
+    height: 456,
+  },
+]
+
 type CarouselSlide = {
   name: string
   title: string
   description: string
-  image: string
+  image: CarouselImageSources
   alt: string
 }
 
@@ -41,16 +85,10 @@ const { t, tm } = useI18n()
 
 const slides = computed<CarouselSlide[]>(() => {
   const localizedSlides = tm('carousel.slides') as Array<Omit<CarouselSlide, 'image'>>
-  const images = [
-    drinkClassicMojitoPng,
-    drinkRaspberryMojitoPng,
-    drinkVioletBreezePng,
-    drinkCuracaoMojitoPng,
-  ]
 
   return localizedSlides.map((slide, index) => ({
     ...slide,
-    image: images[index] ?? drinkClassicMojitoPng,
+    image: carouselImages[index] ?? carouselImages[0]!,
   }))
 })
 
@@ -348,15 +386,22 @@ watch(activeTabIndex, async () => {
               </div>
               <div class="order-1">
                 <figure class="mx-auto h-[306px] overflow-hidden">
-                  <img
-                    :src="slide.image"
-                    :alt="slide.alt"
-                    width="401"
-                    height="592"
-                    decoding="async"
-                    loading="lazy"
-                    class="h-full w-full object-contain object-center"
-                  />
+                  <picture>
+                    <source
+                      type="image/webp"
+                      :srcset="slide.image.webpSrcset"
+                      :sizes="CAROUSEL_DRINK_IMAGE_SIZES"
+                    />
+                    <img
+                      :src="slide.image.png"
+                      :alt="slide.alt"
+                      :width="slide.image.width"
+                      :height="slide.image.height"
+                      decoding="async"
+                      loading="lazy"
+                      class="h-full w-full object-contain object-center"
+                    />
+                  </picture>
                 </figure>
               </div>
               <div class="order-3">
@@ -395,15 +440,22 @@ watch(activeTabIndex, async () => {
             </div>
             <div class="order-1 lg:order-2">
               <figure class="mx-auto h-[306px] lg:h-[592px] lg:w-[401px]">
-                <img
-                  :src="slide.image"
-                  :alt="slide.alt"
-                  width="401"
-                  height="592"
-                  decoding="async"
-                  loading="lazy"
-                  class="js-desktop-slide-image h-full w-full object-contain lg:object-cover lg:object-center"
-                />
+                <picture>
+                  <source
+                    type="image/webp"
+                    :srcset="slide.image.webpSrcset"
+                    :sizes="CAROUSEL_DRINK_IMAGE_SIZES"
+                  />
+                  <img
+                    :src="slide.image.png"
+                    :alt="slide.alt"
+                    :width="slide.image.width"
+                    :height="slide.image.height"
+                    decoding="async"
+                    loading="lazy"
+                    class="js-desktop-slide-image h-full w-full object-contain lg:object-cover lg:object-center"
+                  />
+                </picture>
               </figure>
             </div>
             <div class="order-3 lg:mb-7 lg:max-w-[400px]">

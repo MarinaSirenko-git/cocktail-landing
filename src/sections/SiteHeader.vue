@@ -9,7 +9,8 @@ in sync via resize listener + ResizeObserver. * - Cleans up observer, listeners,
 active tween on unmount. */
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import logoMark from '../assets/logos/velvet-pour-mark.png'
+import logoMarkPng from '../assets/logos/velvet-pour-mark.png'
+import logoMarkWebp from '../assets/logos/velvet-pour-mark.webp'
 import flagEn from '../assets/icons/flags/en.svg'
 import flagRu from '../assets/icons/flags/ru.svg'
 import flagTh from '../assets/icons/flags/th.svg'
@@ -247,15 +248,18 @@ function onDocumentKeydown(event: KeyboardEvent) {
         href="/"
         class="flex-center gap-1 font-display text-[30px] leading-10 text-foreground focus-ring md:shrink-0"
       >
-        <img
-          :src="logoMark"
-          alt=""
-          width="32"
-          height="32"
-          decoding="async"
-          class="size-8"
-          aria-hidden="true"
-        />
+        <picture>
+          <source :srcset="logoMarkWebp" type="image/webp" />
+          <img
+            :src="logoMarkPng"
+            alt=""
+            width="32"
+            height="32"
+            decoding="async"
+            class="size-8"
+            aria-hidden="true"
+          />
+        </picture>
         <span class="mt-[4px] leading-[25px]">{{ t('nav.brand') }}</span>
       </a>
 

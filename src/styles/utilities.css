@@ -25,7 +25,11 @@
 
 @utility noisy {
   @apply size-full;
-  background-image: image-set(url('../assets/images/noisy.png') 1x);
+  background-image: image-set(
+    url('../assets/images/noisy-420.webp') type('image/webp') 1x,
+    url('../assets/images/noisy-840.webp') type('image/webp') 2x,
+    url('../assets/images/noisy-420.png') 1x
+  );
   background-size: 420px 420px;
 }
 
@@ -51,7 +55,12 @@
 }
 
 @utility noisy-display-text {
-  background-image: url('../assets/images/noisy.png'), linear-gradient(#505050, #505050);
+  background-image: image-set(
+      url('../assets/images/noisy-420.webp') type('image/webp') 1x,
+      url('../assets/images/noisy-840.webp') type('image/webp') 2x,
+      url('../assets/images/noisy-420.png') 1x
+    ),
+    linear-gradient(#505050, #505050);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -59,15 +68,4 @@
 
 @utility video {
   @apply w-full lg:h-[67%] 2xl:h-[73%] h-1/2 absolute bottom-0 left-0 object-cover object-[45%_100%] lg:object-contain lg:object-[50%_100%] xl:object-[56%_100%];
-}
-
-@utility masked-img {
-  -webkit-mask-image: url("/src/assets/images/art-section-mask.png");
-  mask-image: url("/src/assets/images/art-section-mask.png");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: 50%;
-  mask-size: 50%;
 }
