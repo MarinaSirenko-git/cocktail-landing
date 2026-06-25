@@ -92,6 +92,8 @@
   },
   "carousel": {
     "ariaFeaturedCocktails": "Избранные коктейли",
+    "ariaPreviousSlide": "Показать предыдущий коктейль: {name}",
+    "ariaNextSlide": "Показать следующий коктейль: {name}",
     "slides": [
       {
         "name": "Classic Mojito",

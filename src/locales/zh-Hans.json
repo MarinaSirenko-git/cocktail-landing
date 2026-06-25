@@ -92,6 +92,8 @@
   },
   "carousel": {
     "ariaFeaturedCocktails": "精选鸡尾酒",
+    "ariaPreviousSlide": "显示上一个鸡尾酒：{name}",
+    "ariaNextSlide": "显示下一个鸡尾酒：{name}",
     "slides": [
       {
         "name": "Classic Mojito",

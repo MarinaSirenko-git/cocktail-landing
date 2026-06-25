@@ -99,6 +99,12 @@ const prefersReducedMotion = usePrefersReducedMotion()
 const isDesktop = useMediaQuery('(min-width: 1024px)')
 const isFirstSlide = computed(() => activeTabIndex.value === 0)
 const isLastSlide = computed(() => activeTabIndex.value === slides.value.length - 1)
+const previousSlideName = computed(
+  () => slides.value[(activeTabIndex.value - 1 + slides.value.length) % slides.value.length]?.name ?? '',
+)
+const nextSlideName = computed(
+  () => slides.value[(activeTabIndex.value + 1) % slides.value.length]?.name ?? '',
+)
 
 type CarouselGsapBundle = {
   gsap: typeof import('gsap').default
@@ -322,6 +328,7 @@ watch(activeTabIndex, async () => {
             class="pointer-events-auto flex flex-col items-start justify-end gap-2 text-left text-muted transition-colors hover:text-foreground focus-ring lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
             :disabled="!isDesktop && isFirstSlide"
             :aria-disabled="!isDesktop && isFirstSlide"
+            :aria-label="t('carousel.ariaPreviousSlide', { name: previousSlideName })"
             @click="goToPreviousSlide"
           >
             <p
@@ -345,6 +352,7 @@ watch(activeTabIndex, async () => {
             class="pointer-events-auto flex flex-col items-end gap-2 text-muted transition-colors hover:text-foreground focus-ring lg:cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted"
             :disabled="!isDesktop && isLastSlide"
             :aria-disabled="!isDesktop && isLastSlide"
+            :aria-label="t('carousel.ariaNextSlide', { name: nextSlideName })"
             @click="goToNextSlide"
           >
             <p

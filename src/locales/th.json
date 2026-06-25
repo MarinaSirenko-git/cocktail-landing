@@ -92,6 +92,8 @@
   },
   "carousel": {
     "ariaFeaturedCocktails": "ค็อกเทลแนะนำ",
+    "ariaPreviousSlide": "แสดงค็อกเทลก่อนหน้า: {name}",
+    "ariaNextSlide": "แสดงค็อกเทลถัดไป: {name}",
     "slides": [
       {
         "name": "Classic Mojito",
